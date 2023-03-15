@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,10 +8,10 @@
 </head>
 <body>
 <nav>
-    <a href="index_authenticated.html">Knjiga</a>
+    <a href="index.html">Knjiga</a>
     <a href="about.html">O knjigi</a>
-    <a href="index.html">Odjava</a>
-    <p>Prijavljen kot <b>Polde</b></p>
+    <a th:href="@{/logout}">Odjava</a>
+    <p>Prijavljen kot <b th:text="${authenticatedUserName}"></b></p>
 </nav>
 <h1>Ferdydurke</h1>
 <h3>1937</h3>
