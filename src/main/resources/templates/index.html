@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ferdydurke</title>
+</head>
+<body>
+<nav>
+    <a href="index_authenticated.html">Knjiga</a>
+    <a href="about.html">O knjigi</a>
+    <a href="index.html">Odjava</a>
+    <p>Prijavljen kot <b>Polde</b></p>
+</nav>
+<h1>Ferdydurke</h1>
+<h3>1937</h3>
+<h2>Witold Gombrowicz</h2>
+<h3>prevedla: Katarina Šalamun-Biedrzycka</h3>
+<h4>prebral: Rok Klančar</h4>
+<br>
+<h4>Poglavja</h4>
+<ul>
+    <li><a id="intro" href="#fake-id">UVOD</a></li>
+    <li><a id="chapter1" href="#fake-id">1. Poglavje: UGRABITEV</a></li>
+    <li><a id="chapter2" href="#fake-id">2. Poglavje: V JETNIŠTVU IN NADALJNEM MANJŠANJU</a></li>
+    <li><a id="chapter3" href="#fake-id">3. Poglavje: V MIŠNICI IN NADALJNEM MEČKANJU</a></li>
+    <li><a id="chapter4" href="#fake-id">4. Poglavje: PREDGOVOR K FILIDORJU S PODLAGO V OTROKU</a></li>
+    <li><a id="chapter5" href="#fake-id">5. Poglavje: FILIDOR, S PODLAGO V OTROKU</a></li>
+    <li><a id="chapter6" href="#fake-id">6. Poglavje: ZAPELJEVANJE, SILJENJE V MLADOST SE NADALJUJE</a></li>
+    <li><a id="chapter7" href="#fake-id">7. Poglavje: LJUBEZEN</a></li>
+    <li><a id="chapter8" href="#fake-id">8. Poglavje: KOMPOT</a></li>
+    <li><a id="chapter9" href="#fake-id">9. Poglavje: ZALEZOVANJE, TIPANJE V SODOBNOST SE NADALJUJE</a></li>
+    <li><a id="chapter10" href="#fake-id">10. Poglavje: ORGIJA STEGEN IN ZNOVA V MIŠNICI</a></li>
+    <li><a id="chapter11" href="#fake-id">11. Poglavje: PREDGOVOR K FILIBERTU, PODLOŽENEMU Z OTROKOM</a></li>
+    <li><a id="chapter12" href="#fake-id">12. Poglavje: FILIBERT, PODLOŽEN Z OTROKOM</a></li>
+    <li><a id="chapter13" href="#fake-id">13. Poglavje: HLAPČIČ ALI NOVE NEVARNOSTI</a></li>
+    <li><a id="chapter14" href="#fake-id">14. Poglavje: ORGIJA FRISOV IN ZNOVA V MIŠNICI</a></li>
+</ul>
+<br>
+<br>
+<p id="currently-playing">UVOD</p>
+<span id="track-listened"></span><audio id="audio-player" controls src="https://samplelib.com/lib/preview/mp3/sample-15s.mp3"></audio><span id="track-left"></span>
+<br>
+<button id="back-10-sec">Prevrti 10 sekund</button>
+<button id="forward-10-sec">Preskoči 10 sekund</button>
+<button id="add-bookmark">Dodaj zaznamek</button>
+<br>
+<h5>Zaznamki</h5>
+<ul id="bookmarks">
+</ul>
+<br>
+<h4>Hitrost predvajanja</h4>
+<ul>
+    <li id="x0.5"><a href="#fake-id">x0.5</a></li>
+    <li id="x0.75"><a href="#fake-id">x0.75</a></li>
+    <li id="x1.0"><a href="#fake-id">x1.0</a></li>
+    <li id="x1.25"><a href="#fake-id">x1.25</a></li>
+    <li id="x1.5"><a href="#fake-id">x1.5</a></li>
+    <li id="x1.75"><a href="#fake-id">x1.75</a></li>
+    <li id="x2.0"><a href="#fake-id">x2.0</a></li>
+</ul>
+
+<script>
+
+        // UI elements
+        const audioPlayer = document.getElementById("audio-player");
+
+        const currentlyPlaying = document.getElementById("currently-playing");
+        const trackListened = document.getElementById("track-listened");
+        const trackLeft = document.getElementById("track-left");
+
+        const chapters = [
+            "https://samplelib.com/lib/preview/mp3/sample-15s.mp3",
+            "https://freetestdata.com/wp-content/uploads/2021/09/Free_Test_Data_5MB_MP3.mp3",
+            "https://freetestdata.com/wp-content/uploads/2021/09/Free_Test_Data_5MB_MP3.mp3",
+            "https://file-examples.com/storage/fef1706276640fa2f99a5a4/2017/11/file_example_MP3_2MG.mp3",
+            "https://file-examples.com/storage/fef1706276640fa2f99a5a4/2017/11/file_example_MP3_2MG.mp3",
+            "media/peto_poglavje.mp3",
+            "media/sesto_poglavje.mp3",
+            "media/sedmo_poglavje.mp3",
+            "media/osmo_poglavje.mp3",
+            "media/deveto_poglavje.mp3",
+            "media/deseto_poglavje.mp3",
+            "media/enajsto_poglavje.mp3",
+            "media/dvanajsto_poglavje.mp3",
+            "media/trinajsto_poglavje.mp3",
+            "media/stirinajsto_poglavje.mp3",
+        ];
+
+        const chapterSourcesAndNamesLong = {
+            "https://samplelib.com/lib/preview/mp3/sample-15s.mp3" : "UVOD",
+            "https://freetestdata.com/wp-content/uploads/2021/09/Free_Test_Data_5MB_MP3.mp3" : "1. POGLAVJE: UGRABITEV",
+            "https://freetestdata.com/wp-content/uploads/2021/09/Free_Test_Data_5MB_MP3.mp3" : "2. POGLAVJE: V JETNIŠTVU IN NADALJNEM MANJŠANJU",
+            "https://file-examples.com/storage/fef1706276640fa2f99a5a4/2017/11/file_example_MP3_2MG.mp3" : "3. POGLAVJE: V MIŠNICI IN NADALJNEM MEČKANJU",
+            "https://file-examples.com/storage/fef1706276640fa2f99a5a4/2017/11/file_example_MP3_2MG.mp3" : "4. POGLAVJE: PREDGOVOR K FILIDORJU S PODLAGO V OTROKU",
+            "media/peto_poglavje.mp3" : "5. POGLAVJE: FILIDOR, S PODLAGO V OTROKU",
+            "media/sesto_poglavje.mp3" : "6. POGLAVJE: ZAPELJEVANJE, SILJENJE V MLADOST SE NADALJUJE",
+            "media/sedmo_poglavje.mp3" : "7. POGLAVJE: LJUBEZEN",
+            "media/osmo_poglavje.mp3" : "8. POGLAVJE: KOMPOT",
+            "media/deveto_poglavje.mp3" : "9. POGLAVJE: ZALEZOVANJE, TIPANJE V SODOBNOST SE NADALJUJE",
+            "media/deseto_poglavje.mp3" : "10. POGLAVJE: ORGIJA STEGEN IN ZNOVA V MIŠNICI",
+            "media/enajsto_poglavje.mp3" : "11. POGLAVJE: PREDGOVOR K FILIBERTU, PODLOŽENEMU Z OTROKOM",
+            "media/dvanajsto_poglavje.mp3" : "12. POGLAVJE: FILIBERT, PODLOŽEN Z OTROKOM",
+            "media/trinajsto_poglavje.mp3" : "13. POGLAVJE: HLAPČIČ ALI NOVE NEVARNOSTI",
+            "media/stirinajsto_poglavje.mp3" : "14. POGLAVJE: ORGIJA FRISOV IN ZNOVA V MIŠNICI",
+        }
+
+        const chapterSourcesAndNames = {
+            "https://samplelib.com/lib/preview/mp3/sample-15s.mp3" : "UVOD",
+            "https://freetestdata.com/wp-content/uploads/2021/09/Free_Test_Data_5MB_MP3.mp3" : "1. POGLAVJE",
+            "https://freetestdata.com/wp-content/uploads/2021/09/Free_Test_Data_5MB_MP3.mp3" : "2. POGLAVJE",
+            "https://file-examples.com/storage/fef1706276640fa2f99a5a4/2017/11/file_example_MP3_2MG.mp3" : "3. POGLAVJE",
+            "https://file-examples.com/storage/fef1706276640fa2f99a5a4/2017/11/file_example_MP3_2MG.mp3" : "4. POGLAVJE",
+            "media/peto_poglavje.mp3" : "5. POGLAVJE",
+            "media/sesto_poglavje.mp3" : "6. POGLAVJE",
+            "media/sedmo_poglavje.mp3" : "7. POGLAVJE",
+            "media/osmo_poglavje.mp3" : "8. POGLAVJE",
+            "media/deveto_poglavje.mp3" : "9. POGLAVJE",
+            "media/deseto_poglavje.mp3" : "10. POGLAVJE",
+            "media/enajsto_poglavje.mp3" : "11. POGLAVJE",
+            "media/dvanajsto_poglavje.mp3" : "12. POGLAVJE",
+            "media/trinajsto_poglavje.mp3" : "13. POGLAVJE",
+            "media/stirinajsto_poglavje.mp3" : "14. POGLAVJE",
+        }
+
+
+        const back10Sec = document.getElementById("back-10-sec");
+        const forward10Sec = document.getElementById("forward-10-sec");
+
+        const addBookmark = document.getElementById("add-bookmark");
+        const bookmarks = document.getElementById("bookmarks");
+
+        const x05 = document.getElementById("x0.5");
+        const x075 = document.getElementById("x0.75");
+        const x1 = document.getElementById("x1.0");
+        const x125 = document.getElementById("x1.25");
+        const x15 = document.getElementById("x1.5");
+        const x175 = document.getElementById("x1.75");
+        const x2 = document.getElementById("x2.0");
+
+        const intro = document.getElementById("intro");
+        const chapter1 = document.getElementById("chapter1");
+        const chapter2 = document.getElementById("chapter2");
+        const chapter3 = document.getElementById("chapter3");
+        const chapter4 = document.getElementById("chapter4");
+        const chapter5 = document.getElementById("chapter5");
+        const chapter6 = document.getElementById("chapter6");
+        const chapter7 = document.getElementById("chapter7");
+        const chapter8 = document.getElementById("chapter8");
+        const chapter9 = document.getElementById("chapter9");
+        const chapter10 = document.getElementById("chapter10");
+        const chapter11 = document.getElementById("chapter11");
+        const chapter12 = document.getElementById("chapter12");
+        const chapter13 = document.getElementById("chapter13");
+        const chapter14 = document.getElementById("chapter14");
+
+        document.addEventListener("DOMContentLoaded", (e) => {
+            if (localStorage.getItem("playhead-position")) {
+                audioPlayer.currentTime = localStorage.getItem("playhead-position") - 5;
+                audioPlayer.src = localStorage.getItem("chapter-source");
+            }
+        });
+
+
+        // Add bookmark
+        addBookmark.addEventListener("click", () => {
+            audioPlayer.pause();
+            const bookmarkNote = window.prompt("Opomba za zaznamek:");
+            if (bookmarkNote == null) {
+                return;
+            }
+            audioPlayer.play();
+            let newBookmark = document.createElement("li");
+            let bookmarkInfo = document.createElement("span");
+            let deleteBookmark = document.createElement("span")
+            newBookmark.classList.add("bookmark");
+            newBookmark.setAttribute("data-bookmark-time", audioPlayer.currentTime);
+            newBookmark.setAttribute("data-bookmark-chapter", audioPlayer.getAttribute("src"));
+            bookmarkInfo.textContent = chapterSourcesAndNames[audioPlayer.getAttribute("src")] + " " + sToTime(audioPlayer.currentTime) + " " + bookmarkNote + "  ";
+            deleteBookmark.classList.add("delete-bookmark");
+            deleteBookmark.textContent = "🗑";
+            newBookmark.appendChild(bookmarkInfo);
+            newBookmark.appendChild(deleteBookmark);
+            bookmarks.appendChild(newBookmark);
+        });
+
+        // Play bookmark OR delete a bookmark
+        bookmarks.addEventListener("click", (e) => {
+            if (e.target.classList.contains("bookmark") || e.target.parentElement.classList.contains("bookmark")) {
+                if (e.target.classList.contains("delete-bookmark")) {
+                    e.target.parentElement.remove();
+                    return;
+                }
+                if (e.target.getAttribute("data-bookmark-chapter") == null) {
+                    audioPlayer.src = e.target.parentElement.getAttribute("data-bookmark-chapter");
+                    audioPlayer.currentTime = e.target.parentElement.getAttribute("data-bookmark-time");
+                    audioPlayer.play();
+                    return
+                }
+                audioPlayer.src = e.target.getAttribute("data-bookmark-chapter");
+                audioPlayer.currentTime = e.target.getAttribute("data-bookmark-time");
+                audioPlayer.play();
+            }
+        });
+
+
+        // Play next chapter if current one ended
+
+        audioPlayer.addEventListener("ended", (e) => {
+            let currentSrc = audioPlayer.getAttribute("src");
+            let arrayPosition = chapters.indexOf(currentSrc);
+            if (arrayPosition == 14 || arrayPosition == -1) {
+                return;
+            }
+            audioPlayer.src = chapters[arrayPosition + 1];
+            audioPlayer.play();
+        });
+
+
+        // Play speed
+
+        x05.addEventListener("click", (e) => {
+            audioPlayer.playbackRate = 0.5;
+        });
+
+        x075.addEventListener("click", (e) => {
+            audioPlayer.playbackRate = 0.75;
+        });
+
+        x1.addEventListener("click", (e) => {
+            audioPlayer.playbackRate = 1.0;
+        });
+
+        x125.addEventListener("click", (e) => {
+            audioPlayer.playbackRate = 1.25;
+        });
+
+        x15.addEventListener("click", (e) => {
+            audioPlayer.playbackRate = 1.5;
+        });
+
+        x175.addEventListener("click", (e) => {
+            audioPlayer.playbackRate = 1.75;
+        });
+
+        x2.addEventListener("click", (e) => {
+            audioPlayer.playbackRate = 2.0;
+        });
+
+        // Rewind/fast forward
+
+        back10Sec.addEventListener("click", (e) => {
+            audioPlayer.currentTime -= 10;
+        });
+
+        forward10Sec.addEventListener("click", (e) => {
+            audioPlayer.currentTime += 10;
+        });
+
+        // Store playhead position && update time listened and time left text && update currently playing info
+
+        audioPlayer.addEventListener("timeupdate", (e) => {
+            const currentTime = audioPlayer.currentTime.toFixed(0);
+            localStorage.setItem("playhead-position", currentTime);
+            localStorage.setItem("chapter-source", audioPlayer.getAttribute("src"));
+            trackListened.textContent = sToTime(currentTime);
+            trackLeft.textContent = sToTime(audioPlayer.duration - currentTime);
+            currentlyPlaying.textContent = chapterSourcesAndNamesLong[audioPlayer.getAttribute("src")];
+        });
+
+        // Helper methods seconds to hour:min:sec
+
+        function sToTime(t) {
+            return padZero(parseInt((t / (60 * 60)) % 24)) + ":" +
+                    padZero(parseInt((t / (60)) % 60)) + ":" +
+                    padZero(parseInt((t) % 60));
+            }
+
+        function padZero(v) {
+            return (v < 10) ? "0" + v : v;
+        }
+
+        // Chapters
+
+        intro.addEventListener("click", (e) => {
+            audioPlayer.src = "https://samplelib.com/lib/preview/mp3/sample-15s.mp3";
+            audioPlayer.play();
+        });
+
+        chapter1.addEventListener("click", (e) => {
+            audioPlayer.src = "https://freetestdata.com/wp-content/uploads/2021/09/Free_Test_Data_5MB_MP3.mp3";
+            audioPlayer.play();
+        });
+
+        chapter2.addEventListener("click", (e) => {
+            audioPlayer.src = "https://freetestdata.com/wp-content/uploads/2021/09/Free_Test_Data_5MB_MP3.mp3";
+            audioPlayer.play();
+        });
+
+        chapter3.addEventListener("click", (e) => {
+            audioPlayer.src = "https://file-examples.com/storage/fef1706276640fa2f99a5a4/2017/11/file_example_MP3_2MG.mp3";
+            audioPlayer.play();
+        });
+
+        chapter4.addEventListener("click", (e) => {
+            audioPlayer.src = "https://file-examples.com/storage/fef1706276640fa2f99a5a4/2017/11/file_example_MP3_2MG.mp3";
+            audioPlayer.play();
+        });
+
+        chapter5.addEventListener("click", (e) => {
+            audioPlayer.src = "media/peto_poglavje.mp3";
+            audioPlayer.play();
+        });
+
+        chapter6.addEventListener("click", (e) => {
+            audioPlayer.src = "media/sesto_poglavje.mp3";
+            audioPlayer.play();
+        });
+
+        chapter7.addEventListener("click", (e) => {
+            audioPlayer.src = "media/sedmo_poglavje.mp3";
+            audioPlayer.play();
+        });
+
+        chapter8.addEventListener("click", (e) => {
+            audioPlayer.src = "media/osmo_poglavje.mp3";
+            audioPlayer.play();
+        });
+
+        chapter9.addEventListener("click", (e) => {
+            audioPlayer.src = "media/deveto_poglavje.mp3";
+            audioPlayer.play();
+        });
+
+        chapter10.addEventListener("click", (e) => {
+            audioPlayer.src = "media/deseto_poglavje.mp3";
+            audioPlayer.play();
+        });
+
+        chapter11.addEventListener("click", (e) => {
+            audioPlayer.src = "media/enajsto_poglavje.mp3";
+            audioPlayer.play();
+        });
+
+        chapter12.addEventListener("click", (e) => {
+            audioPlayer.src = "media/dvanajsto_poglavje.mp3";
+            audioPlayer.play();
+        });
+
+        chapter13.addEventListener("click", (e) => {
+            audioPlayer.src = "media/trinajsto_poglavje.mp3";
+            audioPlayer.play();
+        });
+
+        chapter14.addEventListener("click", (e) => {
+            audioPlayer.src = "media/stirinajsto_poglavje.mp3";
+            audioPlayer.play();
+        });
+    </script>
+</body>
+</html>
