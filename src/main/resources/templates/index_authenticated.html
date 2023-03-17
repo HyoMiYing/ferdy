@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ferdydurke</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ferdydurke</title>
 </head>
 <body>
 <nav>
-    <a href="index.html">Knjiga</a>
-    <a href="login.html">Prijava</a>
-    <a href="register.html">Registracija</a>
-    <a href="about.html">O knjigi</a>
+  <a href="index_authenticated.html">Knjiga</a>
+  <a href="about.html">O knjigi</a>
+  <a href="index.html">Odjava</a>
+  <p>Prijavljen kot <b th:text="${authenticatedUserName}"></b></p>
 </nav>
 <h1>Ferdydurke</h1>
 <h3>1937</h3>
@@ -21,21 +21,21 @@
 <br>
 <h4>Poglavja</h4>
 <ul>
-    <li><a id="intro" href="#fake-id">UVOD</a></li>
-    <li><a id="chapter1" href="#fake-id">1. Poglavje: UGRABITEV</a></li>
-    <li><a id="chapter2" href="#fake-id">2. Poglavje: V JETNIŠTVU IN NADALJNEM MANJŠANJU</a></li>
-    <li><a id="chapter3" href="#fake-id">3. Poglavje: V MIŠNICI IN NADALJNEM MEČKANJU</a></li>
-    <li><a id="chapter4" href="#fake-id">4. Poglavje: PREDGOVOR K FILIDORJU S PODLAGO V OTROKU</a></li>
-    <li><a id="chapter5" href="#fake-id">5. Poglavje: FILIDOR, S PODLAGO V OTROKU</a></li>
-    <li><a id="chapter6" href="#fake-id">6. Poglavje: ZAPELJEVANJE, SILJENJE V MLADOST SE NADALJUJE</a></li>
-    <li><a id="chapter7" href="#fake-id">7. Poglavje: LJUBEZEN</a></li>
-    <li><a id="chapter8" href="#fake-id">8. Poglavje: KOMPOT</a></li>
-    <li><a id="chapter9" href="#fake-id">9. Poglavje: ZALEZOVANJE, TIPANJE V SODOBNOST SE NADALJUJE</a></li>
-    <li><a id="chapter10" href="#fake-id">10. Poglavje: ORGIJA STEGEN IN ZNOVA V MIŠNICI</a></li>
-    <li><a id="chapter11" href="#fake-id">11. Poglavje: PREDGOVOR K FILIBERTU, PODLOŽENEMU Z OTROKOM</a></li>
-    <li><a id="chapter12" href="#fake-id">12. Poglavje: FILIBERT, PODLOŽEN Z OTROKOM</a></li>
-    <li><a id="chapter13" href="#fake-id">13. Poglavje: HLAPČIČ ALI NOVE NEVARNOSTI</a></li>
-    <li><a id="chapter14" href="#fake-id">14. Poglavje: ORGIJA FRISOV IN ZNOVA V MIŠNICI</a></li>
+  <li><a id="intro" href="#fake-id">UVOD</a></li>
+  <li><a id="chapter1" href="#fake-id">1. Poglavje: UGRABITEV</a></li>
+  <li><a id="chapter2" href="#fake-id">2. Poglavje: V JETNIŠTVU IN NADALJNEM MANJŠANJU</a></li>
+  <li><a id="chapter3" href="#fake-id">3. Poglavje: V MIŠNICI IN NADALJNEM MEČKANJU</a></li>
+  <li><a id="chapter4" href="#fake-id">4. Poglavje: PREDGOVOR K FILIDORJU S PODLAGO V OTROKU</a></li>
+  <li><a id="chapter5" href="#fake-id">5. Poglavje: FILIDOR, S PODLAGO V OTROKU</a></li>
+  <li><a id="chapter6" href="#fake-id">6. Poglavje: ZAPELJEVANJE, SILJENJE V MLADOST SE NADALJUJE</a></li>
+  <li><a id="chapter7" href="#fake-id">7. Poglavje: LJUBEZEN</a></li>
+  <li><a id="chapter8" href="#fake-id">8. Poglavje: KOMPOT</a></li>
+  <li><a id="chapter9" href="#fake-id">9. Poglavje: ZALEZOVANJE, TIPANJE V SODOBNOST SE NADALJUJE</a></li>
+  <li><a id="chapter10" href="#fake-id">10. Poglavje: ORGIJA STEGEN IN ZNOVA V MIŠNICI</a></li>
+  <li><a id="chapter11" href="#fake-id">11. Poglavje: PREDGOVOR K FILIBERTU, PODLOŽENEMU Z OTROKOM</a></li>
+  <li><a id="chapter12" href="#fake-id">12. Poglavje: FILIBERT, PODLOŽEN Z OTROKOM</a></li>
+  <li><a id="chapter13" href="#fake-id">13. Poglavje: HLAPČIČ ALI NOVE NEVARNOSTI</a></li>
+  <li><a id="chapter14" href="#fake-id">14. Poglavje: ORGIJA FRISOV IN ZNOVA V MIŠNICI</a></li>
 </ul>
 <br>
 <br>
@@ -44,16 +44,21 @@
 <br>
 <button id="back-10-sec">Prevrti 10 sekund</button>
 <button id="forward-10-sec">Preskoči 10 sekund</button>
+<button id="add-bookmark">Dodaj zaznamek</button>
+<br>
+<h5>Zaznamki</h5>
+<ul id="bookmarks">
+</ul>
 <br>
 <h4>Hitrost predvajanja</h4>
 <ul>
-    <li id="x0.5"><a href="#fake-id">x0.5</a></li>
-    <li id="x0.75"><a href="#fake-id">x0.75</a></li>
-    <li id="x1.0"><a href="#fake-id">x1.0</a></li>
-    <li id="x1.25"><a href="#fake-id">x1.25</a></li>
-    <li id="x1.5"><a href="#fake-id">x1.5</a></li>
-    <li id="x1.75"><a href="#fake-id">x1.75</a></li>
-    <li id="x2.0"><a href="#fake-id">x2.0</a></li>
+  <li id="x0.5"><a href="#fake-id">x0.5</a></li>
+  <li id="x0.75"><a href="#fake-id">x0.75</a></li>
+  <li id="x1.0"><a href="#fake-id">x1.0</a></li>
+  <li id="x1.25"><a href="#fake-id">x1.25</a></li>
+  <li id="x1.5"><a href="#fake-id">x1.5</a></li>
+  <li id="x1.75"><a href="#fake-id">x1.75</a></li>
+  <li id="x2.0"><a href="#fake-id">x2.0</a></li>
 </ul>
 
 <script>
@@ -123,6 +128,9 @@
         const back10Sec = document.getElementById("back-10-sec");
         const forward10Sec = document.getElementById("forward-10-sec");
 
+        const addBookmark = document.getElementById("add-bookmark");
+        const bookmarks = document.getElementById("bookmarks");
+
         const x05 = document.getElementById("x0.5");
         const x075 = document.getElementById("x0.75");
         const x1 = document.getElementById("x1.0");
@@ -151,6 +159,48 @@
             if (localStorage.getItem("playhead-position")) {
                 audioPlayer.currentTime = localStorage.getItem("playhead-position") - 5;
                 audioPlayer.src = localStorage.getItem("chapter-source");
+            }
+        });
+
+
+        // Add bookmark
+        addBookmark.addEventListener("click", () => {
+            audioPlayer.pause();
+            const bookmarkNote = window.prompt("Opomba za zaznamek:");
+            if (bookmarkNote == null) {
+                return;
+            }
+            audioPlayer.play();
+            let newBookmark = document.createElement("li");
+            let bookmarkInfo = document.createElement("span");
+            let deleteBookmark = document.createElement("span")
+            newBookmark.classList.add("bookmark");
+            newBookmark.setAttribute("data-bookmark-time", audioPlayer.currentTime);
+            newBookmark.setAttribute("data-bookmark-chapter", audioPlayer.getAttribute("src"));
+            bookmarkInfo.textContent = chapterSourcesAndNames[audioPlayer.getAttribute("src")] + " " + sToTime(audioPlayer.currentTime) + " " + bookmarkNote + "  ";
+            deleteBookmark.classList.add("delete-bookmark");
+            deleteBookmark.textContent = "🗑";
+            newBookmark.appendChild(bookmarkInfo);
+            newBookmark.appendChild(deleteBookmark);
+            bookmarks.appendChild(newBookmark);
+        });
+
+        // Play bookmark OR delete a bookmark
+        bookmarks.addEventListener("click", (e) => {
+            if (e.target.classList.contains("bookmark") || e.target.parentElement.classList.contains("bookmark")) {
+                if (e.target.classList.contains("delete-bookmark")) {
+                    e.target.parentElement.remove();
+                    return;
+                }
+                if (e.target.getAttribute("data-bookmark-chapter") == null) {
+                    audioPlayer.src = e.target.parentElement.getAttribute("data-bookmark-chapter");
+                    audioPlayer.currentTime = e.target.parentElement.getAttribute("data-bookmark-time");
+                    audioPlayer.play();
+                    return
+                }
+                audioPlayer.src = e.target.getAttribute("data-bookmark-chapter");
+                audioPlayer.currentTime = e.target.getAttribute("data-bookmark-time");
+                audioPlayer.play();
             }
         });
 

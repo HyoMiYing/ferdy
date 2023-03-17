@@ -10,8 +10,13 @@ import java.security.Principal;
 public class WebsiteController {
 
     @GetMapping("/")
-    public String homepage(Principal principal, Model model) {
-        model.addAttribute("authenticatedUserName", principal.getName());
+    public String homepage() {
         return "index.html";
+    }
+
+    @GetMapping("/doma")
+    public String homepage_authenticated(Principal principal, Model model) {
+        model.addAttribute("authenticatedUserName", principal.getName());
+        return "index_authenticated.html";
     }
 }
