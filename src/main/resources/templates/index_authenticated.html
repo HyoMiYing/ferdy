@@ -10,7 +10,7 @@
 <nav>
   <a href="index_authenticated.html">Knjiga</a>
   <a href="about.html">O knjigi</a>
-  <a href="index.html">Odjava</a>
+  <a th:href="@{/logout}">Odjava</a>
   <p>Prijavljen kot <b th:text="${authenticatedUserName}"></b></p>
 </nav>
 <h1>Ferdydurke</h1>
