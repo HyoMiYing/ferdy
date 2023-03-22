@@ -38,10 +38,10 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/doma")
-
-                );
+            .authorizeHttpRequests().anyRequest().authenticated()
+            .and()
+            .formLogin()
+                .defaultSuccessUrl("/zvesti", true);
         return http.build();
     }
 }
