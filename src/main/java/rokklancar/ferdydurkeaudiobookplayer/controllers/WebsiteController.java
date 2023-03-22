@@ -9,12 +9,12 @@ import java.security.Principal;
 @Controller
 public class WebsiteController {
 
-    @GetMapping("/doma")
+    @GetMapping("/")
     public String homepage() {
         return "index.html";
     }
 
-    @GetMapping("/")
+    @GetMapping("/zvesti")
     public String homepage_authenticated(Principal principal, Model model) {
         model.addAttribute("authenticatedUserName", principal.getName());
         return "index_authenticated.html";
