@@ -10,8 +10,11 @@ import java.security.Principal;
 public class WebsiteController {
 
     @GetMapping("/")
-    public String homepage() {
-        return "index.html";
+    public String homepage(Principal principal) {
+        if (principal == null) {
+            return "redirect:/neprijavljeni";
+        }
+        return "redirect:/prijavljeni";
     }
 
     // Controllers for unauthenticated users
@@ -26,7 +29,6 @@ public class WebsiteController {
     }
 
     // Controllers for authenticated users
-
     @GetMapping("/prijavljeni")
     public String homepageAuthenticated(Principal principal, Model model) {
         model.addAttribute("authenticatedUserName", principal.getName());
