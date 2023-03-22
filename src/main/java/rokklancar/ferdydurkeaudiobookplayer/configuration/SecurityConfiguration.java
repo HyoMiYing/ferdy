@@ -38,10 +38,10 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            .authorizeHttpRequests().anyRequest().authenticated()
+            .authorizeHttpRequests().requestMatchers("/neprijavljeni/**", "/").anonymous()
             .and()
             .formLogin()
-                .defaultSuccessUrl("/zvesti", true);
+                .defaultSuccessUrl("/prijavljeni", true);
         return http.build();
     }
 }
