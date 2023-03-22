@@ -8,8 +8,8 @@
 </head>
 <body>
 <nav>
-  <a href="index_authenticated.html">Knjiga</a>
-  <a href="about.html">O knjigi</a>
+  <a th:href="@{/zvesti}">Knjiga</a>
+  <a th:href="@{/zvesti/o_knjigi}">O knjigi</a>
   <a th:href="@{/logout}">Odjava</a>
   <p>Prijavljen kot <b th:text="${authenticatedUserName}"></b></p>
 </nav>

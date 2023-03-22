@@ -14,9 +14,17 @@ public class WebsiteController {
         return "index.html";
     }
 
+    // Controllers for authenticated users
+
     @GetMapping("/zvesti")
-    public String homepage_authenticated(Principal principal, Model model) {
+    public String homepageAuthenticated(Principal principal, Model model) {
         model.addAttribute("authenticatedUserName", principal.getName());
         return "index_authenticated.html";
+    }
+
+    @GetMapping("/zvesti/o_knjigi")
+    public String aboutPageAuthenticated(Principal principal, Model model) {
+        model.addAttribute("authenticatedUserName", principal.getName());
+        return "about_authenticated.html";
     }
 }
