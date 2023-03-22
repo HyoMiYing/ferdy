@@ -14,6 +14,17 @@ public class WebsiteController {
         return "index.html";
     }
 
+    // Controllers for unauthenticated users
+    @GetMapping("/neprijavljeni")
+    public String homepageUnauthenticated() {
+        return "index.html";
+    }
+
+    @GetMapping("/neprijavljeni/o_knjigi")
+    public String aboutPageUnauthenticated() {
+        return "about.html";
+    }
+
     // Controllers for authenticated users
 
     @GetMapping("/zvesti")
