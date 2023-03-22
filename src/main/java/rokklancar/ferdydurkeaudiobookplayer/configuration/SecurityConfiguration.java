@@ -38,7 +38,10 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            .authorizeHttpRequests().requestMatchers("/neprijavljeni/**", "/").anonymous()
+            .authorizeHttpRequests()
+            .requestMatchers("/neprijavljeni/**").anonymous()
+            .requestMatchers("/").permitAll()
+            .anyRequest().authenticated()
             .and()
             .formLogin()
                 .defaultSuccessUrl("/prijavljeni", true);
