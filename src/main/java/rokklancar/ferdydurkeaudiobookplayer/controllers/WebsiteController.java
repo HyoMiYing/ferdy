@@ -3,6 +3,7 @@ package rokklancar.ferdydurkeaudiobookplayer.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import rokklancar.ferdydurkeaudiobookplayer.dto.UserDto;
 
 import java.security.Principal;
 
@@ -29,7 +30,9 @@ public class WebsiteController {
     }
 
     @GetMapping("/neprijavljeni/registracija")
-    public String register() {
+    public String register(Model model) {
+        UserDto userDto = new UserDto();
+        model.addAttribute("user", userDto);
         return "register.html";
     }
 
