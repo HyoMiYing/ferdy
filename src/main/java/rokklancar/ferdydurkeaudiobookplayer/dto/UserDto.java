@@ -2,8 +2,10 @@ package rokklancar.ferdydurkeaudiobookplayer.dto;
 
 
 import org.hibernate.validator.constraints.NotEmpty;
+import rokklancar.ferdydurkeaudiobookplayer.validation.PasswordMatches;
 import rokklancar.ferdydurkeaudiobookplayer.validation.ValidEmail;
 
+@PasswordMatches
 public class UserDto {
     @ValidEmail
     @NotEmpty
