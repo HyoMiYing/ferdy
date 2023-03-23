@@ -10,7 +10,9 @@
 <nav>
   <a th:href="@{/prijavljeni}">Knjiga</a>
   <a th:href="@{/prijavljeni/o_knjigi}">O knjigi</a>
-  <a th:href="@{/logout}">Odjava</a>
+  <form style="display: inline;" id="logout-form" th:action="@{/logout}" method="post">
+    <a onclick="document.getElementById('logout-form').submit();" href="#odjava">Odjava</a>
+  </form>
   <p>Prijavljen kot <b th:text="${authenticatedUserName}"></b></p>
 </nav>
 <h1>Ferdydurke</h1>
