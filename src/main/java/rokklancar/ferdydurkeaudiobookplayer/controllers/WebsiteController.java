@@ -28,6 +28,11 @@ public class WebsiteController {
         return "about.html";
     }
 
+    @GetMapping("/neprijavljeni/registracija")
+    public String register() {
+        return "register.html";
+    }
+
     // Controllers for authenticated users
     @GetMapping("/prijavljeni")
     public String homepageAuthenticated(Principal principal, Model model) {
