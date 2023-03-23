@@ -44,7 +44,10 @@ public class SecurityConfiguration {
             .anyRequest().authenticated()
             .and()
             .formLogin()
-                .defaultSuccessUrl("/prijavljeni", true);
+                .defaultSuccessUrl("/prijavljeni", true)
+            .and()
+            .logout()
+                .logoutSuccessUrl("/");
         return http.build();
     }
 }
