@@ -1,4 +1,4 @@
-package rokklancar.ferdydurkeaudiobookplayer.controllers;
+package rokklancar.ferdydurkeaudiobookplayer.web.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -8,7 +8,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import rokklancar.ferdydurkeaudiobookplayer.dto.UserDto;
+import rokklancar.ferdydurkeaudiobookplayer.web.dto.UserDto;
 import rokklancar.ferdydurkeaudiobookplayer.persistence.model.User;
 
 import java.security.Principal;

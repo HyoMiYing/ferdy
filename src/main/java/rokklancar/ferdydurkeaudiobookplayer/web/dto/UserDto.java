@@ -1,4 +1,4 @@
-package rokklancar.ferdydurkeaudiobookplayer.dto;
+package rokklancar.ferdydurkeaudiobookplayer.web.dto;
 
 
 import org.hibernate.validator.constraints.NotEmpty;
