@@ -8,13 +8,17 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import rokklancar.ferdydurkeaudiobookplayer.service.IUserService;
 import rokklancar.ferdydurkeaudiobookplayer.web.dto.UserDto;
 import rokklancar.ferdydurkeaudiobookplayer.persistence.model.User;
+import rokklancar.ferdydurkeaudiobookplayer.web.error.UserAlreadyExistsException;
 
 import java.security.Principal;
 
 @Controller
 public class WebsiteController {
+
+    private IUserService userService;
 
     @GetMapping("/")
     public String homepage(Principal principal) {
@@ -49,7 +53,10 @@ public class WebsiteController {
             Errors errors) {
 
         try {
-            User registered = userService.registerNewUserAccount(userDto);
+            final User registered = userService.registerNewUserAccount(userDto);
+            return "redirect:/prijavljeni";
+        } catch (final UserAlreadyExistsException exception) {
+            return "redirect:/neprijavljeni/registracija";
         }
 
     }

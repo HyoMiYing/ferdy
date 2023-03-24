@@ -2,7 +2,7 @@ package rokklancar.ferdydurkeaudiobookplayer.validation;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
-import rokklancar.ferdydurkeaudiobookplayer.dto.UserDto;
+import rokklancar.ferdydurkeaudiobookplayer.web.dto.UserDto;
 
 public class PasswordMatchesValidator implements ConstraintValidator<PasswordMatches, Object> {
 
