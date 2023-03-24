@@ -1,9 +1,15 @@
 package rokklancar.ferdydurkeaudiobookplayer.controllers;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import rokklancar.ferdydurkeaudiobookplayer.dto.UserDto;
+import rokklancar.ferdydurkeaudiobookplayer.model.User;
 
 import java.security.Principal;
 
@@ -34,6 +40,18 @@ public class WebsiteController {
         UserDto userDto = new UserDto();
         model.addAttribute("user", userDto);
         return "register.html";
+    }
+
+    @PostMapping("/neprijavljeni/registracija/submit")
+    public String register(
+            @ModelAttribute("user") @Valid UserDto userDto,
+            HttpServletRequest request,
+            Errors errors) {
+
+        try {
+            User registered = userService.registerNewUserAccount(userDto);
+        }
+
     }
 
     // Controllers for authenticated users
