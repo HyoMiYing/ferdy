@@ -1,4 +1,4 @@
-package rokklancar.ferdydurkeaudiobookplayer.model;
+package rokklancar.ferdydurkeaudiobookplayer.persistence.model;
 
 import jakarta.persistence.*;
 

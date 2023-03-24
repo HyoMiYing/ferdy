@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import rokklancar.ferdydurkeaudiobookplayer.dto.UserDto;
-import rokklancar.ferdydurkeaudiobookplayer.model.User;
+import rokklancar.ferdydurkeaudiobookplayer.persistence.model.User;
 
 import java.security.Principal;
 
