@@ -14,20 +14,26 @@
   <a th:href="@{/neprijavljeni/o_knjigi}">O knjigi</a>
 </nav>
 <h1>Registriraj se</h1>
-<form th:action="@{/neprijavljeni/registracija/submit}" th:object="${user}" method="post" enctype="utf8">
+<form th:action="@{/neprijavljeni/registracija}" th:object="${user}" method="post" enctype="utf8">
   <div>
-    <label th:text="#{label.user.email}">email</label>
+    <label>Email</label>
     <input type="email" th:field="*{email}">
-    <p th:each="error: ${#fields.errors('email')}" th:text="${error}">Validation error</p>
+    <div th:if="${fieldErrors != null}">
+      <div th:each="error : ${fieldErrors}" th:if="${error.field} == 'email'" th:text="${error.defaultMessage}"></div>
+    </div>
   </div>
   <div>
     <label th:text="#{label.user.password}">password</label>
     <input type="password" th:field="*{password}">
-    <p th:each="error: ${#fields.errors('password')}" th:text="${error}">Validation error</p>
+    <div th:if="${fieldErrors != null}">
+    </div>
   </div>
   <div>
     <label th:text="#{label.user.confirmPassword}">confirm</label>
     <input type="password" th:field="*{matchingPassword}">
+    <div th:if="${globalErrors != null}">
+      <div th:each="error : ${globalErrors}" th:text="${error.defaultMessage}"></div>
+    </div>
   </div>
   <button type="submit" th:text="#{label.form.submit}">submit</button>
 </form>
