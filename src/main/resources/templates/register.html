@@ -14,7 +14,7 @@
   <a th:href="@{/neprijavljeni/o_knjigi}">O knjigi</a>
 </nav>
 <h1>Registriraj se</h1>
-<form action="@{/neprijavljeni/registracija/submit}" th:object="${user}" method="post" enctype="utf8">
+<form th:action="@{/neprijavljeni/registracija/submit}" th:object="${user}" method="post" enctype="utf8">
   <div>
     <label th:text="#{label.user.email}">email</label>
     <input type="email" th:field="*{email}">
