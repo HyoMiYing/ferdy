@@ -43,13 +43,6 @@ public class WebsiteController {
     // Controllers for unauthenticated users
     @GetMapping("/neprijavljeni")
     public String homepageUnauthenticated() {
-        // fetch all customers
-        log.info("Users found with findAll():");
-        log.info("-------------------------------");
-        for (User user : repository.findAll()) {
-            log.info(user.toString());
-        }
-        log.info("");
         return "index.html";
     }
 
@@ -72,10 +65,8 @@ public class WebsiteController {
     ) {
         try {
             final User registered = userService.registerNewUserAccount(userDto);
-            log.info("User " + registered + " has been saved.");
             return new ModelAndView("homepageAuthenticated");
         } catch (final UserAlreadyExistsException exception) {
-            log.info("Oh no! User already exists exception ran");
             return new ModelAndView("register").addObject("userExistsException", exception);
         }
     }
@@ -99,11 +90,6 @@ public class WebsiteController {
         final List<FieldError> fieldErrors = result.getFieldErrors();
         final List<ObjectError> globalErrors = result.getGlobalErrors();
         final List<ObjectError> allErrors = result.getAllErrors();
-        System.out.println("Field errors: " + fieldErrors);
-        System.out.println("BindingResutl: " + result);
-        System.out.println("BindingResutl global errors: " + globalErrors);
-        System.out.println("BindingResutl all errors: " + allErrors);
-        System.out.println("BindingResutl target: " + result.getTarget());
 
         UserDto user = new UserDto();
         ModelAndView modelAndView = new ModelAndView();
