@@ -15,6 +15,9 @@
 </nav>
 <h1>Registriraj se</h1>
 <form th:action="@{/neprijavljeni/registracija}" th:object="${user}" method="post" enctype="utf8">
+  <div th:if="${userExistsException != null}">
+    <div th:text="${userExistsException.getMessage}"></div>
+  </div>
   <div>
     <label>Email</label>
     <input type="email" th:field="*{email}">

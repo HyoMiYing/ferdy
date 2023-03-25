@@ -4,9 +4,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.bind.validation.ValidationErrors;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.*;
@@ -62,24 +59,24 @@ public class WebsiteController {
     }
 
     @GetMapping("/neprijavljeni/registracija")
-    public String register(Model model) {
+    public String register(Model model){
         UserDto userDto = new UserDto();
         model.addAttribute("user", userDto);
         return "register.html";
     }
 
     @PostMapping("/neprijavljeni/registracija")
-    public String register(
+    public ModelAndView register(
             @ModelAttribute("user") @Valid UserDto userDto,
             HttpServletRequest request
     ) {
         try {
             final User registered = userService.registerNewUserAccount(userDto);
             log.info("User " + registered + " has been saved.");
-            return "redirect:/prijavljeni";
+            return new ModelAndView("homepageAuthenticated");
         } catch (final UserAlreadyExistsException exception) {
             log.info("Oh no! User already exists exception ran");
-            return "redirect:/neprijavljeni/registracija";
+            return new ModelAndView("register").addObject("userExistsException", exception);
         }
     }
 
