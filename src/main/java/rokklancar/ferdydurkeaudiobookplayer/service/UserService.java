@@ -25,7 +25,7 @@ public class UserService implements IUserService {
     @Override
     public User registerNewUserAccount(final UserDto accountDto) {
         if (emailExists(accountDto.getEmail())) {
-            throw new UserAlreadyExistsException("There is an account with that email address: " + accountDto.getEmail());
+            throw new UserAlreadyExistsException("Email naslov " + accountDto.getEmail() + " je že registriran");
         }
         final User user = new User();
 

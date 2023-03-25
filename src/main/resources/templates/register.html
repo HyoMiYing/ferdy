@@ -17,6 +17,7 @@
 <form th:action="@{/neprijavljeni/registracija}" th:object="${user}" method="post" enctype="utf8">
   <div th:if="${userExistsException != null}">
     <div th:text="${userExistsException.getMessage}"></div>
+    <a th:href="@{/neprijavljeni/ponastavi-geslo}">Ponastavi geslo</a>
   </div>
   <div>
     <label>Email</label>
