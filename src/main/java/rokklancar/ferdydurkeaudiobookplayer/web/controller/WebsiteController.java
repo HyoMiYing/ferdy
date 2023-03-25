@@ -65,7 +65,7 @@ public class WebsiteController {
     ) {
         try {
             final User registered = userService.registerNewUserAccount(userDto);
-            return new ModelAndView("homepageAuthenticated");
+            return new ModelAndView("index.html");
         } catch (final UserAlreadyExistsException exception) {
             return new ModelAndView("register").addObject("userExistsException", exception);
         }
