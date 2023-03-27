@@ -5,56 +5,122 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ferdydurke</title>
+    <style>
+    body {
+        background-color: #FFF5D2;
+        color: #416868;
+    }
+
+    #navigation-bar {
+        color: #B77900;
+    }
+
+    #navigation-bar a {
+        padding-right: 30px;
+        padding-top: 4px;
+        font-size: 20px;
+        text-decoration: underline;
+        white-space: nowrap;
+    }
+
+    #main-info {
+        display: none;
+    }
+
+    #chapters {
+        list-style: none;
+        padding-left: 10px;
+        white-space: nowrap;
+    }
+
+    #chapters a {
+        color: #416868;
+        text-decoration: none;
+    }
+
+    #whole-audio-player {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: #416868;
+    }
+
+    #audio-player {
+        width: 100vw;
+        background-color: #416868;
+        color: #416868;
+    }
+
+    #play-speed-toggle {
+        display: none;
+    }
+
+    .chapter-now-playing {
+        font-weight: bold;
+    }
+
+    .chapter:hover {
+        font-weight: bold;
+    }
+    </style>
 </head>
 <body>
-<nav>
+<nav id="navigation-bar">
     <a th:href="@{/neprijavljeni}">Knjiga</a>
     <a th:href="@{/neprijavljeni/prijava}">Prijava</a>
     <a th:href="@{/neprijavljeni/registracija}">Registracija</a>
     <a th:href="@{/neprijavljeni/o_knjigi}">O knjigi</a>
 </nav>
-<h1>Ferdydurke</h1>
-<h3>1937</h3>
-<h2>Witold Gombrowicz</h2>
-<h3>prevedla: Katarina Šalamun-Biedrzycka</h3>
+<div id="main-info">
+    <h1>Ferdydurke</h1>
+    <h3>1937</h3>
+    <h2>Witold Gombrowicz</h2>
+    <h3>prevedla: Katarina Šalamun-Biedrzycka</h3>
 <h4>prebral: Rok Klančar</h4>
+</div>
 <br>
 <h4>Poglavja</h4>
-<ul>
-    <li><a id="intro" href="#fake-id">UVOD</a></li>
-    <li><a id="chapter1" href="#fake-id">1. Poglavje: UGRABITEV</a></li>
-    <li><a id="chapter2" href="#fake-id">2. Poglavje: V JETNIŠTVU IN NADALJNEM MANJŠANJU</a></li>
-    <li><a id="chapter3" href="#fake-id">3. Poglavje: V MIŠNICI IN NADALJNEM MEČKANJU</a></li>
-    <li><a id="chapter4" href="#fake-id">4. Poglavje: PREDGOVOR K FILIDORJU S PODLAGO V OTROKU</a></li>
-    <li><a id="chapter5" href="#fake-id">5. Poglavje: FILIDOR, S PODLAGO V OTROKU</a></li>
-    <li><a id="chapter6" href="#fake-id">6. Poglavje: ZAPELJEVANJE, SILJENJE V MLADOST SE NADALJUJE</a></li>
-    <li><a id="chapter7" href="#fake-id">7. Poglavje: LJUBEZEN</a></li>
-    <li><a id="chapter8" href="#fake-id">8. Poglavje: KOMPOT</a></li>
-    <li><a id="chapter9" href="#fake-id">9. Poglavje: ZALEZOVANJE, TIPANJE V SODOBNOST SE NADALJUJE</a></li>
-    <li><a id="chapter10" href="#fake-id">10. Poglavje: ORGIJA STEGEN IN ZNOVA V MIŠNICI</a></li>
-    <li><a id="chapter11" href="#fake-id">11. Poglavje: PREDGOVOR K FILIBERTU, PODLOŽENEMU Z OTROKOM</a></li>
-    <li><a id="chapter12" href="#fake-id">12. Poglavje: FILIBERT, PODLOŽEN Z OTROKOM</a></li>
-    <li><a id="chapter13" href="#fake-id">13. Poglavje: HLAPČIČ ALI NOVE NEVARNOSTI</a></li>
-    <li><a id="chapter14" href="#fake-id">14. Poglavje: ORGIJA FRISOV IN ZNOVA V MIŠNICI</a></li>
+<ul id="chapters">
+    <li><a class="chapter uvod" id="intro" href="#fake-id">UVOD</a></li>
+    <li><a class="chapter prvo_poglavje" id="chapter1" href="#fake-id">1. Poglavje: UGRABITEV</a></li>
+    <li><a class="chapter drugo_poglavje" id="chapter2" href="#fake-id">2. Poglavje: V JETNIŠTVU IN NADALJNEM MANJŠANJU</a></li>
+    <li><a class="chapter tretje_poglavje" id="chapter3" href="#fake-id">3. Poglavje: V MIŠNICI IN NADALJNEM MEČKANJU</a></li>
+    <li><a class="chapter cetrto_poglavje" id="chapter4" href="#fake-id">4. Poglavje: PREDGOVOR K FILIDORJU S PODLAGO V OTROKU</a></li>
+    <li><a class="chapter peto_poglavje" id="chapter5" href="#fake-id">5. Poglavje: FILIDOR, S PODLAGO V OTROKU</a></li>
+    <li><a class="chapter sesto_poglavje" id="chapter6" href="#fake-id">6. Poglavje: ZAPELJEVANJE, SILJENJE V MLADOST SE NADALJUJE</a></li>
+    <li><a class="chapter sedmo_poglavje" id="chapter7" href="#fake-id">7. Poglavje: LJUBEZEN</a></li>
+    <li><a class="chapter osmo_poglavje" id="chapter8" href="#fake-id">8. Poglavje: KOMPOT</a></li>
+    <li><a class="chapter deveto_poglavje" id="chapter9" href="#fake-id">9. Poglavje: ZALEZOVANJE, TIPANJE V SODOBNOST SE NADALJUJE</a></li>
+    <li><a class="chapter deseto_poglavje" id="chapter10" href="#fake-id">10. Poglavje: ORGIJA STEGEN IN ZNOVA V MIŠNICI</a></li>
+    <li><a class="chapter enajsto_poglavje" id="chapter11" href="#fake-id">11. Poglavje: PREDGOVOR K FILIBERTU, PODLOŽENEMU Z OTROKOM</a></li>
+    <li><a class="chapter dvanajsto_poglavje" id="chapter12" href="#fake-id">12. Poglavje: FILIBERT, PODLOŽEN Z OTROKOM</a></li>
+    <li><a class="chapter trinajsto_poglavje" id="chapter13" href="#fake-id">13. Poglavje: HLAPČIČ ALI NOVE NEVARNOSTI</a></li>
+    <li><a class="chapter stirinajsto_poglavje" id="chapter14" href="#fake-id">14. Poglavje: ORGIJA FRISOV IN ZNOVA V MIŠNICI</a></li>
 </ul>
 <br>
 <br>
-<p id="currently-playing">UVOD</p>
-<span id="track-listened"></span><audio id="audio-player" type="audio/mpeg" controls th:src="@{/neprijavljeni/ferdydurke_stream?chapter=uvod.mp3}"></audio><span id="track-left"></span>
+<div id="whole-audio-player">
+    <p id="currently-playing">UVOD</p>
+    <span id="track-listened"></span><audio id="audio-player" type="audio/mpeg" controls th:src="@{/neprijavljeni/ferdydurke_stream?chapter=uvod.mp3}"></audio><span id="track-left"></span>
+    <br>
+    <button id="back-10-sec">Prevrti 10 sekund</button>
+    <button id="forward-10-sec">Preskoči 10 sekund</button>
+</div>
 <br>
-<button id="back-10-sec">Prevrti 10 sekund</button>
-<button id="forward-10-sec">Preskoči 10 sekund</button>
 <br>
-<h4>Hitrost predvajanja</h4>
-<ul>
-    <li id="x0.5"><a href="#fake-id">x0.5</a></li>
-    <li id="x0.75"><a href="#fake-id">x0.75</a></li>
-    <li id="x1.0"><a href="#fake-id">x1.0</a></li>
-    <li id="x1.25"><a href="#fake-id">x1.25</a></li>
-    <li id="x1.5"><a href="#fake-id">x1.5</a></li>
-    <li id="x1.75"><a href="#fake-id">x1.75</a></li>
-    <li id="x2.0"><a href="#fake-id">x2.0</a></li>
-</ul>
+<div id="play-speed-toggle">
+    <h4>Hitrost predvajanja</h4>
+    <ul>
+        <li id="x0.5"><a href="#fake-id">x0.5</a></li>
+        <li id="x0.75"><a href="#fake-id">x0.75</a></li>
+        <li id="x1.0"><a href="#fake-id">x1.0</a></li>
+        <li id="x1.25"><a href="#fake-id">x1.25</a></li>
+        <li id="x1.5"><a href="#fake-id">x1.5</a></li>
+        <li id="x1.75"><a href="#fake-id">x1.75</a></li>
+        <li id="x2.0"><a href="#fake-id">x2.0</a></li>
+    </ul>
+</div>
 
 <script>
 
@@ -239,80 +305,105 @@
             return newFileSrc;
         }
 
+        function markChapterAsSelected (chapter) {
+            const chapterElements = document.getElementsByClassName("chapter");
+            for (let i = 0; i < chapterElements.length; i++) {
+                chapterElements[i].classList.remove("chapter-now-playing");
+                if (chapterElements[i].classList.contains(chapter)) {
+                    chapterElements[i].classList.add("chapter-now-playing");
+                }
+            }
+        }
+
         // Chapters
 
         intro.addEventListener("click", (e) => {
             audioPlayer.src = changeAudioPlayerSrc("uvod.mp3", introFileSrc);
+            markChapterAsSelected("uvod");
             audioPlayer.play();
         });
 
         chapter1.addEventListener("click", (e) => {
             audioPlayer.src = changeAudioPlayerSrc("prvo_poglavje.mp3", introFileSrc);
+            markChapterAsSelected("prvo_poglavje");
             audioPlayer.play();
         });
 
         chapter2.addEventListener("click", (e) => {
             audioPlayer.src = changeAudioPlayerSrc("drugo_poglavje.mp3", introFileSrc);
+            markChapterAsSelected("drugo_poglavje");
             audioPlayer.play();
         });
 
         chapter3.addEventListener("click", (e) => {
             audioPlayer.src = changeAudioPlayerSrc("tretje_poglavje.mp3", introFileSrc);
+            markChapterAsSelected("tretje_poglavje");
             audioPlayer.play();
         });
 
         chapter4.addEventListener("click", (e) => {
             audioPlayer.src = changeAudioPlayerSrc("cetrto_poglavje.mp3", introFileSrc);
+            markChapterAsSelected("cetrto_poglavje");
             audioPlayer.play();
         });
 
         chapter5.addEventListener("click", (e) => {
             audioPlayer.src = changeAudioPlayerSrc("peto_poglavje.mp3", introFileSrc);
+            markChapterAsSelected("peto_poglavje");
             audioPlayer.play();
         });
 
         chapter6.addEventListener("click", (e) => {
             audioPlayer.src = changeAudioPlayerSrc("sesto_poglavje.mp3", introFileSrc);
+            markChapterAsSelected("sesto_poglavje");
             audioPlayer.play();
         });
 
         chapter7.addEventListener("click", (e) => {
             audioPlayer.src = changeAudioPlayerSrc("sedmo_poglavje.mp3", introFileSrc);
+            markChapterAsSelected("sedmo_poglavje");
             audioPlayer.play();
         });
 
         chapter8.addEventListener("click", (e) => {
             audioPlayer.src = changeAudioPlayerSrc("osmo_poglavje.mp3", introFileSrc);
+            markChapterAsSelected("osmo_poglavje");
             audioPlayer.play();
         });
 
         chapter9.addEventListener("click", (e) => {
             audioPlayer.src = changeAudioPlayerSrc("deveto_poglavje.mp3", introFileSrc);
+            markChapterAsSelected("deveto_poglavje");
             audioPlayer.play();
         });
 
         chapter10.addEventListener("click", (e) => {
             audioPlayer.src = changeAudioPlayerSrc("deseto_poglavje.mp3", introFileSrc);
+            markChapterAsSelected("deseto_poglavje");
             audioPlayer.play();
         });
 
         chapter11.addEventListener("click", (e) => {
             audioPlayer.src = changeAudioPlayerSrc("enajsto_poglavje.mp3", introFileSrc);
+            markChapterAsSelected("enajsto_poglavje");
             audioPlayer.play();
         });
 
         chapter12.addEventListener("click", (e) => {
             audioPlayer.src = changeAudioPlayerSrc("dvanajsto_poglavje.mp3", introFileSrc);
+            markChapterAsSelected("dvanajsto_poglavje");
             audioPlayer.play();
         });
 
         chapter13.addEventListener("click", (e) => {
             audioPlayer.src = changeAudioPlayerSrc("trinajsto_poglavje.mp3", introFileSrc);
+            markChapterAsSelected("trinajsto_poglavje");
             audioPlayer.play();
         });
 
         chapter14.addEventListener("click", (e) => {
             audioPlayer.src = changeAudioPlayerSrc("stirinajsto_poglavje.mp3", introFileSrc);
+            markChapterAsSelected("stirinajsto_poglavje");
             audioPlayer.play();
         });
     </script>
