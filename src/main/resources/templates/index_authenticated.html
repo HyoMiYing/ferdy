@@ -42,8 +42,7 @@
 <br>
 <br>
 <p id="currently-playing">UVOD</p>
-<span id="track-listened"></span><audio id="audio-player" controls src="https://samplelib.com/lib/preview/mp3/sample-15s.mp3"></audio><span id="track-left"></span>
-<br>
+<span id="track-listened"></span><audio id="audio-player" type="audio/mpeg" controls th:src="@{/neprijavljeni/ferdydurke_stream?chapter=uvod.mp3}"></audio><span id="track-left"></span><br>
 <button id="back-10-sec">Prevrti 10 sekund</button>
 <button id="forward-10-sec">Preskoči 10 sekund</button>
 <button id="add-bookmark">Dodaj zaznamek</button>
@@ -283,80 +282,88 @@
             return (v < 10) ? "0" + v : v;
         }
 
+        // Helper methods to switch chapters in the player
+        const introFileSrc = audioPlayer.src;
+
+        function changeAudioPlayerSrc (chapterSrc, baseSrc) {
+            const newFileSrc = baseSrc.replace(/=(.*)/, "=" + chapterSrc);
+            return newFileSrc;
+        }
+
         // Chapters
 
         intro.addEventListener("click", (e) => {
-            audioPlayer.src = "https://samplelib.com/lib/preview/mp3/sample-15s.mp3";
+            audioPlayer.src = changeAudioPlayerSrc("uvod.mp3", introFileSrc);
             audioPlayer.play();
         });
 
         chapter1.addEventListener("click", (e) => {
-            audioPlayer.src = "https://freetestdata.com/wp-content/uploads/2021/09/Free_Test_Data_5MB_MP3.mp3";
+            audioPlayer.src = changeAudioPlayerSrc("prvo_poglavje.mp3", introFileSrc);
             audioPlayer.play();
         });
 
         chapter2.addEventListener("click", (e) => {
-            audioPlayer.src = "https://freetestdata.com/wp-content/uploads/2021/09/Free_Test_Data_5MB_MP3.mp3";
+            audioPlayer.src = changeAudioPlayerSrc("drugo_poglavje.mp3", introFileSrc);
             audioPlayer.play();
         });
 
         chapter3.addEventListener("click", (e) => {
-            audioPlayer.src = "https://file-examples.com/storage/fef1706276640fa2f99a5a4/2017/11/file_example_MP3_2MG.mp3";
+            audioPlayer.src = changeAudioPlayerSrc("tretje_poglavje.mp3", introFileSrc);
             audioPlayer.play();
         });
 
         chapter4.addEventListener("click", (e) => {
-            audioPlayer.src = "https://file-examples.com/storage/fef1706276640fa2f99a5a4/2017/11/file_example_MP3_2MG.mp3";
+            audioPlayer.src = changeAudioPlayerSrc("cetrto_poglavje.mp3", introFileSrc);
             audioPlayer.play();
         });
 
         chapter5.addEventListener("click", (e) => {
-            audioPlayer.src = "media/peto_poglavje.mp3";
+            audioPlayer.src = changeAudioPlayerSrc("peto_poglavje.mp3", introFileSrc);
             audioPlayer.play();
         });
 
         chapter6.addEventListener("click", (e) => {
-            audioPlayer.src = "media/sesto_poglavje.mp3";
+            audioPlayer.src = changeAudioPlayerSrc("sesto_poglavje.mp3", introFileSrc);
             audioPlayer.play();
         });
 
         chapter7.addEventListener("click", (e) => {
-            audioPlayer.src = "media/sedmo_poglavje.mp3";
+            audioPlayer.src = changeAudioPlayerSrc("sedmo_poglavje.mp3", introFileSrc);
             audioPlayer.play();
         });
 
         chapter8.addEventListener("click", (e) => {
-            audioPlayer.src = "media/osmo_poglavje.mp3";
+            audioPlayer.src = changeAudioPlayerSrc("osmo_poglavje.mp3", introFileSrc);
             audioPlayer.play();
         });
 
         chapter9.addEventListener("click", (e) => {
-            audioPlayer.src = "media/deveto_poglavje.mp3";
+            audioPlayer.src = changeAudioPlayerSrc("deveto_poglavje.mp3", introFileSrc);
             audioPlayer.play();
         });
 
         chapter10.addEventListener("click", (e) => {
-            audioPlayer.src = "media/deseto_poglavje.mp3";
+            audioPlayer.src = changeAudioPlayerSrc("deseto_poglavje.mp3", introFileSrc);
             audioPlayer.play();
         });
 
         chapter11.addEventListener("click", (e) => {
-            audioPlayer.src = "media/enajsto_poglavje.mp3";
+            audioPlayer.src = changeAudioPlayerSrc("enajsto_poglavje.mp3", introFileSrc);
             audioPlayer.play();
         });
 
         chapter12.addEventListener("click", (e) => {
-            audioPlayer.src = "media/dvanajsto_poglavje.mp3";
+            audioPlayer.src = changeAudioPlayerSrc("dvanajsto_poglavje.mp3", introFileSrc);
             audioPlayer.play();
         });
 
         chapter13.addEventListener("click", (e) => {
-            audioPlayer.src = "media/trinajsto_poglavje.mp3";
+            audioPlayer.src = changeAudioPlayerSrc("trinajsto_poglavje.mp3", introFileSrc);
             audioPlayer.play();
         });
 
         chapter14.addEventListener("click", (e) => {
-            audioPlayer.src = "media/stirinajsto_poglavje.mp3";
+            audioPlayer.src = changeAudioPlayerSrc("stirinajsto_poglavje.mp3", introFileSrc);
             audioPlayer.play();
         });
     </script>
