@@ -12,7 +12,7 @@ public class FerdydurkeAudiobookPlayerApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(FerdydurkeAudiobookPlayerApplication.class, args);
-		if (!System.getProperty("user.name").equals("roka"))
+		if (!System.getProperty("user.name").equals("rok"))
 		{
 			System.out.println("CALLING AWS");
 			rokklancar.ferdydurkeaudiobookplayer.service.AWSS3Service.downloadAudiobookFile();
