@@ -20,26 +20,26 @@
     <a th:href="@{/neprijavljeni/ponastavi-geslo}">Ponastavi geslo</a>
   </div>
   <div>
-    <label>Email</label>
+    <label>email</label>
     <input type="email" th:field="*{email}">
     <div th:if="${fieldErrors != null}">
       <div th:each="error : ${fieldErrors}" th:if="${error.field} == 'email'" th:text="${error.defaultMessage}"></div>
     </div>
   </div>
   <div>
-    <label th:text="#{label.user.password}">password</label>
+    <label>geslo</label>
     <input type="password" th:field="*{password}">
     <div th:if="${fieldErrors != null}">
     </div>
   </div>
   <div>
-    <label th:text="#{label.user.confirmPassword}">confirm</label>
+    <label>potrdi geslo</label>
     <input type="password" th:field="*{matchingPassword}">
     <div th:if="${globalErrors != null}">
       <div th:each="error : ${globalErrors}" th:text="${error.defaultMessage}"></div>
     </div>
   </div>
-  <button type="submit" th:text="#{label.form.submit}">submit</button>
+  <button type="submit">registriraj se</button>
 </form>
 </body>
 </html>

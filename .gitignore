@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Big ass mp3 fyles
+src/main/resources/static/
