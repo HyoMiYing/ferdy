@@ -5,6 +5,66 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ferdydurke</title>
+  <style>
+    body {
+        background-color: #FFF5D2;
+        color: #416868;
+    }
+
+    #navigation-bar {
+        color: #B77900;
+    }
+
+    #navigation-bar a {
+        color: #B77900;
+        padding-right: 30px;
+        padding-top: 4px;
+        font-size: 20px;
+        text-decoration: underline;
+        white-space: nowrap;
+    }
+
+    #main-info {
+        display: none;
+    }
+
+    #chapters {
+        list-style: none;
+        padding-left: 10px;
+        white-space: nowrap;
+    }
+
+    #chapters a {
+        color: #416868;
+        text-decoration: none;
+    }
+
+    #whole-audio-player {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: #416868;
+    }
+
+    #audio-player {
+        width: 100vw;
+        background-color: #416868;
+        color: #416868;
+    }
+
+    #play-speed-toggle {
+        display: none;
+    }
+
+    .chapter-now-playing {
+        font-weight: bold;
+    }
+
+    .chapter:hover {
+        font-weight: bold;
+    }
+    </style>
 </head>
 <body>
 <nav>
