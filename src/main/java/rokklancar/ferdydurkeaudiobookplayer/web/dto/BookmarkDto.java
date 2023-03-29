@@ -2,6 +2,7 @@ package rokklancar.ferdydurkeaudiobookplayer.web.dto;
 
 import jakarta.validation.constraints.NotEmpty;
 import rokklancar.ferdydurkeaudiobookplayer.persistence.model.User;
+import rokklancar.ferdydurkeaudiobookplayer.validation.ValidEmail;
 
 public class BookmarkDto {
 
@@ -14,7 +15,8 @@ public class BookmarkDto {
     private String note;
 
     @NotEmpty
-    private User user;
+    @ValidEmail
+    private String userEmail;
 
     public String getChapter() {
         return chapter;
@@ -40,11 +42,11 @@ public class BookmarkDto {
         this.note = note;
     }
 
-    public User getUser() {
-        return user;
+    public String getUserEmail() {
+        return userEmail;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 }

@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 import rokklancar.ferdydurkeaudiobookplayer.persistence.dao.UserRepository;
 import rokklancar.ferdydurkeaudiobookplayer.persistence.model.Bookmark;
+import rokklancar.ferdydurkeaudiobookplayer.service.BookmarkService;
 import rokklancar.ferdydurkeaudiobookplayer.service.IUserService;
 import rokklancar.ferdydurkeaudiobookplayer.service.MediaStreamLoader;
 import rokklancar.ferdydurkeaudiobookplayer.web.dto.BookmarkDto;
@@ -33,12 +34,15 @@ public class WebsiteController {
 
     private IUserService userService;
 
+    private BookmarkService bookmarkService;
+
     private MediaStreamLoader mediaLoaderService;
 
     private UserRepository repository;
 
-    public WebsiteController(IUserService userService, UserRepository userRepository, MediaStreamLoader mediaLoaderService) {
+    public WebsiteController(IUserService userService, BookmarkService bookmarkService, UserRepository userRepository, MediaStreamLoader mediaLoaderService) {
         this.userService = userService;
+        this.bookmarkService = bookmarkService;
         this.repository = userRepository;
         this.mediaLoaderService = mediaLoaderService;
     }
@@ -110,6 +114,7 @@ public class WebsiteController {
     // Controllers for authenticated users
     @GetMapping("/prijavljeni")
     public String homepageAuthenticated(Principal principal, Model model) {
+        model.addAttribute("bookmarks", bookmarkService.)
         model.addAttribute("authenticatedUserName", principal.getName());
         return "index_authenticated.html";
     }
