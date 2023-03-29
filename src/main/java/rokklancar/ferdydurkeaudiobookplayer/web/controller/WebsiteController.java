@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 import rokklancar.ferdydurkeaudiobookplayer.persistence.dao.UserRepository;
+import rokklancar.ferdydurkeaudiobookplayer.persistence.model.Bookmark;
 import rokklancar.ferdydurkeaudiobookplayer.service.IUserService;
 import rokklancar.ferdydurkeaudiobookplayer.service.MediaStreamLoader;
+import rokklancar.ferdydurkeaudiobookplayer.web.dto.BookmarkDto;
 import rokklancar.ferdydurkeaudiobookplayer.web.dto.UserDto;
 import rokklancar.ferdydurkeaudiobookplayer.persistence.model.User;
 import rokklancar.ferdydurkeaudiobookplayer.web.error.UserAlreadyExistsException;
@@ -116,6 +118,17 @@ public class WebsiteController {
     public String aboutPageAuthenticated(Principal principal, Model model) {
         model.addAttribute("authenticatedUserName", principal.getName());
         return "about_authenticated.html";
+    }
+
+    @PostMapping("/prijavljeni/dodaj_zaznamek")
+    public String addBookmark(@ModelAttribute("bookmark") @Valid BookmarkDto bookmarkDto) {
+        try {
+            final Bookmark bookmark = bookmarkService.addNewBookmark(bookmarkDto);
+            return "redirect:/prijavljeni";
+        } catch (Exception e) {
+            log.info(e.toString());
+            return "redirect:/prijavljeni";
+        }
     }
 
     @ExceptionHandler(BindException.class)
