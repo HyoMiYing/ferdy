@@ -1,5 +1,6 @@
 package rokklancar.ferdydurkeaudiobookplayer.service;
 
+import org.springframework.stereotype.Service;
 import rokklancar.ferdydurkeaudiobookplayer.persistence.dao.BookmarkRepository;
 import rokklancar.ferdydurkeaudiobookplayer.persistence.model.Bookmark;
 import rokklancar.ferdydurkeaudiobookplayer.persistence.model.User;
@@ -7,6 +8,7 @@ import rokklancar.ferdydurkeaudiobookplayer.web.dto.BookmarkDto;
 
 import java.util.List;
 
+@Service
 public class BookmarkService {
 
     private BookmarkRepository bookmarkRepository;

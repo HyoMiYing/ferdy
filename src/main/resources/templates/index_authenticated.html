@@ -73,7 +73,7 @@
   <form style="display: inline;" id="logout-form" th:action="@{/logout}" method="post">
     <a onclick="document.getElementById('logout-form').submit();" href="#odjava">Odjava</a>
   </form>
-  <p>Prijavljen kot <b th:text="${authenticatedUserName}"></b></p>
+  <p>Prijavljen kot <b id="user-name" th:text="${authenticatedUserName}"></b></p>
 </nav>
 <div id="main-info">
     <h1>Ferdydurke</h1>
@@ -105,16 +105,25 @@
 <br>
 <div id="whole-audio-player">
     <p id="currently-playing">UVOD</p>
-    <span id="track-listened"></span><audio id="audio-player" type="audio/mpeg" controls th:src="@{/neprijavljeni/ferdydurke_stream?chapter=uvod.mp3}"></audio><span id="track-left"></span>
+    <span id="track-listened"></span><audio id="audio-player" type="audio/mpeg" controls th:src="@{/prijavljeni/ferdydurke_stream?chapter=uvod.mp3}"></audio><span id="track-left"></span>
     <br>
     <button id="back-10-sec">Prevrti 10 sekund</button>
     <button id="forward-10-sec">Preskoči 10 sekund</button>
-    <button id="add-bookmark">Dodaj zaznamek</button>
+    <form id="add-bookmark-form" th:action="@{/prijavljeni/dodaj_zaznamek}" method="post">
+        <input id="chapter-field" type="text" name="chapter">
+        <input id="timestamp-field" type="text" name="timestamp">
+        <input id="note-field" type="text" name="note">
+        <input id="email-field" type="email" name="userEmail" th:value="${authenticatedUserName}">
+        <button id="add-bookmark">Dodaj zaznamek</button>
+    </form>
 </div>
 <br>
-<h5>Zaznamki</h5>
-<ul id="bookmarks">
-</ul>
+<div th:if="${bookmarks != null}">
+    <h5>Zaznamki</h5>
+    <ul id="bookmarks">
+        <li class="bookmark-list-item" th:data-bookmark-chapter="${bookmark.getChapter}" th:data-bookmark-timestamp="${bookmark.getTimestamp}" th:each="bookmark : ${bookmarks}"><span th:text="${bookmark.getChapter}"></span>-<span th:text="${bookmark.getTimestamp}"></span>-<span th:text="${bookmark.getNote}"></span></li>
+    </ul>
+</div>
 <br>
 <div id="play-speed-toggle">
     <h4>Hitrost predvajanja</h4>
@@ -157,21 +166,21 @@
         ];
 
         const chapterSourcesAndNamesLong = {
-            "https://samplelib.com/lib/preview/mp3/sample-15s.mp3" : "UVOD",
-            "https://freetestdata.com/wp-content/uploads/2021/09/Free_Test_Data_5MB_MP3.mp3" : "1. POGLAVJE: UGRABITEV",
-            "https://freetestdata.com/wp-content/uploads/2021/09/Free_Test_Data_5MB_MP3.mp3" : "2. POGLAVJE: V JETNIŠTVU IN NADALJNEM MANJŠANJU",
-            "https://file-examples.com/storage/fef1706276640fa2f99a5a4/2017/11/file_example_MP3_2MG.mp3" : "3. POGLAVJE: V MIŠNICI IN NADALJNEM MEČKANJU",
-            "https://file-examples.com/storage/fef1706276640fa2f99a5a4/2017/11/file_example_MP3_2MG.mp3" : "4. POGLAVJE: PREDGOVOR K FILIDORJU S PODLAGO V OTROKU",
-            "media/peto_poglavje.mp3" : "5. POGLAVJE: FILIDOR, S PODLAGO V OTROKU",
-            "media/sesto_poglavje.mp3" : "6. POGLAVJE: ZAPELJEVANJE, SILJENJE V MLADOST SE NADALJUJE",
-            "media/sedmo_poglavje.mp3" : "7. POGLAVJE: LJUBEZEN",
-            "media/osmo_poglavje.mp3" : "8. POGLAVJE: KOMPOT",
-            "media/deveto_poglavje.mp3" : "9. POGLAVJE: ZALEZOVANJE, TIPANJE V SODOBNOST SE NADALJUJE",
-            "media/deseto_poglavje.mp3" : "10. POGLAVJE: ORGIJA STEGEN IN ZNOVA V MIŠNICI",
-            "media/enajsto_poglavje.mp3" : "11. POGLAVJE: PREDGOVOR K FILIBERTU, PODLOŽENEMU Z OTROKOM",
-            "media/dvanajsto_poglavje.mp3" : "12. POGLAVJE: FILIBERT, PODLOŽEN Z OTROKOM",
-            "media/trinajsto_poglavje.mp3" : "13. POGLAVJE: HLAPČIČ ALI NOVE NEVARNOSTI",
-            "media/stirinajsto_poglavje.mp3" : "14. POGLAVJE: ORGIJA FRISOV IN ZNOVA V MIŠNICI",
+            "uvod.mp3" : "UVOD",
+            "prvo_poglavje.mp3" : "1. POGLAVJE: UGRABITEV",
+            "drugo_poglavje.mp3" : "2. POGLAVJE: V JETNIŠTVU IN NADALJNEM MANJŠANJU",
+            "tretje_poglavje.mp3" : "3. POGLAVJE: V MIŠNICI IN NADALJNEM MEČKANJU",
+            "cetrto_poglavje.mp3" : "4. POGLAVJE: PREDGOVOR K FILIDORJU S PODLAGO V OTROKU",
+            "peto_poglavje.mp3" : "5. POGLAVJE: FILIDOR, S PODLAGO V OTROKU",
+            "sesto_poglavje.mp3" : "6. POGLAVJE: ZAPELJEVANJE, SILJENJE V MLADOST SE NADALJUJE",
+            "sedmo_poglavje.mp3" : "7. POGLAVJE: LJUBEZEN",
+            "osmo_poglavje.mp3" : "8. POGLAVJE: KOMPOT",
+            "deveto_poglavje.mp3" : "9. POGLAVJE: ZALEZOVANJE, TIPANJE V SODOBNOST SE NADALJUJE",
+            "deseto_poglavje.mp3" : "10. POGLAVJE: ORGIJA STEGEN IN ZNOVA V MIŠNICI",
+            "enajsto_poglavje.mp3" : "11. POGLAVJE: PREDGOVOR K FILIBERTU, PODLOŽENEMU Z OTROKOM",
+            "dvanajsto_poglavje.mp3" : "12. POGLAVJE: FILIBERT, PODLOŽEN Z OTROKOM",
+            "trinajsto_poglavje.mp3" : "13. POGLAVJE: HLAPČIČ ALI NOVE NEVARNOSTI",
+            "stirinajsto_poglavje.mp3" : "14. POGLAVJE: ORGIJA FRISOV IN ZNOVA V MIŠNICI",
         }
 
         const chapterSourcesAndNames = {
@@ -232,43 +241,40 @@
 
 
         // Add bookmark
-        addBookmark.addEventListener("click", () => {
+        const addBookmarkForm = document.getElementById("add-bookmark-form");
+
+        addBookmarkForm.addEventListener("submit", (e) => {
+            e.preventDefault();
             audioPlayer.pause();
             const bookmarkNote = window.prompt("Opomba za zaznamek:");
-            if (bookmarkNote == null) {
-                return;
-            }
-            audioPlayer.play();
-            let newBookmark = document.createElement("li");
-            let bookmarkInfo = document.createElement("span");
-            let deleteBookmark = document.createElement("span")
-            newBookmark.classList.add("bookmark");
-            newBookmark.setAttribute("data-bookmark-time", audioPlayer.currentTime);
-            newBookmark.setAttribute("data-bookmark-chapter", audioPlayer.getAttribute("src"));
-            bookmarkInfo.textContent = chapterSourcesAndNames[audioPlayer.getAttribute("src")] + " " + sToTime(audioPlayer.currentTime) + " " + bookmarkNote + "  ";
-            deleteBookmark.classList.add("delete-bookmark");
-            deleteBookmark.textContent = "🗑";
-            newBookmark.appendChild(bookmarkInfo);
-            newBookmark.appendChild(deleteBookmark);
-            bookmarks.appendChild(newBookmark);
+            let chapterField = document.getElementById("chapter-field");
+            chapterField.value = audioPlayer.currentSrc.replace(/(.*)=/, "");
+            let timestampField = document.getElementById("timestamp-field");
+            timestampField.value = audioPlayer.currentTime;
+            let noteField = document.getElementById("note-field");
+            noteField.value = bookmarkNote;
+            addBookmarkForm.submit();
         });
 
         // Play bookmark OR delete a bookmark
         bookmarks.addEventListener("click", (e) => {
-            if (e.target.classList.contains("bookmark") || e.target.parentElement.classList.contains("bookmark")) {
+            if (e.target.classList.contains("bookmark-list-item") || e.target.parentElement.classList.contains("bookmark-list-item")) {
                 if (e.target.classList.contains("delete-bookmark")) {
                     e.target.parentElement.remove();
                     return;
                 }
                 if (e.target.getAttribute("data-bookmark-chapter") == null) {
                     audioPlayer.src = e.target.parentElement.getAttribute("data-bookmark-chapter");
-                    audioPlayer.currentTime = e.target.parentElement.getAttribute("data-bookmark-time");
+                    console.log("Setting the time to:" + parseInt(e.target.parentElement.getAttribute("data-bookmark-timestamp")));
+                    audioPlayer.currentTime = parseInt(e.target.parentElement.getAttribute("data-bookmark-timestamp"));
                     audioPlayer.play();
                     return
-                }
+                } else {
                 audioPlayer.src = e.target.getAttribute("data-bookmark-chapter");
-                audioPlayer.currentTime = e.target.getAttribute("data-bookmark-time");
+                console.log("Setting the time to:" + parseInt(e.target.getAttribute("data-bookmark-timestamp")));
+                audioPlayer.currentTime = parseInt(e.target.getAttribute("data-bookmark-timestamp"));
                 audioPlayer.play();
+                }
             }
         });
 

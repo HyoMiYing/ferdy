@@ -114,8 +114,9 @@ public class WebsiteController {
     // Controllers for authenticated users
     @GetMapping("/prijavljeni")
     public String homepageAuthenticated(Principal principal, Model model) {
-        model.addAttribute("bookmarks", bookmarkService.)
+        model.addAttribute("bookmarks", bookmarkService.findBookmarksByUser(userService.findUserByEmail(principal.getName())));
         model.addAttribute("authenticatedUserName", principal.getName());
+        System.out.println("Bookmarks;" + bookmarkService.findBookmarksByUser(userService.findUserByEmail(principal.getName())));
         return "index_authenticated.html";
     }
 
@@ -129,10 +130,37 @@ public class WebsiteController {
     public String addBookmark(@ModelAttribute("bookmark") @Valid BookmarkDto bookmarkDto) {
         try {
             final Bookmark bookmark = bookmarkService.addNewBookmark(bookmarkDto);
+            System.out.println("Bookmark added");
             return "redirect:/prijavljeni";
         } catch (Exception e) {
             log.info(e.toString());
+            System.out.println("Error when creating a bookmark");
             return "redirect:/prijavljeni";
+        }
+    }
+
+    @GetMapping("/prijavljeni/ferdydurke_stream")
+    @ResponseBody
+    public ResponseEntity<StreamingResponseBody> ferdydurke_stream_auth(
+            @RequestHeader(value = "Range", required = false)
+            String rangeHeader,
+            @RequestParam String chapter,
+            HttpServletRequest request)
+    {
+        try
+        {
+            String filePathString = "src/main/resources/static/" + chapter;
+            ResponseEntity<StreamingResponseBody> returnVal = mediaLoaderService.loadPartialMediaFile(filePathString, rangeHeader);
+
+            return returnVal;
+        }
+        catch (FileNotFoundException e)
+        {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        catch (IOException e)
+        {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
