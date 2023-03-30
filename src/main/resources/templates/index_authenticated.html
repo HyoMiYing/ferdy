@@ -143,6 +143,8 @@
         // UI elements
         const audioPlayer = document.getElementById("audio-player");
 
+        const introFileSrc = audioPlayer.src;
+
         const currentlyPlaying = document.getElementById("currently-playing");
         const trackListened = document.getElementById("track-listened");
         const trackLeft = document.getElementById("track-left");
@@ -264,16 +266,14 @@
                     return;
                 }
                 if (e.target.getAttribute("data-bookmark-chapter") == null) {
-                    audioPlayer.src = e.target.parentElement.getAttribute("data-bookmark-chapter");
-                    console.log("Setting the time to:" + parseInt(e.target.parentElement.getAttribute("data-bookmark-timestamp")));
+                    audioPlayer.src = window.location.href.replace(/prijavljeni(.*)/, "prijavljeni/ferdydurke_stream?chapter=" + e.target.parentElement.getAttribute("data-bookmark-chapter"));
                     audioPlayer.currentTime = parseInt(e.target.parentElement.getAttribute("data-bookmark-timestamp"));
                     audioPlayer.play();
                     return
                 } else {
-                audioPlayer.src = e.target.getAttribute("data-bookmark-chapter");
-                console.log("Setting the time to:" + parseInt(e.target.getAttribute("data-bookmark-timestamp")));
-                audioPlayer.currentTime = parseInt(e.target.getAttribute("data-bookmark-timestamp"));
-                audioPlayer.play();
+                    audioPlayer.src = window.location.href.replace(/prijavljeni(.*)/, "prijavljeni/ferdydurke_stream?chapter=" + e.target.getAttribute("data-bookmark-chapter"));
+                    audioPlayer.currentTime = parseInt(e.target.getAttribute("data-bookmark-timestamp"));
+                    audioPlayer.play();
                 }
             }
         });
@@ -356,8 +356,6 @@
         }
 
         // Helper methods to switch chapters in the player
-        const introFileSrc = audioPlayer.src;
-
         function changeAudioPlayerSrc (chapterSrc, baseSrc) {
             const newFileSrc = baseSrc.replace(/=(.*)/, "=" + chapterSrc);
             return newFileSrc;
