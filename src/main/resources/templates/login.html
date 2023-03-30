@@ -1,22 +1,120 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head>
-  <title>Please Log In</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ferdydurke - Prijava</title>
+  <style>
+    body {
+        background-color: #FFF5D2;
+        color: #416868;
+    }
+
+    #navigation-bar {
+        color: #B77900;
+    }
+
+    #navigation-bar a {
+        color: #B77900;
+        padding-right: 30px;
+        padding-top: 4px;
+        font-size: 20px;
+        text-decoration: underline;
+        white-space: nowrap;
+    }
+
+    #main-info {
+        display: none;
+    }
+
+    #chapters {
+        list-style: none;
+        padding-left: 10px;
+        white-space: nowrap;
+    }
+
+    #chapters a {
+        color: #416868;
+        text-decoration: none;
+    }
+
+    #whole-audio-player {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: #416868;
+    }
+
+    #audio-player {
+        width: 100vw;
+        background-color: #416868;
+        color: #416868;
+    }
+
+    #play-speed-toggle {
+        display: none;
+    }
+
+    .chapter-now-playing {
+        font-weight: bold;
+    }
+
+    .chapter:hover {
+        font-weight: bold;
+    }
+
+        #form-centre {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+      border: #416868 4px solid;
+      padding: 1rem;
+    }
+
+    #form-centre .submit-button {
+      display: block;
+      margin: 1rem auto;
+    }
+
+    #form-centre .error {
+      color: #b71500;
+      display: block;
+      margin: auto;
+    }
+
+    #form-centre .input-element {
+      padding: 1em;
+    }
+    </style>
 </head>
 <body>
-<h1>Please Log In</h1>
-<div th:if="${param.error}">
-  Invalid username and password.</div>
-<div th:if="${param.logout}">
-  You have been logged out.</div>
-<form th:action="@{/login}" method="post">
-  <div>
-    <input type="text" name="username" placeholder="Username"/>
-  </div>
-  <div>
-    <input type="password" name="password" placeholder="Password"/>
-  </div>
-  <input type="submit" value="Log in" />
-</form>
+<nav id="navigation-bar">
+  <a th:href="@{/neprijavljeni}">Knjiga</a>
+  <a th:href="@{/neprijavljeni/prijava}">Prijava</a>
+  <a th:href="@{/neprijavljeni/registracija}">Registracija</a>
+  <a th:href="@{/neprijavljeni/o_knjigi}">O knjigi</a>
+</nav>
+<div id="form-centre">
+  <h1>Prijavi se</h1>
+  <div th:if="${param.error}">
+    email in geslo se ne ujemata</div>
+  <div th:if="${param.logout}">
+    Odjavljen/a si</div>
+  <form th:action="@{/login}" method="post">
+    <div class="input-element">
+      <label for="username">email</label>
+      <input type="email" name="username" placeholder="email"/>
+    </div>
+    <div class="input-element">
+      <label for="password">geslo</label>
+      <input type="password" name="password" placeholder="geslo"/>
+    </div>
+    <input class="submit-button" type="submit" value="prijavi se" />
+  </form>
+</div>
 </body>
 </html>
