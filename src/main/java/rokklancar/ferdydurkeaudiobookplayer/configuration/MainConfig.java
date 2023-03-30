@@ -12,18 +12,13 @@ import java.net.URISyntaxException;
 public class MainConfig {
 
     @Bean
-    public DataSource dataSource() throws URISyntaxException {
-        URI dbUri = new URI(System.getenv("DATABASE_URL"));
-
-        String username = dbUri.getUserInfo().split(":")[0];
-        String password = dbUri.getUserInfo().split(":")[1];
-        String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath() + "?sslmode=require";
-
-        DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
-        dataSourceBuilder.url(dbUrl);
-        dataSourceBuilder.username(username);
-        dataSourceBuilder.password(password);
-
-        return dataSourceBuilder.build();
-    }
+    public DataSource getDataSource() {
+                return DataSourceBuilder.create()
+                                .driverClassName("org.postgresql.Driver")
+                                .url("jdbc:postgresql://localhost:5432/springdb")
+                        .password("springpassword")
+                        .username("springbootone")
+                                .build();
+            }
 }
+
