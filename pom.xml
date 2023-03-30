@@ -86,7 +86,7 @@
 			<artifactId>commons-io</artifactId>
 			<version>2.11.0</version>
 		</dependency>-->
-		<dependency>
+		<!--<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-api</artifactId>
 			<version>5.9.2</version>
@@ -111,7 +111,7 @@
 			<groupId>org.codehaus.plexus</groupId>
 			<artifactId>plexus-compiler-javac</artifactId>
 			<version>2.13.0</version>
-		</dependency>
+		</dependency>-->
 	</dependencies>
 
 	<build>
