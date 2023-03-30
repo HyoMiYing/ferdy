@@ -75,12 +75,12 @@
 			<artifactId>aws-java-sdk</artifactId>
 			<version>1.12.420</version>
 		</dependency>
-		<dependency>
+<!--		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<version>1.18.26</version>
 			<scope>provided</scope>
-		</dependency>
+		</dependency>-->
 <!--		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
