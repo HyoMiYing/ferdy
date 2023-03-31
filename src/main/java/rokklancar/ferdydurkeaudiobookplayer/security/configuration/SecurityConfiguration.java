@@ -74,7 +74,7 @@ public class SecurityConfiguration {
             .anyRequest().authenticated()
             .and()
             .formLogin()
-                .loginPage("/login").permitAll()
+                .loginPage("/neprijavljeni/prijava").permitAll()
                 .defaultSuccessUrl("/prijavljeni", true);
         return http.build();
     }

@@ -104,7 +104,7 @@
     email in geslo se ne ujemata</div>
   <div th:if="${param.logout}">
     Odjavljen/a si</div>
-  <form th:action="@{/login}" method="post">
+  <form th:action="@{/neprijavljeni/prijava}" method="post">
     <div class="input-element">
       <label for="username">email</label>
       <input type="email" name="username" placeholder="email"/>
