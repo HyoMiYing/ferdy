@@ -173,14 +173,13 @@
         #chapters-menu {
             display: none;
             position: absolute;
-            top: 61px;
-            padding-left: 1rem;
             background-color: #FFF5D2;
             margin: auto;
             width: 417px;
             height: 625px;
             margin: auto;
             z-index: 15;
+            overflow: auto;
         }
 
         #chapters-menu a {
@@ -214,7 +213,7 @@
         }
 
         #chapters-menu-header {
-            position: fixed;
+            position: sticky;
             width: 93%;
             top: 0px;
             background-color: #FFF5D2;
@@ -267,6 +266,13 @@
 
             #chapters-menu {
                 padding: 0;
+                top: 61px;
+                min-height: 625px;
+            }
+
+            #chapters-menu-header {
+                position: fixed;
+                top: 0px;
             }
 
         }
