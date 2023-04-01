@@ -4,8 +4,14 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
   <title>Ferdydurke - Prijava</title>
   <style>
+    html {
+        font-size: 16px;
+        font-family: 'Poppins', sans-serif;
+    }
+
     body {
         background-color: #FFF5D2;
         color: #416868;
@@ -22,10 +28,6 @@
         font-size: 20px;
         text-decoration: underline;
         white-space: nowrap;
-    }
-
-    #main-info {
-        display: none;
     }
 
     #chapters {
@@ -65,8 +67,8 @@
         font-weight: bold;
     }
 
-        #form-centre {
-          width: 417px;
+    #form-centre {
+      width: 417px;
       height: 625px;
       position: absolute;
       top: 50%;
@@ -91,173 +93,108 @@
     #form-centre .input-element {
       padding: 1em;
     }
-    </style>
-        <style>
-          html {
-              font-size: 16px;
-              font-family: 'Poppins', sans-serif;
-              letter-spacing: -0.5px;
-              line-height: 110%;
-          }
+  </style>
+          <style>
+            html {
+                font-size: 16px;
+                font-family: 'Poppins', sans-serif;
+                letter-spacing: -0.5px;
+                line-height: 110%;
+            }
+    
+            body {
+                background-color: #FFF5D2;
+                color: #416868;
+            }
+    
+            #navigation-bar {
+                color: #B77900;
+            }
+    
+            #navigation-bar a {
+                color: #B77900;
+                padding-right: 30px;
+                padding-top: 4px;
+                font-size: 20px;
+                text-decoration: underline;
+                white-space: nowrap;
+            }
+    
+            #whole-audio-player {
+                width: 100%;
+                color: #FFF5D2;
+                background-color: #416868;
+                margin: none;
+            }
+    
+            #audio-player {
+                display: none;
+                background-color: #416868;
+                color: #416868;
+            }
+    
+            #play-speed-toggle {
+                display: none;
+            }
+    
+            .chapter-now-playing {
+                font-weight: 550;
+            }
+    
+            .hidden-element {
+                display: none;
+            }
+    
+            #form-centre {
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                width: 417px;
+                height: 625px;
+                border: #416868 4px solid;
+            }
   
-          body {
-              background-color: #FFF5D2;
-              color: #416868;
-          }
+            #form-centre * {
+              margin: 0 auto;
+            }
   
-          #navigation-bar {
-              color: #B77900;
-          }
-  
-          #navigation-bar a {
-              color: #B77900;
-              padding-right: 30px;
-              padding-top: 4px;
-              font-size: 20px;
-              text-decoration: underline;
-              white-space: nowrap;
-          }
-  
-          #whole-audio-player {
-              width: 100%;
-              color: #FFF5D2;
-              background-color: #416868;
-              margin: none;
-          }
-  
-          #audio-player {
-              display: none;
-              background-color: #416868;
-              color: #416868;
-          }
-  
-          #play-speed-toggle {
-              display: none;
-          }
-  
-          .chapter-now-playing {
-              font-weight: 550;
-          }
-  
-          .hidden-element {
-              display: none;
-          }
-  
-          #form-centre {
-              display: flex;
-              flex-direction: column;
-              justify-content: flex-start;
-              width: 417px;
-              height: 625px;
-              border: #416868 4px solid;
-          }
-
-          #form-centre * {
-            margin: 0 auto;
-          }
-
-          #form-centre h1 {
-            margin: 2rem auto;
-          }
-  
-          .center-elements {
-              display: flex;
-              justify-content: center;
-          }
-  
-          .elements-in-columns {
-              display: flex;
-              flex-direction: column;
-          }
-  
-  
-  
-          #seconds-info {
-              justify-content: space-between;
-          }
-  
-          #progress-slider-container {
-              width: 100%;
-          }
-  
-          #progress-slider {
-              width: 100%;
-              -webkit-appearance: none;
-              appearance: none;
-              background: transparent;
-              cursor: pointer;
-          }
-  
-          /* Chromium browsers and safari */
-  
-          #progress-slider::-webkit-slider-runnable-track {
-              background: #FFF5D2;
-              content: '';
-              height: 2px;
-              pointer-events: none;
-          }
-  
-          #progress-slider::-webkit-slider-thumb {
-              -webkit-appearance: none;
-              appearance: none;
-              background-color: #B77900;
-          }
-  
-          /* Firefox */
-  
-          #progress-slider::-moz-range-track {
-              background: #FFF5D2;
-              height: 2px;
-          }
-  
-          #progress-slider::-moz-range-thumb {
-              border: none;
-              background-color: #B77900;
-          }
-  
-          #progress-slider::-moz-range-progress {
-              height: 2px;
-              background: #B77900;
-              border: 0;
-              margin-top: 0;
-          }
-  
-          #player-controls {
-              justify-content: space-evenly;
-          }
-  
-          #bottom-menu {
-              justify-content: space-around;
-          }
-  
-          #navigation-bar {
-              padding: 1em;
-          }
-  
-          #main-info {
-              margin: auto;
-              text-align: center;
-          }
-  
-          #main-info * {
-              margin: 0;
-          }
-  
-          @media only screen and (max-width: 417px) {
-  
-              body {
-                  margin: 0;
-              }
-  
-              #form-centre {
-                  width: 100%;
-                  height: 100vh;
-                  border: none;
-                  padding: 0;
-              }
-  
-          }
-      </style>
+            #form-centre h1 {
+              margin: 2rem auto;
+            }
+    
+            .center-elements {
+                display: flex;
+                justify-content: center;
+            }
+    
+            #navigation-bar {
+                padding: 1em;
+            }
+    
+            #main-info {
+                margin: auto;
+                text-align: center;
+            }
+    
+            #main-info * {
+                margin: 0;
+            }
+    
+            @media only screen and (max-width: 417px) {
+    
+                body {
+                    margin: 0;
+                }
+    
+                #form-centre {
+                    width: 100%;
+                    height: 100vh;
+                    border: none;
+                    padding: 0;
+                }
+    
+            }
+        </style>
 </head>
 <body>
   <!-- <div id="form-centre">
@@ -272,13 +209,13 @@
     </div>
 </div> -->
 
-<nav id="navigation-bar">
-  <a th:href="@{/neprijavljeni}">Knjiga</a>
-  <a th:href="@{/neprijavljeni/prijava}">Prijava</a>
-  <a th:href="@{/neprijavljeni/registracija}">Registracija</a>
-  <a th:href="@{/neprijavljeni/o_knjigi}">O knjigi</a>
-</nav>
 <div id="form-centre">
+  <nav id="navigation-bar">
+    <a th:href="@{/neprijavljeni}">Knjiga</a>
+    <a th:href="@{/neprijavljeni/prijava}">Prijava</a>
+    <a th:href="@{/neprijavljeni/registracija}">Registracija</a>
+    <a th:href="@{/neprijavljeni/o_knjigi}">O knjigi</a>
+  </nav>
   <h1>Prijavi se</h1>
   <div th:if="${param.error}">
     email in geslo se ne ujemata</div>

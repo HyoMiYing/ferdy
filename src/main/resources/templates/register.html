@@ -4,8 +4,14 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
   <title>Ferdydurke - Registracija</title>
   <style>
+    html {
+        font-size: 16px;
+        font-family: 'Poppins', sans-serif;
+    }
+
     body {
         background-color: #FFF5D2;
         color: #416868;
@@ -22,10 +28,6 @@
         font-size: 20px;
         text-decoration: underline;
         white-space: nowrap;
-    }
-
-    #main-info {
-        display: none;
     }
 
     #chapters {
@@ -165,71 +167,6 @@
                 justify-content: center;
             }
     
-            .elements-in-columns {
-                display: flex;
-                flex-direction: column;
-            }
-    
-    
-    
-            #seconds-info {
-                justify-content: space-between;
-            }
-    
-            #progress-slider-container {
-                width: 100%;
-            }
-    
-            #progress-slider {
-                width: 100%;
-                -webkit-appearance: none;
-                appearance: none;
-                background: transparent;
-                cursor: pointer;
-            }
-    
-            /* Chromium browsers and safari */
-    
-            #progress-slider::-webkit-slider-runnable-track {
-                background: #FFF5D2;
-                content: '';
-                height: 2px;
-                pointer-events: none;
-            }
-    
-            #progress-slider::-webkit-slider-thumb {
-                -webkit-appearance: none;
-                appearance: none;
-                background-color: #B77900;
-            }
-    
-            /* Firefox */
-    
-            #progress-slider::-moz-range-track {
-                background: #FFF5D2;
-                height: 2px;
-            }
-    
-            #progress-slider::-moz-range-thumb {
-                border: none;
-                background-color: #B77900;
-            }
-    
-            #progress-slider::-moz-range-progress {
-                height: 2px;
-                background: #B77900;
-                border: 0;
-                margin-top: 0;
-            }
-    
-            #player-controls {
-                justify-content: space-evenly;
-            }
-    
-            #bottom-menu {
-                justify-content: space-around;
-            }
-    
             #navigation-bar {
                 padding: 1em;
             }
@@ -260,13 +197,14 @@
         </style>
 </head>
 <body>
+<div id="form-centre">
   <nav id="navigation-bar">
     <a th:href="@{/neprijavljeni}">Knjiga</a>
     <a th:href="@{/neprijavljeni/prijava}">Prijava</a>
     <a th:href="@{/neprijavljeni/registracija}">Registracija</a>
-    <a th:href="@{/neprijavljeni/o_knjigi}">O knjigi</a>
-</nav>
-<div id="form-centre">
+    <a th:href="@{/neprijavljeni/o_knjigi}">O knjigi</a>  
+  </nav>
+  <!-- <div id="main-info"> -->
   <h1>Registriraj se</h1>
   <p style="text-align: center;" >Če se registriraš, se tvoj položaj v knjigi vedno shrani. Poleg tega lahko dodajaš zaznamke</p>
   <form th:action="@{/neprijavljeni/registracija}" th:object="${user}" method="post" enctype="utf8">
@@ -297,6 +235,7 @@
     </div>
     <button class="submit-button" type="submit">registriraj se</button>
   </form>
+</div>
 </div>
 </body>
 </html>
