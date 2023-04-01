@@ -1,164 +1,245 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-    <link rel="stylesheet" href="https://icono-49d6.kxcdn.com/icono.min.css">
-    
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Ferdydurke</title>
-        <style>
-            body {
-                background-color: #FFF5D2;
-                color: #416868;
-            }
-            
-            #navigation-bar {
-                color: #B77900;
-            }
-            
-            #navigation-bar a {
-                color: #B77900;
-                padding-right: 30px;
-                padding-top: 4px;
-                font-size: 20px;
-                text-decoration: underline;
-                white-space: nowrap;
-            }
-            
+<link rel="stylesheet" href="https://icono-49d6.kxcdn.com/icono.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ferdydurke</title>
+    <style>
+        html {
+            font-size: 16px;
+            font-family: 'Poppins', sans-serif;
+            letter-spacing: -0.5px;
+            line-height: 110%;
+        }
 
-            
-            #chapters {
-                list-style: none;
-                padding-left: 10px;
-                white-space: nowrap;
-            }
-            
-            #chapters a {
-                color: #416868;
-                text-decoration: none;
-            }
-            
-            #whole-audio-player {
-                width: 100%;
-                color: #FFF5D2;
-                background-color: #416868;
-                margin: none;
-            }
+        body {
+            background-color: #FFF5D2;
+            color: #416868;
+        }
 
-            #audio-player {
-                background-color: #416868;
-                color: #416868;
-            }
-            
-            #play-speed-toggle {
-                display: none;
-            }
-            
-            .chapter-now-playing {
-                font-weight: bold;
-            }
-            
-            .chapter:hover {
-                font-weight: bold;
-            }
-            
-            .hidden-element {
-                display: none;
-            }
-            
-            #form-centre {
-                display: flex;
-                flex-direction: column;
-                justify-content: flex-end;
-                width: 417px;
-                height: 625px;
-                margin: auto;
-                border: #416868 4px solid;
-            }
-            
-            .center-elements {
-                display: flex;
-                justify-content: center;
-            }
+        #navigation-bar {
+            color: #B77900;
+        }
 
-            
-            #seconds-info {
-                justify-content: space-between;
-            }
-            
-            #progress-slider-container {
-                width: 100%;
-            }
+        #navigation-bar a {
+            color: #B77900;
+            padding-right: 30px;
+            padding-top: 4px;
+            font-size: 20px;
+            text-decoration: underline;
+            white-space: nowrap;
+        }
 
-            #progress-slider {
-                width: 100%;
-                -webkit-appearance: none;
-                appearance: none;
-                background: transparent;
-                cursor: pointer;
-            }
-            /* Chromium browsers and safari */
+        #whole-audio-player {
+            width: 100%;
+            color: #FFF5D2;
+            background-color: #416868;
+            margin: none;
+        }
 
-            #progress-slider::-webkit-slider-runnable-track {
-                background: #FFF5D2;
-                content: '';
-                height: 2px;
-                pointer-events: none;
-            }
+        #audio-player {
+            display: none;
+            background-color: #416868;
+            color: #416868;
+        }
 
-            #progress-slider::-webkit-slider-thumb {
-                -webkit-appearance: none;
-                appearance: none;
-                background-color: #B77900;
-            }
-    
-    /* Firefox */
-    
-            #progress-slider::-moz-range-track {
-                background: #FFF5D2;
-                height: 2px;
-            }
+        #play-speed-toggle {
+            display: none;
+        }
 
-            #progress-slider::-moz-range-thumb {
-                border: none;
-                background-color: #B77900;
-            }
+        .chapter-now-playing {
+            font-weight: 550;
+        }
 
-            #progress-slider::-moz-range-progress {
-                height: 2px;
-                background: #B77900;
-                border: 0;
-                margin-top: 0;
-            }
+        .hidden-element {
+            display: none;
+        }
 
-            #player-controls {
-                justify-content: space-evenly;
-            }
+        #form-centre {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            width: 417px;
+            height: 625px;
+            margin: auto;
+            border: #416868 4px solid;
+        }
 
-            #bottom-menu {
-                justify-content: space-around;
-            }
-            
-            #navigation-bar {
-                padding: 1em;
-            }        
+        .center-elements {
+            display: flex;
+            justify-content: center;
+        }
 
-            #main-info {
-                margin: auto;
-                text-align: center;
-            }
+        .elements-in-columns {
+            display: flex;
+            flex-direction: column;
+        }
 
-            #main-info * {
-                margin: 0;
-            }
-            
-            #whole-audio-player-wrapper {
-                background-color: #416868;
-                padding: 0.5em;
-            }
-            @media only screen and (max-width: 417px) {
-                
+
+
+        #seconds-info {
+            justify-content: space-between;
+        }
+
+        #progress-slider-container {
+            width: 100%;
+        }
+
+        #progress-slider {
+            width: 100%;
+            -webkit-appearance: none;
+            appearance: none;
+            background: transparent;
+            cursor: pointer;
+        }
+
+        /* Chromium browsers and safari */
+
+        #progress-slider::-webkit-slider-runnable-track {
+            background: #FFF5D2;
+            content: '';
+            height: 2px;
+            pointer-events: none;
+        }
+
+        #progress-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            background-color: #B77900;
+        }
+
+        /* Firefox */
+
+        #progress-slider::-moz-range-track {
+            background: #FFF5D2;
+            height: 2px;
+        }
+
+        #progress-slider::-moz-range-thumb {
+            border: none;
+            background-color: #B77900;
+        }
+
+        #progress-slider::-moz-range-progress {
+            height: 2px;
+            background: #B77900;
+            border: 0;
+            margin-top: 0;
+        }
+
+        #player-controls {
+            justify-content: space-evenly;
+        }
+
+        #bottom-menu {
+            justify-content: space-around;
+        }
+
+        #navigation-bar {
+            padding: 1em;
+        }
+
+        #main-info {
+            margin: auto;
+            text-align: center;
+        }
+
+        #main-info * {
+            margin: 0;
+        }
+
+        #whole-audio-player-wrapper {
+            background-color: #416868;
+            padding: 0.5em;
+        }
+
+        #player-controls div {
+            cursor: pointer;
+        }
+
+        #bottom-menu div {
+            cursor: pointer;
+        }
+
+        /* DAJ display: none; KO KONCAS Z UREJANJEM */
+        #chapters-menu {
+            position: absolute;
+            top: 61px;
+            padding-left: 1rem;
+            background-color: #FFF5D2;
+            margin: auto;
+            width: 417px;
+            height: 625px;
+            margin: auto;
+            z-index: 15;
+        }
+
+        #chapters-menu a {
+            word-wrap: normal;
+        }
+
+        #chapters {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            overflow: auto;
+        }
+
+
+        #chapters li {
+            padding: 1.17rem 0.78rem;
+            border-bottom-width: 1px;
+            border-bottom: #4168686D 1px solid;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        #chapters a {
+            color: #416868;
+            text-decoration: none;
+        }
+
+        #chapters span {
+            padding-left: 2rem;
+            margin: auto 0;
+        }
+
+        #chapters-menu-header {
+            position: fixed;
+            width: 93%;
+            top: 0px;
+            background-color: #FFF5D2;
+            display: flex;
+            padding: 1.35rem 0.9rem;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: #41686880 1px solid;
+        }
+
+        #chapters-menu-header div {
+            color: #B77900;
+            display: inline-block;
+        }
+
+        #chapters-menu-header h4 {
+            font-size: 1.1rem;
+        }
+
+        #chapters-menu-header * {
+            margin: 0;
+        }
+
+        #close-chapters-menu {
+            cursor: pointer;
+        }
+
+        @media only screen and (max-width: 417px) {
+
 
             #previous-main {
                 display: none;
@@ -174,170 +255,180 @@
                 border: none;
             }
 
-            #whole-audio-player {
+            #chapters-menu {
+                width: 100%;
+                height: 100vh;
+                border: none;
             }
-            
+
+            #chapters-menu {
+                padding: 0;
+            }
+
         }
 
 
-            /* WTF */
-            /*generated with Input range slider CSS style generator (version 20211225)
+        /* WTF */
+        /*generated with Input range slider CSS style generator (version 20211225)
 https://toughengineer.github.io/demo/slider-styler*/
-input[type=range].styled-slider {
-  height: 2.2em;
-  -webkit-appearance: none;
-}
+        input[type=range].styled-slider {
+            height: 2.2em;
+            -webkit-appearance: none;
+        }
 
-/*progress support*/
-#progress-slider.styled-slider.slider-progress {
-  --range: calc(var(--max) - var(--min));
-  --ratio: calc((var(--value) - var(--min)) / var(--range));
-  --sx: calc(0.5 * 2em + var(--ratio) * (100% - 2em));
-}
+        /*progress support*/
+        #progress-slider.styled-slider.slider-progress {
+            --range: calc(var(--max) - var(--min));
+            --ratio: calc((var(--value) - var(--min)) / var(--range));
+            --sx: calc(0.5 * 2em + var(--ratio) * (100% - 2em));
+        }
 
-#progress-slider.styled-slider:focus {
-  outline: none;
-}
+        #progress-slider.styled-slider:focus {
+            outline: none;
+        }
 
-/*webkit*/
-#progress-slider.styled-slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 2em;
-  height: 2em;
-  border-radius: 1em;
-  background: #B77900;
-  border: none;
-  box-shadow: 0 0 2px black;
-  margin-top: calc(max((1em - 1px - 1px) * 0.5,0px) - 2em * 0.5);
-}
+        /*webkit*/
+        #progress-slider.styled-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 2em;
+            height: 2em;
+            border-radius: 1em;
+            background: #B77900;
+            border: none;
+            box-shadow: 0 0 2px black;
+            margin-top: calc(max((1em - 1px - 1px) * 0.5, 0px) - 2em * 0.5);
+        }
 
-#progress-slider.styled-slider::-webkit-slider-runnable-track {
-  height: 1em;
-  border: 1px solid #FFF5D2;
-  border-radius: 0.5em;
-  background: #FFF5D2;
-  box-shadow: none;
-}
+        #progress-slider.styled-slider::-webkit-slider-runnable-track {
+            height: 1em;
+            border: 1px solid #FFF5D2;
+            border-radius: 0.5em;
+            background: #FFF5D2;
+            box-shadow: none;
+        }
 
-#progress-slider.styled-slider::-webkit-slider-thumb:hover {
-  background: #B77900;
-}
+        #progress-slider.styled-slider::-webkit-slider-thumb:hover {
+            background: #B77900;
+        }
 
-#progress-slider.styled-slider:hover::-webkit-slider-runnable-track {
-  background: #FFF5D2;
-  border-color: #FFF5D2;
-}
+        #progress-slider.styled-slider:hover::-webkit-slider-runnable-track {
+            background: #FFF5D2;
+            border-color: #FFF5D2;
+        }
 
-#progress-slider.styled-slider::-webkit-slider-thumb:active {
-  background: #B77900;
-}
+        #progress-slider.styled-slider::-webkit-slider-thumb:active {
+            background: #B77900;
+        }
 
-#progress-slider.styled-slider:active::-webkit-slider-runnable-track {
-  background: #FFF5D2;
-  border-color: #FFF5D2;
-}
+        #progress-slider.styled-slider:active::-webkit-slider-runnable-track {
+            background: #FFF5D2;
+            border-color: #FFF5D2;
+        }
 
-#progress-slider.styled-slider.slider-progress::-webkit-slider-runnable-track {
-  background: linear-gradient(#B77900,#B77900) 0/var(--sx) 100% no-repeat, #FFF5D2;
-}
+        #progress-slider.styled-slider.slider-progress::-webkit-slider-runnable-track {
+            background: linear-gradient(#B77900, #B77900) 0/var(--sx) 100% no-repeat, #FFF5D2;
+        }
 
-#progress-slider.styled-slider.slider-progress:hover::-webkit-slider-runnable-track {
-  background: linear-gradient(#B77900,#B77900) 0/var(--sx) 100% no-repeat, #FFF5D2;
-}
+        #progress-slider.styled-slider.slider-progress:hover::-webkit-slider-runnable-track {
+            background: linear-gradient(#B77900, #B77900) 0/var(--sx) 100% no-repeat, #FFF5D2;
+        }
 
-#progress-slider.styled-slider.slider-progress:active::-webkit-slider-runnable-track {
-  background: linear-gradient(#B77900,#B77900) 0/var(--sx) 100% no-repeat, #FFF5D2;
-}
+        #progress-slider.styled-slider.slider-progress:active::-webkit-slider-runnable-track {
+            background: linear-gradient(#B77900, #B77900) 0/var(--sx) 100% no-repeat, #FFF5D2;
+        }
 
-/*ms*/
-#progress-slider.styled-slider::-ms-fill-upper {
-  background: #FFF5D2;
-  border-color: #FFF5D2;
-}
+        /*ms*/
+        #progress-slider.styled-slider::-ms-fill-upper {
+            background: #FFF5D2;
+            border-color: #FFF5D2;
+        }
 
-#progress-slider.styled-slider::-ms-fill-lower {
-  background: #FFF5D2;
-  border-color: #FFF5D2;
-}
+        #progress-slider.styled-slider::-ms-fill-lower {
+            background: #FFF5D2;
+            border-color: #FFF5D2;
+        }
 
-#progress-slider.styled-slider::-ms-thumb {
-  width: 2em;
-  height: 2em;
-  border-radius: 1em;
-  background: #B77900;
-  border: none;
-  margin-top: 0;
-  box-sizing: border-box;
-}
+        #progress-slider.styled-slider::-ms-thumb {
+            width: 2em;
+            height: 2em;
+            border-radius: 1em;
+            background: #B77900;
+            border: none;
+            margin-top: 0;
+            box-sizing: border-box;
+        }
 
-#progress-slider.styled-slider::-ms-track {
-  height: 1em;
-  border-radius: 0.5em;
-  background: #FFF5D2;
-  border: 1px solid #FFF5D2;
-  box-shadow: none;
-  box-sizing: border-box;
-}
+        #progress-slider.styled-slider::-ms-track {
+            height: 1em;
+            border-radius: 0.5em;
+            background: #FFF5D2;
+            border: 1px solid #FFF5D2;
+            box-shadow: none;
+            box-sizing: border-box;
+        }
 
-#progress-slider.styled-slider::-ms-thumb:hover {
-  background: #B77900;
-}
+        #progress-slider.styled-slider::-ms-thumb:hover {
+            background: #B77900;
+        }
 
-#progress-slider.styled-slider:hover::-ms-track {
-  background: #FFF5D2;
-  border-color: #FFF5D2;
-}
+        #progress-slider.styled-slider:hover::-ms-track {
+            background: #FFF5D2;
+            border-color: #FFF5D2;
+        }
 
-#progress-slider.styled-slider::-ms-thumb:active {
-  background: #B77900;
-}
+        #progress-slider.styled-slider::-ms-thumb:active {
+            background: #B77900;
+        }
 
-#progress-slider.styled-slider:active::-ms-track {
-  background: #FFF5D2;
-  border-color: #c1c1c1;
-}
+        #progress-slider.styled-slider:active::-ms-track {
+            background: #FFF5D2;
+            border-color: #c1c1c1;
+        }
 
-#progress-slider.styled-slider.slider-progress::-ms-fill-lower {
-  height: max(calc(1em - 1px - 1px),0px);
-  border-radius: 0.5em 0 0 0.5em;
-  margin: -1px 0 -1px -1px;
-  background: #B77900;
-  border: 1px solid #FFF5D2;
-  border-right-width: 0;
-}
+        #progress-slider.styled-slider.slider-progress::-ms-fill-lower {
+            height: max(calc(1em - 1px - 1px), 0px);
+            border-radius: 0.5em 0 0 0.5em;
+            margin: -1px 0 -1px -1px;
+            background: #B77900;
+            border: 1px solid #FFF5D2;
+            border-right-width: 0;
+        }
 
-#progress-slider.styled-slider.slider-progress:hover::-ms-fill-lower {
-  background: #B77900;
-  border-color: #FFF5D2;
-}
+        #progress-slider.styled-slider.slider-progress:hover::-ms-fill-lower {
+            background: #B77900;
+            border-color: #FFF5D2;
+        }
 
-#progress-slider.styled-slider.slider-progress:active::-ms-fill-lower {
-  background: #B77900;
-  border-color: #c1c1c1;
-}
+        #progress-slider.styled-slider.slider-progress:active::-ms-fill-lower {
+            background: #B77900;
+            border-color: #c1c1c1;
+        }
 
-#progress-slider::-ms-fill-lower {
-    background: #FFF5D2;
-    border-radius: 10px;
-}
-#progress-slider::-ms-fill-upper {
-    background: #ddd;
-    border-radius: 10px;
-}
-#progress-slider::-ms-thumb {
-    border: none;
-    height: 16px;
-    width: 16px;
-    border-radius: 50%;
-    background: #B77900;
-}
-#progress-slider:focus::-ms-fill-lower {
-    background: #FFF5D2;
-}
-#progress-slider:focus::-ms-fill-upper {
-    background: #ccc;
-}
+        #progress-slider::-ms-fill-lower {
+            background: #FFF5D2;
+            border-radius: 10px;
+        }
 
+        #progress-slider::-ms-fill-upper {
+            background: #ddd;
+            border-radius: 10px;
+        }
+
+        #progress-slider::-ms-thumb {
+            border: none;
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            background: #B77900;
+        }
+
+        #progress-slider:focus::-ms-fill-lower {
+            background: #FFF5D2;
+        }
+
+        #progress-slider:focus::-ms-fill-upper {
+            background: #ccc;
+        }
     </style>
 </head>
 
@@ -352,105 +443,131 @@ input[type=range].styled-slider {
             </form>
             <p>Prijavljen kot <b id="user-name" th:text="${authenticatedUserName}"></b></p>
         </nav>
-        <!-- <h4>Poglavja</h4> -->
-        <!-- <ul id="chapters">
-            <li><a class="chapter uvod" id="intro" href="#fake-id">UVOD</a></li>
-            <li><a class="chapter prvo_poglavje" id="chapter1" href="#fake-id">1. Poglavje: UGRABITEV</a></li>
-            <li><a class="chapter drugo_poglavje" id="chapter2" href="#fake-id">2. Poglavje: V JETNIŠTVU IN NADALJNEM
-                    MANJŠANJU</a></li>
-            <li><a class="chapter tretje_poglavje" id="chapter3" href="#fake-id">3. Poglavje: V MIŠNICI IN NADALJNEM
-                    MEČKANJU</a></li>
-            <li><a class="chapter cetrto_poglavje" id="chapter4" href="#fake-id">4. Poglavje: PREDGOVOR K FILIDORJU S
-                    PODLAGO V OTROKU</a></li>
-            <li><a class="chapter peto_poglavje" id="chapter5" href="#fake-id">5. Poglavje: FILIDOR, S PODLAGO V
-                    OTROKU</a>
-            </li>
-            <li><a class="chapter sesto_poglavje" id="chapter6" href="#fake-id">6. Poglavje: ZAPELJEVANJE, SILJENJE V
-                    MLADOST SE NADALJUJE</a></li>
-            <li><a class="chapter sedmo_poglavje" id="chapter7" href="#fake-id">7. Poglavje: LJUBEZEN</a></li>
-            <li><a class="chapter osmo_poglavje" id="chapter8" href="#fake-id">8. Poglavje: KOMPOT</a></li>
-            <li><a class="chapter deveto_poglavje" id="chapter9" href="#fake-id">9. Poglavje: ZALEZOVANJE, TIPANJE V
-                    SODOBNOST SE NADALJUJE</a></li>
-            <li><a class="chapter deseto_poglavje" id="chapter10" href="#fake-id">10. Poglavje: ORGIJA STEGEN IN ZNOVA V
-                    MIŠNICI</a></li>
-            <li><a class="chapter enajsto_poglavje" id="chapter11" href="#fake-id">11. Poglavje: PREDGOVOR K FILIBERTU,
-                    PODLOŽENEMU Z OTROKOM</a></li>
-            <li><a class="chapter dvanajsto_poglavje" id="chapter12" href="#fake-id">12. Poglavje: FILIBERT, PODLOŽEN Z
-                    OTROKOM</a></li>
-            <li><a class="chapter trinajsto_poglavje" id="chapter13" href="#fake-id">13. Poglavje: HLAPČIČ ALI NOVE
-                    NEVARNOSTI</a></li>
-            <li><a class="chapter stirinajsto_poglavje" id="chapter14" href="#fake-id">14. Poglavje: ORGIJA FRISOV IN
-                    ZNOVA
-                    V MIŠNICI</a></li>
-        </ul> -->
+        <div id="chapters-menu">
+            <div id="chapters-menu-header">
+                <div id="close-chapters-menu">Zapri</div>
+                <h4>Poglavja</h4>
+                <span style="visibility: hidden;">Zapri</span>
+            </div>
+            <ul id="chapters">
+                <li><a class="chapter uvod" id="intro" href="#fake-id">UVOD</a><span>00:00:00</span></li>
+                <li><a class="chapter prvo_poglavje" id="chapter1" href="#fake-id">1. Poglavje: UGRABITEV</a><span>00:00:00</span></li>
+                <li><a class="chapter drugo_poglavje" id="chapter2" href="#fake-id">2. Poglavje: V JETNIŠTVU IN
+                        NADALJNEM
+                        MANJŠANJU</a><span>00:00:00</span></li>
+                <li><a class="chapter drugo_poglavje" id="chapter2" href="#fake-id">Habit Five: Seek First to Understand; Then to be Understood</a><span>00:00:00</span></li>
+                <li><a class="chapter tretje_poglavje" id="chapter3" href="#fake-id">3. Poglavje: V MIŠNICI IN NADALJNEM
+                        MEČKANJU</a><span>00:00:00</span></li>
+                <li><a class="chapter cetrto_poglavje" id="chapter4" href="#fake-id">4. Poglavje: PREDGOVOR K FILIDORJU
+                        S
+                        PODLAGO V OTROKU</a><span>00:00:00</span></li>
+                <li><a class="chapter peto_poglavje" id="chapter5" href="#fake-id">5. Poglavje: FILIDOR, S PODLAGO V
+                        OTROKU</a><span>00:00</span></li>
+                <li><a class="chapter sesto_poglavje" id="chapter6" href="#fake-id">6. Poglavje: ZAPELJEVANJE, SILJENJE
+                        V
+                        MLADOST SE NADALJUJE</a><span>00:00:00</span></li>
+                <li><a class="chapter sedmo_poglavje" id="chapter7" href="#fake-id">7. Poglavje: LJUBEZEN</a><span>00:00:00</span></li>
+                <li><a class="chapter osmo_poglavje" id="chapter8" href="#fake-id">8. Poglavje: KOMPOT</a><span>00:00:00</span></li>
+                <li><a class="chapter deveto_poglavje" id="chapter9" href="#fake-id">9. Poglavje: ZALEZOVANJE, TIPANJE V
+                        SODOBNOST SE NADALJUJE</a><span>00:00:00</span></li>
+                <li><a class="chapter deseto_poglavje" id="chapter10" href="#fake-id">10. Poglavje: ORGIJA STEGEN IN
+                        ZNOVA V
+                        MIŠNICI</a><span>00:00:00</span></li>
+                <li><a class="chapter enajsto_poglavje" id="chapter11" href="#fake-id">11. Poglavje: PREDGOVOR K
+                        FILIBERTU,
+                        PODLOŽENEMU Z OTROKOM</a><span>00:00:00</span></li>
+                <li><a class="chapter dvanajsto_poglavje" id="chapter12" href="#fake-id">12. Poglavje: FILIBERT,
+                        PODLOŽEN Z
+                        OTROKOM</a><span>00:00:00</span></li>
+                <li><a class="chapter trinajsto_poglavje" id="chapter13" href="#fake-id">13. Poglavje: HLAPČIČ ALI NOVE
+                        NEVARNOSTI</a><span>00:00:00</span></li>
+                <li><a class="chapter stirinajsto_poglavje" id="chapter14" href="#fake-id">14. Poglavje: ORGIJA FRISOV
+                        IN
+                        ZNOVA
+                        V MIŠNICI</a><span>00:00:00</span></li>
+            </ul>
+        </div>
         <div id="main-info">
             <h1>Ferdydurke</h1>
             <h6>1937</h6>
             <h2>Witold Gombrowicz</h2>
-            <h3>prevedla: Katarina Šalamun-Biedrzycka</h3>
-            <h4>prebral: Rok Klančar</h4>
-        </div>        <br>
+        </div> <br>
         <div id="whole-audio-player-wrapper">
-        <div id="whole-audio-player">
+            <div id="whole-audio-player">
 
-            <br>
+                <br>
 
-            <div class="center-elements">
-                <div class="ten columns" style="color: #FFF5D2; display: block; text-align: center;" id="chapter-info">10. Poglavje: ORGIJA STEGEN IN ZNOVA V MIŠNICI</div>
-            </div>
+                <div class="center-elements">
+                    <div class="ten columns" style="color: #FFF5D2; display: block; text-align: center;"
+                        id="chapter-info">10. Poglavje: ORGIJA STEGEN IN ZNOVA V MIŠNICI</div>
+                </div>
 
-            <br>
+                <br>
 
-            <div id="progress-slider-container" class="center-elements">
+                <div id="progress-slider-container" class="center-elements">
                     <input class="styled-slider slider-progress" type="range" name="" id="progress-slider">
-<script>
-    for (let e of document.querySelectorAll('input[type="range"].slider-progress')) {
-        e.style.setProperty('--value', e.value);
-        e.style.setProperty('--min', e.min == '' ? '0' : e.min);
-        e.style.setProperty('--max', e.max == '' ? '100' : e.max);
-        e.addEventListener('input', () => e.style.setProperty('--value', e.value));
-    }   
-</script>
-            </div>
+                    <script>
+                        for (let e of document.querySelectorAll('input[type="range"].slider-progress')) {
+                            e.style.setProperty('--value', e.value);
+                            e.style.setProperty('--min', e.min == '' ? '0' : e.min);
+                            e.style.setProperty('--max', e.max == '' ? '100' : e.max);
+                            e.addEventListener('input', () => e.style.setProperty('--value', e.value));
+                        }   
+                    </script>
+                </div>
 
-            <div id="seconds-info" class="center-elements">
-                <div class="three columns">
-                    <div id="track-listened">boli me</div>
+                <div id="seconds-info" class="center-elements">
+                    <div class="three columns">
+                        <div id="track-listened">to more</div>
+                    </div>
+                    <div class="three columns">
+                        <div id="time-left-whole-book">4h 15min</div>
+                    </div>
+                    <div class="three columns">
+                        <div id="track-left">bit kle</div>
+                    </div>
                 </div>
-                <div class="three columns">
-                    <div id="time-left-whole-book">4h 15min</div>
-                </div>
-                <div class="three columns">
-                    <div id="track-left">kurac</div>
-                </div>
-            </div>
 
-            <br>
+                <br>
 
-            <div id="player-controls" class="center-elements">
-                <div class="one column">
-                    <div class="icono-previous" id="previous-chapter"></div>
+                <div id="player-controls" class="center-elements">
+                    <div class="one column">
+                        <div class="icono-previous" id="previous-chapter"></div>
+                    </div>
+                    <div class="one column">
+                        <div class="icono-rewind" id="back-10-sec"></div>
+                    </div>
+                    <div class="one column" id="play-pause-container">
+                        <div class="icono-play" id="play-pause"></div>
+                    </div>
+                    <div class="one column">
+                        <div class="icono-forward" id="forward-10-sec"></div>
+                    </div>
+                    <div class="one column">
+                        <div class="icono-next" id="next-chapter"></div>
+                    </div>
                 </div>
-                <div class="one column">
-                    <div class="icono-rewind" id="back-10-seconds"></div>
-                </div>
-                <div class="one column">
-                    <div class="icono-play" id="play-pause"></div>
-                </div>
-                <div class="one column">
-                    <div class="icono-forward" id="forward-10-seconds"></div>
-                </div>
-                <div class="one column">
-                    <div class="icono-next" id="next-chapter"></div>
-                </div>
-            </div>
 
-            <br>
+                <br>
 
-            <div id="bottom-menu" class="center-elements">
-                <div class="one column" id="narration-speed">1.0x</div>
-                <div class="icono-list one column" id="chapter-list"></div>
-                <div class="icono-bookmark one column" id="add-bookmark"></div>
+                <div id="bottom-menu" class="center-elements">
+                    <div class="elements-in-columns">
+                        <div class="one column" id="narration-speed">1.0x</div>
+                    </div>
+                    <div class="elements-in-columns" id="chapter-list">
+                        <div class="icono-list one column"></div>
+                    </div>
+                    <div class="elements-in-columns">
+                        <form id="add-bookmark-form" th:action="@{/prijavljeni/dodaj_zaznamek}" method="post">
+                            <input class="hidden-element" id="chapter-field" type="text" name="chapter">
+                            <input class="hidden-element" id="timestamp-field" type="text" name="timestamp">
+                            <input class="hidden-element" id="note-field" type="text" name="note">
+                            <input class="hidden-element" id="email-field" type="email" name="userEmail"
+                                th:value="${authenticatedUserName}">
+                            <div class="icono-bookmark one column" id="add-bookmark">
+                        </form>
+                    </div>
+                </div>
             </div>
 
             <br>
@@ -462,16 +579,12 @@ input[type=range].styled-slider {
         <p id="currently-playing">UVOD</p>
         <span id="track-listened"></span><audio id="audio-player" type="audio/mpeg" controls
             th:src="@{/prijavljeni/ferdydurke_stream?chapter=uvod.mp3}"></audio><span id="track-left"></span>
-        <br>
-        <button id="back-10-sec">Prevrti 10 sekund</button>
-        <button id="forward-10-sec">Preskoči 10 sekund</button>
         <form id="add-bookmark-form" th:action="@{/prijavljeni/dodaj_zaznamek}" method="post">
             <input class="hidden-element" id="chapter-field" type="text" name="chapter">
             <input class="hidden-element" id="timestamp-field" type="text" name="timestamp">
             <input class="hidden-element" id="note-field" type="text" name="note">
             <input class="hidden-element" id="email-field" type="email" name="userEmail"
                 th:value="${authenticatedUserName}">
-            <button id="add-bookmark">Dodaj zaznamek</button>
         </form>
         <br>
         <div th:if="${bookmarks != null}">
@@ -503,11 +616,44 @@ input[type=range].styled-slider {
         // UI elements
         const audioPlayer = document.getElementById("audio-player");
 
+        const mainInfoDiv = document.getElementById("main-info");
+
         const introFileSrc = audioPlayer.src;
 
         const currentlyPlaying = document.getElementById("currently-playing");
         const trackListened = document.getElementById("track-listened");
         const trackLeft = document.getElementById("track-left");
+
+        const playPauseButton = document.getElementById("play-pause");
+        const playPauseButtonContainer = document.getElementById("play-pause-container");
+
+        const chaptersListButton = document.getElementById("chapter-list");
+
+        const chaptersMenu = document.getElementById("chapters-menu");
+        const closeChaptersMenu = document.getElementById("close-chapters-menu")
+
+        chaptersListButton.addEventListener("click", (e) => {
+            chaptersMenu.style.display = "block";
+        });
+
+        closeChaptersMenu.addEventListener("click", (e) => {
+            chaptersMenu.style.display = "none";
+        });
+
+
+        const progressBar = document.getElementById("progress-slider");
+
+        playPauseButtonContainer.addEventListener("click", (e) => {
+            if (playPauseButton.classList.contains("icono-play")) {
+                audioPlayer.play();
+                playPauseButton.classList.remove("icono-play");
+                playPauseButton.classList.add("icono-pause");
+            } else if (playPauseButton.classList.contains("icono-pause")) {
+                audioPlayer.pause();
+                playPauseButton.classList.remove("icono-pause");
+                playPauseButton.classList.add("icono-play");
+            }
+        });
 
         const chapters = [
             "https://samplelib.com/lib/preview/mp3/sample-15s.mp3",
@@ -605,6 +751,8 @@ input[type=range].styled-slider {
         // Add bookmark
         const addBookmarkForm = document.getElementById("add-bookmark-form");
 
+        addBookmark.addEventListener("click", () => { addBookmarkForm.submit() });
+
         addBookmarkForm.addEventListener("submit", (e) => {
             e.preventDefault();
             audioPlayer.pause();
@@ -699,6 +847,7 @@ input[type=range].styled-slider {
             localStorage.setItem("playhead-position", currentTime);
             localStorage.setItem("chapter-source", audioPlayer.getAttribute("src"));
             trackListened.textContent = sToTime(currentTime);
+            progressBar.value = (currentTime / audioPlayer.duration) * 100;
             trackLeft.textContent = sToTime(audioPlayer.duration - currentTime);
             currentlyPlaying.textContent = chapterSourcesAndNamesLong[audioPlayer.getAttribute("src")];
         });
