@@ -4,8 +4,16 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ferdydurke</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <title>Ferdydurke - Registracija</title>
   <style>
+    html {
+        font-size: 16px;
+        font-family: 'Poppins', sans-serif;
+        letter-spacing: -0.5px;
+        line-height: 110%;
+    }
+
     body {
         background-color: #FFF5D2;
         color: #416868;
@@ -24,31 +32,15 @@
         white-space: nowrap;
     }
 
-    #main-info {
-        display: none;
-    }
-
-    #chapters {
-        list-style: none;
-        padding-left: 10px;
-        white-space: nowrap;
-    }
-
-    #chapters a {
-        color: #416868;
-        text-decoration: none;
-    }
-
     #whole-audio-player {
-        position: fixed;
-        bottom: 0;
-        left: 0;
         width: 100%;
+        color: #FFF5D2;
         background-color: #416868;
+        margin: none;
     }
 
     #audio-player {
-        width: 100vw;
+        display: none;
         background-color: #416868;
         color: #416868;
     }
@@ -58,76 +50,531 @@
     }
 
     .chapter-now-playing {
-        font-weight: bold;
+        font-weight: 550;
     }
 
-    .chapter:hover {
-        font-weight: bold;
+    .hidden-element {
+        display: none;
     }
 
     #form-centre {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-
-      border: #416868 4px solid;
-      padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        width: 417px;
+        height: 625px;
+        margin: auto;
+        border: #416868 4px solid;
     }
 
-    #form-centre .submit-button {
-      display: block;
-      margin: 1rem auto;
+    .center-elements {
+        display: flex;
+        justify-content: center;
     }
 
-    #form-centre .error {
-      color: #b71500;
-      display: block;
-      margin: auto;
+    .elements-in-columns {
+        display: flex;
+        flex-direction: column;
     }
 
-    #form-centre .input-element {
-      padding: 1em;
+
+
+    #seconds-info {
+        justify-content: space-between;
     }
-  </style>
+
+    #progress-slider-container {
+        width: 100%;
+    }
+
+    #progress-slider {
+        width: 100%;
+        -webkit-appearance: none;
+        appearance: none;
+        background: transparent;
+        cursor: pointer;
+    }
+
+    /* Chromium browsers and safari */
+
+    #progress-slider::-webkit-slider-runnable-track {
+        background: #FFF5D2;
+        content: '';
+        height: 2px;
+        pointer-events: none;
+    }
+
+    #progress-slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        background-color: #B77900;
+    }
+
+    /* Firefox */
+
+    #progress-slider::-moz-range-track {
+        background: #FFF5D2;
+        height: 2px;
+    }
+
+    #progress-slider::-moz-range-thumb {
+        border: none;
+        background-color: #B77900;
+    }
+
+    #progress-slider::-moz-range-progress {
+        height: 2px;
+        background: #B77900;
+        border: 0;
+        margin-top: 0;
+    }
+
+    #player-controls {
+        justify-content: space-evenly;
+    }
+
+    #bottom-menu {
+        justify-content: space-around;
+    }
+
+    #navigation-bar {
+        padding: 1em;
+    }
+
+    #main-info {
+        margin: auto;
+        text-align: center;
+    }
+
+    #main-info * {
+        margin: 0;
+    }
+
+    #whole-audio-player-wrapper {
+        background-color: #416868;
+        padding: 0.5em;
+    }
+
+    #whole-audio-player-wrapper div div {
+        color: #FFF5D2;
+    }
+
+    #player-controls div {
+        cursor: pointer;
+    }
+
+    #bottom-menu div {
+        cursor: pointer;
+    }
+
+    #chapters-menu {
+        display: none;
+        position: absolute;
+        background-color: #FFF5D2;
+        margin: auto;
+        width: 417px;
+        height: 625px;
+        margin: auto;
+        z-index: 15;
+        overflow: auto;
+    }
+
+    #chapters-menu a {
+        word-wrap: normal;
+    }
+
+    #chapters {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        overflow: auto;
+    }
+
+
+    #chapters li {
+        padding: 1.17rem 0.78rem;
+        border-bottom-width: 1px;
+        border-bottom: #4168686D 1px solid;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    #chapters a {
+        color: #416868;
+        text-decoration: none;
+    }
+
+    #chapters span {
+        padding-left: 2rem;
+        margin: auto 0;
+    }
+
+    #chapters-menu-header {
+        position: sticky;
+        width: 93%;
+        top: 0px;
+        background-color: #FFF5D2;
+        display: flex;
+        padding: 1.35rem 0.9rem;
+        justify-content: space-between;
+        align-items: flex-start;
+        border-bottom: #41686880 1px solid;
+    }
+
+    #chapters-menu-header div {
+        color: #B77900;
+        display: inline-block;
+    }
+
+    #chapters-menu-header h4 {
+        font-size: 1.1rem;
+    }
+
+    #chapters-menu-header * {
+        margin: 0;
+    }
+
+    #close-chapters-menu {
+        cursor: pointer;
+    }
+
+    @media only screen and (max-width: 417px) {
+
+
+        #previous-main {
+            display: none;
+        }
+
+        body {
+            margin: 0;
+        }
+
+        #form-centre {
+            width: 100%;
+            height: 100vh;
+            border: none;
+        }
+
+        #chapters-menu {
+            width: 100%;
+            height: 100vh;
+            border: none;
+        }
+
+        #chapters-menu {
+            padding: 0;
+            top: 61px;
+            min-height: 625px;
+        }
+
+        #chapters-menu-header {
+            position: fixed;
+            top: 0px;
+        }
+
+    }
+
+
+    /* WTF */
+    /*generated with Input range slider CSS style generator (version 20211225)
+https://toughengineer.github.io/demo/slider-styler*/
+    input[type=range].styled-slider {
+        height: 2.2em;
+        -webkit-appearance: none;
+    }
+
+    /*progress support*/
+    #progress-slider.styled-slider.slider-progress {
+        --range: calc(var(--max) - var(--min));
+        --ratio: calc((var(--value) - var(--min)) / var(--range));
+        --sx: calc(0.5 * 2em + var(--ratio) * (100% - 2em));
+    }
+
+    #progress-slider.styled-slider:focus {
+        outline: none;
+    }
+
+    /*webkit*/
+    #progress-slider.styled-slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 2em;
+        height: 2em;
+        border-radius: 1em;
+        background: #B77900;
+        border: none;
+        box-shadow: 0 0 2px black;
+        margin-top: calc(max((1em - 1px - 1px) * 0.5, 0px) - 2em * 0.5);
+    }
+
+    #progress-slider.styled-slider::-webkit-slider-runnable-track {
+        height: 1em;
+        border: 1px solid #FFF5D2;
+        border-radius: 0.5em;
+        background: #FFF5D2;
+        box-shadow: none;
+    }
+
+    #progress-slider.styled-slider::-webkit-slider-thumb:hover {
+        background: #B77900;
+    }
+
+    #progress-slider.styled-slider:hover::-webkit-slider-runnable-track {
+        background: #FFF5D2;
+        border-color: #FFF5D2;
+    }
+
+    #progress-slider.styled-slider::-webkit-slider-thumb:active {
+        background: #B77900;
+    }
+
+    #progress-slider.styled-slider:active::-webkit-slider-runnable-track {
+        background: #FFF5D2;
+        border-color: #FFF5D2;
+    }
+
+    #progress-slider.styled-slider.slider-progress::-webkit-slider-runnable-track {
+        background: linear-gradient(#B77900, #B77900) 0/var(--sx) 100% no-repeat, #FFF5D2;
+    }
+
+    #progress-slider.styled-slider.slider-progress:hover::-webkit-slider-runnable-track {
+        background: linear-gradient(#B77900, #B77900) 0/var(--sx) 100% no-repeat, #FFF5D2;
+    }
+
+    #progress-slider.styled-slider.slider-progress:active::-webkit-slider-runnable-track {
+        background: linear-gradient(#B77900, #B77900) 0/var(--sx) 100% no-repeat, #FFF5D2;
+    }
+
+    /*ms*/
+    #progress-slider.styled-slider::-ms-fill-upper {
+        background: #FFF5D2;
+        border-color: #FFF5D2;
+    }
+
+    #progress-slider.styled-slider::-ms-fill-lower {
+        background: #FFF5D2;
+        border-color: #FFF5D2;
+    }
+
+    #progress-slider.styled-slider::-ms-thumb {
+        width: 2em;
+        height: 2em;
+        border-radius: 1em;
+        background: #B77900;
+        border: none;
+        margin-top: 0;
+        box-sizing: border-box;
+    }
+
+    #progress-slider.styled-slider::-ms-track {
+        height: 1em;
+        border-radius: 0.5em;
+        background: #FFF5D2;
+        border: 1px solid #FFF5D2;
+        box-shadow: none;
+        box-sizing: border-box;
+    }
+
+    #progress-slider.styled-slider::-ms-thumb:hover {
+        background: #B77900;
+    }
+
+    #progress-slider.styled-slider:hover::-ms-track {
+        background: #FFF5D2;
+        border-color: #FFF5D2;
+    }
+
+    #progress-slider.styled-slider::-ms-thumb:active {
+        background: #B77900;
+    }
+
+    #progress-slider.styled-slider:active::-ms-track {
+        background: #FFF5D2;
+        border-color: #c1c1c1;
+    }
+
+    #progress-slider.styled-slider.slider-progress::-ms-fill-lower {
+        height: max(calc(1em - 1px - 1px), 0px);
+        border-radius: 0.5em 0 0 0.5em;
+        margin: -1px 0 -1px -1px;
+        background: #B77900;
+        border: 1px solid #FFF5D2;
+        border-right-width: 0;
+    }
+
+    #progress-slider.styled-slider.slider-progress:hover::-ms-fill-lower {
+        background: #B77900;
+        border-color: #FFF5D2;
+    }
+
+    #progress-slider.styled-slider.slider-progress:active::-ms-fill-lower {
+        background: #B77900;
+        border-color: #c1c1c1;
+    }
+
+    #progress-slider::-ms-fill-lower {
+        background: #FFF5D2;
+        border-radius: 10px;
+    }
+
+    #progress-slider::-ms-fill-upper {
+        background: #ddd;
+        border-radius: 10px;
+    }
+
+    #progress-slider::-ms-thumb {
+        border: none;
+        height: 16px;
+        width: 16px;
+        border-radius: 50%;
+        background: #B77900;
+    }
+
+    #progress-slider:focus::-ms-fill-lower {
+        background: #FFF5D2;
+    }
+
+    #progress-slider:focus::-ms-fill-upper {
+        background: #ccc;
+    }
+</style>
+          <style>
+            html {
+                font-size: 16px;
+                font-family: 'Poppins', sans-serif;
+                letter-spacing: -0.5px;
+                line-height: 110%;
+            }
+    
+            body {
+                background-color: #FFF5D2;
+                color: #416868;
+            }
+    
+            #navigation-bar {
+                color: #B77900;
+            }
+    
+            #navigation-bar a {
+                color: #B77900;
+                padding-right: 30px;
+                padding-top: 4px;
+                font-size: 20px;
+                text-decoration: underline;
+                white-space: nowrap;
+            }
+    
+            #whole-audio-player {
+                width: 100%;
+                color: #FFF5D2;
+                background-color: #416868;
+                margin: none;
+            }
+    
+            #audio-player {
+                display: none;
+                background-color: #416868;
+                color: #416868;
+            }
+    
+            #play-speed-toggle {
+                display: none;
+            }
+    
+            .chapter-now-playing {
+                font-weight: 550;
+            }
+    
+            .hidden-element {
+                display: none;
+            }
+    
+            #form-centre {
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                width: 417px;
+                height: 625px;
+                border: #416868 4px solid;
+            }
+  
+            #form-centre h1 {
+              margin: 2rem auto;
+            }
+    
+            .center-elements {
+                display: flex;
+                justify-content: center;
+            }
+    
+            #navigation-bar {
+                padding: 1em;
+            }
+    
+            #main-info {
+                margin: auto;
+                text-align: center;
+            }
+    
+            #main-info * {
+                margin: 0;
+            }
+    
+            @media only screen and (max-width: 417px) {
+    
+                body {
+                    margin: 0;
+                }
+    
+                #form-centre {
+                    width: 100%;
+                    height: 100vh;
+                    border: none;
+                    padding: 0;
+                }
+    
+            }
+        </style>
 </head>
 <body>
+  <br>
+<div id="form-centre">
   <nav id="navigation-bar">
     <a th:href="@{/neprijavljeni}">Knjiga</a>
     <a th:href="@{/neprijavljeni/prijava}">Prijava</a>
     <a th:href="@{/neprijavljeni/registracija}">Registracija</a>
-    <a th:href="@{/neprijavljeni/o_knjigi}">O knjigi</a>
-</nav>
-<div id="form-centre">
+  </nav>
+  <div id="main-info">
   <h1>Registriraj se</h1>
+  <p style="text-align: center;" >Če se registriraš, se tvoj položaj v knjigi vedno shrani. Poleg tega lahko dodajaš zaznamke</p>
   <form th:action="@{/neprijavljeni/registracija}" th:object="${user}" method="post" enctype="utf8">
     <div class="error" th:if="${userExistsException != null}">
       <div  th:text="${userExistsException.getMessage}">
-      <a th:href="@{/neprijavljeni/ponastavi-geslo}">Ponastavi geslo</a>
+      <!-- <a th:href="@{/neprijavljeni/ponastavi-geslo}">Ponastavi geslo</a> -->
     </div>
     </div>
     <div class="input-element">
       <label>email</label>
-      <input type="email" th:field="*{email}">
-      <div th:if="${fieldErrors != null}">
-        <div th:each="error : ${fieldErrors}" th:if="${error.field} == 'email'" th:text="${error.defaultMessage}"></div>
+      <input type="email" th:field="*{email}" placeholder="email">
+      <div th:if="${fieldErrors != null}"> 
+        <div th:each="error : ${fieldErrors}" th:if="${error.field} == 'email'" th:text="${error.defaultMessage}" ></div>
       </div>
     </div>
     <div class="input-element">
       <label>geslo</label>
-      <input type="password" th:field="*{password}">
+      <input type="password" th:field="*{password}" placeholder="geslo">
       <div th:if="${fieldErrors != null}">
       </div>
     </div>
     <div class="input-element">
       <label>potrdi geslo</label>
-      <input type="password" th:field="*{matchingPassword}">
+      <input type="password" th:field="*{matchingPassword}" placeholder="potrdi geslo">
       <div th:if="${globalErrors != null}">
         <div th:each="error : ${globalErrors}" th:text="${error.defaultMessage}"></div>
       </div>
     </div>
     <button class="submit-button" type="submit">registriraj se</button>
   </form>
+</div>
 </div>
 </body>
 </html>

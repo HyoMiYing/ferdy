@@ -74,11 +74,8 @@ public class SecurityConfiguration {
             .anyRequest().authenticated()
             .and()
             .formLogin()
-                .loginPage("/login").permitAll()
-                .defaultSuccessUrl("/prijavljeni", true)
-            .and()
-            .logout()
-                .logoutSuccessUrl("/");
+            .loginPage("/neprijavljeni/prijava").permitAll()
+            .defaultSuccessUrl("/prijavljeni", true);
         return http.build();
     }
 }

@@ -111,7 +111,7 @@ public class WebsiteController {
         }
     }
 
-    @GetMapping("/login")
+    @GetMapping("/neprijavljeni/prijava")
     public String login(Model model, String error, String logout) {
         if (error != null)
             model.addAttribute("errorMsg", "Your username and password are invalid.");
