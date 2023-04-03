@@ -609,6 +609,8 @@ https://toughengineer.github.io/demo/slider-styler*/
         const chaptersMenu = document.getElementById("chapters-menu");
         const closeChaptersMenu = document.getElementById("close-chapters-menu")
 
+        const timeLeftWholeBook = document.getElementById("time-left-whole-book");
+
         chaptersListButton.addEventListener("click", (e) => {
             chaptersMenu.style.display = "block";
         });
@@ -669,21 +671,21 @@ https://toughengineer.github.io/demo/slider-styler*/
         }
 
         const chapters = [
-            "https://samplelib.com/lib/preview/mp3/sample-15s.mp3",
-            "https://freetestdata.com/wp-content/uploads/2021/09/Free_Test_Data_5MB_MP3.mp3",
-            "https://freetestdata.com/wp-content/uploads/2021/09/Free_Test_Data_5MB_MP3.mp3",
-            "https://file-examples.com/storage/fef1706276640fa2f99a5a4/2017/11/file_example_MP3_2MG.mp3",
-            "https://file-examples.com/storage/fef1706276640fa2f99a5a4/2017/11/file_example_MP3_2MG.mp3",
-            "media/peto_poglavje.mp3",
-            "media/sesto_poglavje.mp3",
-            "media/sedmo_poglavje.mp3",
-            "media/osmo_poglavje.mp3",
-            "media/deveto_poglavje.mp3",
-            "media/deseto_poglavje.mp3",
-            "media/enajsto_poglavje.mp3",
-            "media/dvanajsto_poglavje.mp3",
-            "media/trinajsto_poglavje.mp3",
-            "media/stirinajsto_poglavje.mp3",
+            "uvod.mp3",
+            "prvo_poglavje.mp3",
+            "drugo_poglavje.mp3",
+            "tretje_poglavje.mp3",
+            "cetrto_poglavje.mp3",
+            "peto_poglavje.mp3",
+            "sesto_poglavje.mp3",
+            "sedmo_poglavje.mp3",
+            "osmo_poglavje.mp3",
+            "deveto_poglavje.mp3",
+            "deseto_poglavje.mp3",
+            "enajsto_poglavje.mp3",
+            "dvanajsto_poglavje.mp3",
+            "trinajsto_poglavje.mp3",
+            "stirinajsto_poglavje.mp3",
         ];
 
         const chapterSourcesAndNamesLong = {
@@ -825,7 +827,18 @@ https://toughengineer.github.io/demo/slider-styler*/
             progressBar.value = currentTime;
             trackLeft.textContent = sToTime(audioPlayer.duration - currentTime);
             currentlyPlaying.textContent = chapterSourcesAndNamesLong[audioPlayer.src.split("=")[1]];
+            timeLeftWholeBook.textContent = calculateTimeUntillEnd(audioPlayer.src.split("=")[1], audioPlayer.duration - currentTime);
         });
+
+        function calculateTimeUntillEnd(chapterSource, trackLeft) {
+            let secondsUntillEnd = trackLeft;
+            const indexOfCurrentChapter = chapters.prototype.indexOf(chapterSource);
+            for (let step = indexOfCurrentChapter; step <= chapters.length; step++) {
+                console.log("adding timer for chapter " + chapters[step]);
+                secondsUntillEnd += chapterSourcesAndLength[chapters[step]];
+            }
+            const minutesAndSecondsUntillEnd = sToHourAndMin(secondsUntillEnd);
+        }
 
         // Helper methods seconds to hour:min:sec
 
@@ -833,6 +846,11 @@ https://toughengineer.github.io/demo/slider-styler*/
             return padZero(parseInt((t / (60 * 60)) % 24)) + ":" +
                 padZero(parseInt((t / (60)) % 60)) + ":" +
                 padZero(parseInt((t) % 60));
+        }
+
+        function sToHourAndMin(t) {
+            return padZero(parseInt((t / (60 * 60)) % 24)) + "h" +
+                padZero(parseInt((t / (60)) % 60)) + "min";
         }
 
         function padZero(v) {
