@@ -504,7 +504,7 @@ https://toughengineer.github.io/demo/slider-styler*/
 
                 <div class="center-elements">
                     <div class="ten columns" style="color: #FFF5D2; display: block; text-align: center;"
-                        id="chapter-info">10. Poglavje: ORGIJA STEGEN IN ZNOVA V MIŠNICI</div>
+                        id="currently-playing">poglavje</div>
                 </div>
 
                 <br>
@@ -571,7 +571,6 @@ https://toughengineer.github.io/demo/slider-styler*/
     </div>
     </div>
     <div id="previous-main">
-        <p id="currently-playing">UVOD</p>
         <span id="track-listened"></span><audio id="audio-player" type="audio/mpeg" controls
             th:src="@{/neprijavljeni/ferdydurke_stream?chapter=uvod.mp3}"></audio><span id="track-left"></span>
         <br>
@@ -620,6 +619,36 @@ https://toughengineer.github.io/demo/slider-styler*/
 
 
         const progressBar = document.getElementById("progress-slider");
+
+        progressBar.addEventListener("change", (e) => {
+            const currentChapter = audioPlayer.src.split("=")[1];
+            const currentChapterLength = chapterSourcesAndLength[currentChapter];
+            audioPlayer.currentTime = progressBar.value;
+        });
+
+        progressBar.addEventListener("input", (e) => {
+            trackListened.textContent = sToTime(progressBar.value);
+            trackLeft.textContent = sToTime(audioPlayer.duration - progressBar.value);
+        });
+
+        const chapterSourcesAndLength = {
+            // in seconds
+            "uvod.mp3": 21,
+            "prvo_poglavje.mp3": 2917,
+            "drugo_poglavje.mp3": 3996,
+            "tretje_poglavje.mp3": 3020,
+            "cetrto_poglavje.mp3": 3017,
+            "peto_poglavje.mp3": 2318,
+            "sesto_poglavje.mp3": 2320,
+            "sedmo_poglavje.mp3": 1719,
+            "osmo_poglavje.mp3": 2262,
+            "deveto_poglavje.mp3": 3042,
+            "deseto_poglavje.mp3": 3342,
+            "enajsto_poglavje.mp3": 596,
+            "dvanajsto_poglavje.mp3": 356,
+            "trinajsto_poglavje.mp3": 4835,
+            "stirinajsto_poglavje.mp3": 7010,
+        }
 
         playPauseButtonContainer.addEventListener("click", (e) => {
             if (playPauseButton.classList.contains("icono-play")) {
@@ -728,6 +757,8 @@ https://toughengineer.github.io/demo/slider-styler*/
             if (localStorage.getItem("playhead-position")) {
                 audioPlayer.currentTime = localStorage.getItem("playhead-position") - 5;
                 audioPlayer.src = localStorage.getItem("chapter-source");
+            } else {
+                progressBar.setAttribute("max", chapterSourcesAndLength[audioPlayer.src.split("=")[1]]);
             }
         });
 
@@ -791,9 +822,9 @@ https://toughengineer.github.io/demo/slider-styler*/
             localStorage.setItem("playhead-position", currentTime);
             localStorage.setItem("chapter-source", audioPlayer.getAttribute("src"));
             trackListened.textContent = sToTime(currentTime);
-            progressBar.value = (currentTime / audioPlayer.duration) * 100;
+            progressBar.value = currentTime;
             trackLeft.textContent = sToTime(audioPlayer.duration - currentTime);
-            currentlyPlaying.textContent = chapterSourcesAndNamesLong[audioPlayer.getAttribute("src")];
+            currentlyPlaying.textContent = chapterSourcesAndNamesLong[audioPlayer.src.split("=")[1]];
         });
 
         // Helper methods seconds to hour:min:sec
@@ -824,12 +855,20 @@ https://toughengineer.github.io/demo/slider-styler*/
             }
         }
 
+        //
+
+        function redefineRangeInputValue () {
+          progressBar.setAttribute("max", chapterSourcesAndLength[audioPlayer.src.split("=")[1]]);
+        }
+
+
         // Chapters
 
         intro.addEventListener("click", (e) => {
             chaptersMenu.style.display = "none";
             audioPlayer.src = changeAudioPlayerSrc("uvod.mp3", introFileSrc);
             markChapterAsSelected("uvod");
+            redefineRangeInputValue();
             playAudio();
             audioPlayer.play();
         });
@@ -838,6 +877,7 @@ https://toughengineer.github.io/demo/slider-styler*/
             chaptersMenu.style.display = "none";
             audioPlayer.src = changeAudioPlayerSrc("prvo_poglavje.mp3", introFileSrc);
             markChapterAsSelected("prvo_poglavje");
+            redefineRangeInputValue();
             playAudio();
             audioPlayer.play();
         });
@@ -846,6 +886,7 @@ https://toughengineer.github.io/demo/slider-styler*/
             chaptersMenu.style.display = "none";
             audioPlayer.src = changeAudioPlayerSrc("drugo_poglavje.mp3", introFileSrc);
             markChapterAsSelected("drugo_poglavje");
+            redefineRangeInputValue();
             playAudio();
             audioPlayer.play();
         });
@@ -854,6 +895,7 @@ https://toughengineer.github.io/demo/slider-styler*/
             chaptersMenu.style.display = "none";
             audioPlayer.src = changeAudioPlayerSrc("tretje_poglavje.mp3", introFileSrc);
             markChapterAsSelected("tretje_poglavje");
+            redefineRangeInputValue();
             playAudio();
             audioPlayer.play();
         });
@@ -862,6 +904,7 @@ https://toughengineer.github.io/demo/slider-styler*/
             chaptersMenu.style.display = "none";
             audioPlayer.src = changeAudioPlayerSrc("cetrto_poglavje.mp3", introFileSrc);
             markChapterAsSelected("cetrto_poglavje");
+            redefineRangeInputValue();
             playAudio();
             audioPlayer.play();
         });
@@ -870,6 +913,7 @@ https://toughengineer.github.io/demo/slider-styler*/
             chaptersMenu.style.display = "none";
             audioPlayer.src = changeAudioPlayerSrc("peto_poglavje.mp3", introFileSrc);
             markChapterAsSelected("peto_poglavje");
+            redefineRangeInputValue();
             playAudio();
             audioPlayer.play();
         });
@@ -878,6 +922,7 @@ https://toughengineer.github.io/demo/slider-styler*/
             chaptersMenu.style.display = "none";
             audioPlayer.src = changeAudioPlayerSrc("sesto_poglavje.mp3", introFileSrc);
             markChapterAsSelected("sesto_poglavje");
+            redefineRangeInputValue();
             playAudio();
             audioPlayer.play();
         });
@@ -886,6 +931,7 @@ https://toughengineer.github.io/demo/slider-styler*/
             chaptersMenu.style.display = "none";
             audioPlayer.src = changeAudioPlayerSrc("sedmo_poglavje.mp3", introFileSrc);
             markChapterAsSelected("sedmo_poglavje");
+            redefineRangeInputValue();
             playAudio();
             audioPlayer.play();
         });
@@ -894,6 +940,7 @@ https://toughengineer.github.io/demo/slider-styler*/
             chaptersMenu.style.display = "none";
             audioPlayer.src = changeAudioPlayerSrc("osmo_poglavje.mp3", introFileSrc);
             markChapterAsSelected("osmo_poglavje");
+            redefineRangeInputValue();
             playAudio();
             audioPlayer.play();
         });
@@ -902,6 +949,7 @@ https://toughengineer.github.io/demo/slider-styler*/
             chaptersMenu.style.display = "none";
             audioPlayer.src = changeAudioPlayerSrc("deveto_poglavje.mp3", introFileSrc);
             markChapterAsSelected("deveto_poglavje");
+            redefineRangeInputValue();
             playAudio();
             audioPlayer.play();
         });
@@ -910,6 +958,7 @@ https://toughengineer.github.io/demo/slider-styler*/
             chaptersMenu.style.display = "none";
             audioPlayer.src = changeAudioPlayerSrc("deseto_poglavje.mp3", introFileSrc);
             markChapterAsSelected("deseto_poglavje");
+            redefineRangeInputValue();
             playAudio();
             audioPlayer.play();
         });
@@ -918,6 +967,7 @@ https://toughengineer.github.io/demo/slider-styler*/
             chaptersMenu.style.display = "none";
             audioPlayer.src = changeAudioPlayerSrc("enajsto_poglavje.mp3", introFileSrc);
             markChapterAsSelected("enajsto_poglavje");
+            redefineRangeInputValue();
             playAudio();
             audioPlayer.play();
         });
@@ -926,6 +976,7 @@ https://toughengineer.github.io/demo/slider-styler*/
             chaptersMenu.style.display = "none";
             audioPlayer.src = changeAudioPlayerSrc("dvanajsto_poglavje.mp3", introFileSrc);
             markChapterAsSelected("dvanajsto_poglavje");
+            redefineRangeInputValue();
             playAudio();
             audioPlayer.play();
         });
@@ -934,6 +985,7 @@ https://toughengineer.github.io/demo/slider-styler*/
             chaptersMenu.style.display = "none";
             audioPlayer.src = changeAudioPlayerSrc("trinajsto_poglavje.mp3", introFileSrc);
             markChapterAsSelected("trinajsto_poglavje");
+            redefineRangeInputValue();
             playAudio();
             audioPlayer.play();
         });
@@ -942,6 +994,7 @@ https://toughengineer.github.io/demo/slider-styler*/
             chaptersMenu.style.display = "none";
             audioPlayer.src = changeAudioPlayerSrc("stirinajsto_poglavje.mp3", introFileSrc);
             markChapterAsSelected("stirinajsto_poglavje");
+            redefineRangeInputValue();
             playAudio();
             audioPlayer.play();
         });
