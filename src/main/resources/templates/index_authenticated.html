@@ -1079,9 +1079,11 @@ https://toughengineer.github.io/demo/slider-styler*/
         audioPlayer.addEventListener("timeupdate", (e) => {
             const currentTime = audioPlayer.currentTime.toFixed(0);
             localStorage.setItem("playhead-position", currentTime);
-            localStorage.setItem("chapter-source", audioPlayer.getAttribute("src"));
+            localStorage.setItem("chapter-source", audioPlayer.src.split("=")[1]);
             trackListened.textContent = sToTime(currentTime);
             progressBar.value = currentTime;
+            progressBar.style.setProperty("--max", chapterSourcesAndLength[audioPlayer.src.split("=")[1]]);
+            progressBar.style.setProperty("--value", currentTime);
             trackLeft.textContent = sToTime(audioPlayer.duration - currentTime);
             currentlyPlaying.textContent = chapterSourcesAndNamesLong[audioPlayer.src.split("=")[1]];
             timeLeftWholeBook.textContent = calculateTimeUntillEnd(audioPlayer.src.split("=")[1], audioPlayer.duration - currentTime);
