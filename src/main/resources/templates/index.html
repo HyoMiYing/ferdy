@@ -438,6 +438,11 @@ https://toughengineer.github.io/demo/slider-styler*/
         #progress-slider:focus::-ms-fill-upper {
             background: #ccc;
         }
+
+        .time-fixed-size {
+            width: 5em;
+            text-align: center;
+        }
     </style>
 </head>
 
@@ -522,34 +527,34 @@ https://toughengineer.github.io/demo/slider-styler*/
                 </div>
 
                 <div id="seconds-info" class="center-elements">
-                    <div class="three columns">
-                        <div id="track-listened">to more</div>
+                    <div class="time-fixed-size">
+                        <div id="track-listened">poslušano</div>
                     </div>
-                    <div class="three columns">
-                        <div id="time-left-whole-book">4h 15min</div>
+                    <div class="time-fixed-size">
+                        <div id="time-left-whole-book">ves preostanek</div>
                     </div>
-                    <div class="three columns">
-                        <div id="track-left">bit kle</div>
+                    <div class="time-fixed-size">
+                        <div id="track-left">preostanek</div>
                     </div>
                 </div>
 
                 <br>
 
                 <div id="player-controls" class="center-elements">
-                    <div class="one column">
-                        <div class="icono-previous" id="previous-chapter"></div>
+                    <div id="previous-chapter">
+                        <div class="icono-previous"></div>
                     </div>
-                    <div class="one column">
+                    <div>
                         <div class="icono-rewind" id="back-10-sec"></div>
                     </div>
-                    <div class="one column" id="play-pause-container">
+                    <div id="play-pause-container">
                         <div class="icono-play" id="play-pause"></div>
                     </div>
-                    <div class="one column">
+                    <div>
                         <div class="icono-forward" id="forward-10-sec"></div>
                     </div>
-                    <div class="one column">
-                        <div class="icono-next" id="next-chapter"></div>
+                    <div id="next-chapter">
+                        <div class="icono-next"></div>
                     </div>
                 </div>
 
@@ -591,6 +596,12 @@ https://toughengineer.github.io/demo/slider-styler*/
     <script>
 
         // UI elements
+        const previousChapterButton = document.getElementById("previous-chapter");
+        const nextChapterButton = document.getElementById("next-chapter");
+
+
+
+
         const audioPlayer = document.getElementById("audio-player");
 
         const mainInfoDiv = document.getElementById("main-info");
@@ -662,6 +673,32 @@ https://toughengineer.github.io/demo/slider-styler*/
                 playPauseButton.classList.remove("icono-pause");
                 playPauseButton.classList.add("icono-play");
             }
+        }); 
+
+        previousChapterButton.addEventListener("click", (e) => {
+            const currentChapterIndex = chapters.indexOf(audioPlayer.src.split("=")[1]);
+            if (currentChapterIndex == 0) {
+                return;
+            }
+            chaptersMenu.style.display = "none";
+            audioPlayer.src = changeAudioPlayerSrc(chapters[currentChapterIndex-1], introFileSrc);
+            markChapterAsSelected(chapters[currentChapterIndex-1]);
+            redefineRangeInputValue();
+            playAudio();
+            audioPlayer.play();
+        });
+
+        nextChapterButton.addEventListener("click", (e) => {
+            const currentChapterIndex = chapters.indexOf(audioPlayer.src.split("=")[1]);
+            if (currentChapterIndex == 14) {
+                return;
+            }
+            chaptersMenu.style.display = "none";
+            audioPlayer.src = changeAudioPlayerSrc(chapters[currentChapterIndex+1], introFileSrc);
+            markChapterAsSelected(chapters[currentChapterIndex+1]);
+            redefineRangeInputValue();
+            playAudio();
+            audioPlayer.play();
         });
 
         function playAudio () {
@@ -832,12 +869,12 @@ https://toughengineer.github.io/demo/slider-styler*/
 
         function calculateTimeUntillEnd(chapterSource, trackLeft) {
             let secondsUntillEnd = trackLeft;
-            const indexOfCurrentChapter = chapters.prototype.indexOf(chapterSource);
-            for (let step = indexOfCurrentChapter; step <= chapters.length; step++) {
-                console.log("adding timer for chapter " + chapters[step]);
+            const indexOfCurrentChapter = chapters.indexOf(chapterSource);
+            for (let step = indexOfCurrentChapter+1; step <= chapters.length-1; step++) {
                 secondsUntillEnd += chapterSourcesAndLength[chapters[step]];
             }
             const minutesAndSecondsUntillEnd = sToHourAndMin(secondsUntillEnd);
+            return minutesAndSecondsUntillEnd;
         }
 
         // Helper methods seconds to hour:min:sec
@@ -849,8 +886,8 @@ https://toughengineer.github.io/demo/slider-styler*/
         }
 
         function sToHourAndMin(t) {
-            return padZero(parseInt((t / (60 * 60)) % 24)) + "h" +
-                padZero(parseInt((t / (60)) % 60)) + "min";
+            return parseInt((t / (60 * 60)) % 24) + "h" +
+                parseInt((t / (60)) % 60) + "m";
         }
 
         function padZero(v) {
