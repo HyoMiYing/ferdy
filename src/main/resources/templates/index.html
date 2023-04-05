@@ -169,7 +169,48 @@
             cursor: pointer;
         }
 
-        #chapters-menu {
+        .submenu {
+            display: none;
+            position: absolute;
+            background-color: #FFF5D2;
+            margin: auto;
+            width: 417px;
+            height: 625px;
+            margin: auto;
+            z-index: 15;
+            overflow: auto;
+        }
+
+        .submenu a {
+            word-wrap: normal;
+        }
+
+        .submenu-ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            overflow: auto;
+        }
+
+        .submenu-ul li {
+            padding: 1.17rem 0.78rem;
+            border-bottom-width: 1px;
+            border-bottom: #4168686D 1px solid;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .submenu-ul a {
+            color: #416868;
+            text-decoration: none;
+        }
+
+        .submenu-ul span {
+            padding-left: 2rem;
+            margin: auto 0;
+        }
+
+        /* #chapters-menu {
             display: none;
             position: absolute;
             background-color: #FFF5D2;
@@ -209,9 +250,44 @@
         #chapters span {
             padding-left: 2rem;
             margin: auto 0;
+        } */
+
+        .submenu-header {
+            position: sticky;
+            width: 93%;
+            top: 0px;
+            background-color: #FFF5D2;
+            display: flex;
+            padding: 1.35rem 0.9rem;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: #41686880 1px solid;
         }
 
-        #chapters-menu-header {
+        .submenu-header div {
+            color: #B77900;
+            display: inline-block;
+        }
+
+        .submenu-header h4 {
+            font-size: 1.1rem;
+        }
+
+        .submenu-header * {
+            margin: 0;
+        }
+
+        .close-menu {
+            cursor: pointer;
+        }
+
+        .open-another-submenu {
+            cursor: pointer;
+            color: #B77900;
+            display: inline-block;
+        }
+
+        /* #chapters-menu-header {
             position: sticky;
             width: 93%;
             top: 0px;
@@ -240,6 +316,10 @@
             cursor: pointer;
         }
 
+        #open-bookmarks-menu {
+            cursor: pointer;
+        } */
+
         @media only screen and (max-width: 417px) {
 
 
@@ -257,7 +337,21 @@
                 border: none;
             }
 
-            #chapters-menu {
+            .submenu {
+                padding: 0;
+                top: 61px;
+                min-height: 625px;
+                width: 100%;
+                height: 100vh;
+                border: none;
+            }
+
+            .submenu-header {
+                position: fixed;
+                top: 0px;
+            }
+
+            /* #chapters-menu {
                 width: 100%;
                 height: 100vh;
                 border: none;
@@ -267,12 +361,12 @@
                 padding: 0;
                 top: 61px;
                 min-height: 625px;
-            }
+            } */
 
-            #chapters-menu-header {
+            /* #chapters-menu-header {
                 position: fixed;
                 top: 0px;
-            }
+            } */
 
         }
 
@@ -443,6 +537,10 @@ https://toughengineer.github.io/demo/slider-styler*/
             width: 5em;
             text-align: center;
         }
+
+        .fake-link {
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -454,47 +552,47 @@ https://toughengineer.github.io/demo/slider-styler*/
             <a th:href="@{/neprijavljeni/prijava}">Prijava</a>
             <a th:href="@{/neprijavljeni/registracija}">Registracija</a>
         </nav>
-        <div id="chapters-menu">
-            <div id="chapters-menu-header">
-                <div id="close-chapters-menu">Zapri</div>
+        <div class="submenu" id="chapters-menu">
+            <div class="submenu-header" id="chapters-menu-header">
+                <div class="close-menu" id="close-chapters-menu">Zapri</div>
                 <h4>Poglavja</h4>
-                <span style="visibility: hidden;">Zapri</span>
+                <span style="visibility: hidden;" >Zapri</span>
             </div>
-            <ul id="chapters">
-                <li><a class="fake-link chapter uvod" id="intro">UVOD</a><span>00:00:00</span></li>
-                <li><a class="fake-link chapter prvo_poglavje" id="chapter1">1. Poglavje: UGRABITEV</a><span>00:00:00</span></li>
+            <ul class="submenu-ul" id="chapters">
+                <li><a class="fake-link chapter uvod" id="intro">UVOD</a><span>21</span></li>
+                <li><a class="fake-link chapter prvo_poglavje" id="chapter1">1. Poglavje: UGRABITEV</a><span>48:37</span></li>
                 <li><a class="fake-link chapter drugo_poglavje" id="chapter2">2. Poglavje: V JETNIŠTVU IN
                         NADALJNEM
-                        MANJŠANJU</a><span>00:00:00</span></li>
+                        MANJŠANJU</a><span>1:06:36</span></li>
                 <li><a class="fake-link chapter tretje_poglavje" id="chapter3">3. Poglavje: V MIŠNICI IN NADALJNEM
-                        MEČKANJU</a><span>00:00:00</span></li>
+                        MEČKANJU</a><span>50:20</span></li>
                 <li><a class="fake-link chapter cetrto_poglavje" id="chapter4">4. Poglavje: PREDGOVOR K FILIDORJU
                         S
-                        PODLAGO V OTROKU</a><span>00:00:00</span></li>
+                        PODLAGO V OTROKU</a><span>50:17</span></li>
                 <li><a class="fake-link chapter peto_poglavje" id="chapter5">5. Poglavje: FILIDOR, S PODLAGO V
-                        OTROKU</a><span>00:00</span></li>
+                        OTROKU</a><span>38:38</span></li>
                 <li><a class="fake-link chapter sesto_poglavje" id="chapter6">6. Poglavje: ZAPELJEVANJE, SILJENJE
                         V
-                        MLADOST SE NADALJUJE</a><span>00:00:00</span></li>
-                <li><a class="fake-link chapter sedmo_poglavje" id="chapter7">7. Poglavje: LJUBEZEN</a><span>00:00:00</span></li>
-                <li><a class="fake-link chapter osmo_poglavje" id="chapter8">8. Poglavje: KOMPOT</a><span>00:00:00</span></li>
+                        MLADOST SE NADALJUJE</a><span>38:40</span></li>
+                <li><a class="fake-link chapter sedmo_poglavje" id="chapter7">7. Poglavje: LJUBEZEN</a><span>28:39</span></li>
+                <li><a class="fake-link chapter osmo_poglavje" id="chapter8">8. Poglavje: KOMPOT</a><span>37:42</span></li>
                 <li><a class="fake-link chapter deveto_poglavje" id="chapter9">9. Poglavje: ZALEZOVANJE, TIPANJE V
-                        SODOBNOST SE NADALJUJE</a><span>00:00:00</span></li>
+                        SODOBNOST SE NADALJUJE</a><span>50:42</span></li>
                 <li><a class="fake-link chapter deseto_poglavje" id="chapter10">10. Poglavje: ORGIJA STEGEN IN
                         ZNOVA V
-                        MIŠNICI</a><span>00:00:00</span></li>
+                        MIŠNICI</a><span>55:42</span></li>
                 <li><a class="fake-link chapter enajsto_poglavje" id="chapter11">11. Poglavje: PREDGOVOR K
                         FILIBERTU,
-                        PODLOŽENEMU Z OTROKOM</a><span>00:00:00</span></li>
+                        PODLOŽENEMU Z OTROKOM</a><span>9:56</span></li>
                 <li><a class="fake-link chapter dvanajsto_poglavje" id="chapter12">12. Poglavje: FILIBERT,
                         PODLOŽEN Z
-                        OTROKOM</a><span>00:00:00</span></li>
+                        OTROKOM</a><span>5:56</span></li>
                 <li><a class="fake-link chapter trinajsto_poglavje" id="chapter13">13. Poglavje: HLAPČIČ ALI NOVE
-                        NEVARNOSTI</a><span>00:00:00</span></li>
+                        NEVARNOSTI</a><span>1:20:35</span></li>
                 <li><a class="fake-link chapter stirinajsto_poglavje" id="chapter14">14. Poglavje: ORGIJA FRISOV
                         IN
                         ZNOVA
-                        V MIŠNICI</a><span>00:00:00</span></li>
+                        V MIŠNICI</a><span>1:56:50</span></li>
             </ul>
         </div>
         <div id="main-info">
@@ -786,6 +884,8 @@ https://toughengineer.github.io/demo/slider-styler*/
         const chapter12 = document.getElementById("chapter12");
         const chapter13 = document.getElementById("chapter13");
         const chapter14 = document.getElementById("chapter14");
+
+        
 
         document.addEventListener("DOMContentLoaded", (e) => {
             if (localStorage.getItem("playhead-position")) {
