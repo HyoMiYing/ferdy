@@ -592,6 +592,15 @@ https://toughengineer.github.io/demo/slider-styler*/
         <span id="track-listened"></span><audio id="audio-player" type="audio/mpeg" controls
             th:src="@{/prijavljeni/ferdydurke_stream?chapter=uvod.mp3}"></audio><span id="track-left"></span>
         <br>
+                <div th:if="${bookmarks != null}">
+            <h5>Zaznamki</h5>
+            <ul id="bookmarks">
+                <li class="bookmark-list-item" th:data-bookmark-chapter="${bookmark.getChapter}"
+                    th:data-bookmark-timestamp="${bookmark.getTimestamp}" th:each="bookmark : ${bookmarks}"><span
+                        th:text="${bookmark.getChapter}"></span>-<span th:text="${bookmark.getTimestamp}"></span>-<span
+                        th:text="${bookmark.getNote}"></span></li>
+            </ul>
+        </div>
         <br>
         <div id="play-speed-toggle">
             <h4>Hitrost predvajanja</h4>
@@ -626,6 +635,8 @@ https://toughengineer.github.io/demo/slider-styler*/
 
         const playPauseButton = document.getElementById("play-pause");
         const playPauseButtonContainer = document.getElementById("play-pause-container");
+
+        // Chapter menu elements
 
         const chaptersListButton = document.getElementById("chapter-list");
 
@@ -968,8 +979,6 @@ https://toughengineer.github.io/demo/slider-styler*/
         function redefineRangeInputValue () {
           progressBar.setAttribute("max", chapterSourcesAndLength[audioPlayer.src.split("=")[1]]);
         }
-
-        // Chapters
 
         // Chapters
 
