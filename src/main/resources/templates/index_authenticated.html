@@ -538,6 +538,10 @@ https://toughengineer.github.io/demo/slider-styler*/
             width: 5em;
             text-align: center;
         }
+
+        .fake-link {
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -559,7 +563,7 @@ https://toughengineer.github.io/demo/slider-styler*/
             </div>
             <ul class="submenu-ul" id="bookmarks">
                 <li class="bookmark-list-item chapter" th:data-bookmark-chapter="${bookmark.getChapter}"
-                    th:data-bookmark-timestamp="${bookmark.getTimestamp}" th:each="bookmark : ${bookmarks}"><a th:text="${bookmark.getNote}">-</a><span class="bookmark-timestamp"
+                    th:data-bookmark-timestamp="${bookmark.getTimestamp}" th:each="bookmark : ${bookmarks}"><a class="fake-link" th:text="${bookmark.getNote}">-</a><span class="bookmark-timestamp"
                         th:text="${bookmark.getTimestamp}"></span></li>
             </ul>
         </div>
@@ -570,37 +574,37 @@ https://toughengineer.github.io/demo/slider-styler*/
                 <span class="open-another-submenu" id="open-bookmarks-menu" >Zaznamki</span>
             </div>
             <ul class="submenu-ul" id="chapters">
-                <li><a class="chapter uvod" id="intro" href="#fake-id">UVOD</a><span>21</span></li>
-                <li><a class="chapter prvo_poglavje" id="chapter1" href="#fake-id">1. Poglavje: UGRABITEV</a><span>48:37</span></li>
-                <li><a class="chapter drugo_poglavje" id="chapter2" href="#fake-id">2. Poglavje: V JETNIŠTVU IN
+                <li><a class="fake-link chapter uvod" id="intro">UVOD</a><span>21</span></li>
+                <li><a class="fake-link chapter prvo_poglavje" id="chapter1">1. Poglavje: UGRABITEV</a><span>48:37</span></li>
+                <li><a class="fake-link chapter drugo_poglavje" id="chapter2">2. Poglavje: V JETNIŠTVU IN
                         NADALJNEM
                         MANJŠANJU</a><span>1:06:36</span></li>
-                <li><a class="chapter tretje_poglavje" id="chapter3" href="#fake-id">3. Poglavje: V MIŠNICI IN NADALJNEM
+                <li><a class="fake-link chapter tretje_poglavje" id="chapter3">3. Poglavje: V MIŠNICI IN NADALJNEM
                         MEČKANJU</a><span>50:20</span></li>
-                <li><a class="chapter cetrto_poglavje" id="chapter4" href="#fake-id">4. Poglavje: PREDGOVOR K FILIDORJU
+                <li><a class="fake-link chapter cetrto_poglavje" id="chapter4">4. Poglavje: PREDGOVOR K FILIDORJU
                         S
                         PODLAGO V OTROKU</a><span>50:17</span></li>
-                <li><a class="chapter peto_poglavje" id="chapter5" href="#fake-id">5. Poglavje: FILIDOR, S PODLAGO V
+                <li><a class="fake-link chapter peto_poglavje" id="chapter5">5. Poglavje: FILIDOR, S PODLAGO V
                         OTROKU</a><span>38:38</span></li>
-                <li><a class="chapter sesto_poglavje" id="chapter6" href="#fake-id">6. Poglavje: ZAPELJEVANJE, SILJENJE
+                <li><a class="fake-link chapter sesto_poglavje" id="chapter6">6. Poglavje: ZAPELJEVANJE, SILJENJE
                         V
                         MLADOST SE NADALJUJE</a><span>38:40</span></li>
-                <li><a class="chapter sedmo_poglavje" id="chapter7" href="#fake-id">7. Poglavje: LJUBEZEN</a><span>28:39</span></li>
-                <li><a class="chapter osmo_poglavje" id="chapter8" href="#fake-id">8. Poglavje: KOMPOT</a><span>37:42</span></li>
-                <li><a class="chapter deveto_poglavje" id="chapter9" href="#fake-id">9. Poglavje: ZALEZOVANJE, TIPANJE V
+                <li><a class="fake-link chapter sedmo_poglavje" id="chapter7">7. Poglavje: LJUBEZEN</a><span>28:39</span></li>
+                <li><a class="fake-link chapter osmo_poglavje" id="chapter8">8. Poglavje: KOMPOT</a><span>37:42</span></li>
+                <li><a class="fake-link chapter deveto_poglavje" id="chapter9">9. Poglavje: ZALEZOVANJE, TIPANJE V
                         SODOBNOST SE NADALJUJE</a><span>50:42</span></li>
-                <li><a class="chapter deseto_poglavje" id="chapter10" href="#fake-id">10. Poglavje: ORGIJA STEGEN IN
+                <li><a class="fake-link chapter deseto_poglavje" id="chapter10">10. Poglavje: ORGIJA STEGEN IN
                         ZNOVA V
                         MIŠNICI</a><span>55:42</span></li>
-                <li><a class="chapter enajsto_poglavje" id="chapter11" href="#fake-id">11. Poglavje: PREDGOVOR K
+                <li><a class="fake-link chapter enajsto_poglavje" id="chapter11">11. Poglavje: PREDGOVOR K
                         FILIBERTU,
                         PODLOŽENEMU Z OTROKOM</a><span>9:56</span></li>
-                <li><a class="chapter dvanajsto_poglavje" id="chapter12" href="#fake-id">12. Poglavje: FILIBERT,
+                <li><a class="fake-link chapter dvanajsto_poglavje" id="chapter12">12. Poglavje: FILIBERT,
                         PODLOŽEN Z
                         OTROKOM</a><span>5:56</span></li>
-                <li><a class="chapter trinajsto_poglavje" id="chapter13" href="#fake-id">13. Poglavje: HLAPČIČ ALI NOVE
+                <li><a class="fake-link chapter trinajsto_poglavje" id="chapter13">13. Poglavje: HLAPČIČ ALI NOVE
                         NEVARNOSTI</a><span>1:20:35</span></li>
-                <li><a class="chapter stirinajsto_poglavje" id="chapter14" href="#fake-id">14. Poglavje: ORGIJA FRISOV
+                <li><a class="fake-link chapter stirinajsto_poglavje" id="chapter14">14. Poglavje: ORGIJA FRISOV
                         IN
                         ZNOVA
                         V MIŠNICI</a><span>1:56:50</span></li>
@@ -670,9 +674,7 @@ https://toughengineer.github.io/demo/slider-styler*/
                 <br>
 
                 <div id="bottom-menu" class="center-elements">
-                    <div class="elements-in-columns">
-                        <div class="one column" id="narration-speed">1.0x</div>
-                    </div>
+                    
                     <div class="elements-in-columns" id="chapter-list">
                         <div class="icono-list one column"></div>
                     </div>
@@ -698,7 +700,7 @@ https://toughengineer.github.io/demo/slider-styler*/
         <span id="track-listened"></span><audio id="audio-player" type="audio/mpeg" controls
             th:src="@{/prijavljeni/ferdydurke_stream?chapter=uvod.mp3}"></audio><span id="track-left"></span>
         <br>
-                <div th:if="${bookmarks != null}">
+                <!-- <div th:if="${bookmarks != null}">
             <h5>Zaznamki</h5>
             <ul id="bookmarks">
                 <li class="bookmark-list-item" th:data-bookmark-chapter="${bookmark.getChapter}"
@@ -706,7 +708,7 @@ https://toughengineer.github.io/demo/slider-styler*/
                         th:text="${bookmark.getChapter}"></span>-<span th:text="${bookmark.getTimestamp}"></span>-<span
                         th:text="${bookmark.getNote}"></span></li>
             </ul>
-        </div>
+        </div> -->
         <br>
         <div id="play-speed-toggle">
             <h4>Hitrost predvajanja</h4>
@@ -819,6 +821,14 @@ https://toughengineer.github.io/demo/slider-styler*/
             "trinajsto_poglavje.mp3": 4835,
             "stirinajsto_poglavje.mp3": 7010,
         }
+
+        // const fakeLinks = document.getElementsByClassName("fake-link");
+
+        // for (let link of fakeLinks) {
+        //     link.preventDefault();
+        // }
+
+
 
         playPauseButtonContainer.addEventListener("click", (e) => {
             if (playPauseButton.classList.contains("icono-play")) {
@@ -1073,7 +1083,6 @@ https://toughengineer.github.io/demo/slider-styler*/
             trackListened.textContent = sToTime(currentTime);
             progressBar.value = currentTime;
             trackLeft.textContent = sToTime(audioPlayer.duration - currentTime);
-            console.log(chapterSourcesAndNamesLong[audioPlayer.src.split("=")[1]]);
             currentlyPlaying.textContent = chapterSourcesAndNamesLong[audioPlayer.src.split("=")[1]];
             timeLeftWholeBook.textContent = calculateTimeUntillEnd(audioPlayer.src.split("=")[1], audioPlayer.duration - currentTime);
         });
