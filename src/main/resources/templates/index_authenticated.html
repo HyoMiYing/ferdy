@@ -1014,12 +1014,12 @@ https://toughengineer.github.io/demo/slider-styler*/
         // Play next chapter if current one ended
 
         audioPlayer.addEventListener("ended", (e) => {
-            let currentSrc = audioPlayer.getAttribute("src");
+            let currentSrc = audioPlayer.src.split("=")[1];
             let arrayPosition = chapters.indexOf(currentSrc);
             if (arrayPosition == 14 || arrayPosition == -1) {
                 return;
             }
-            audioPlayer.src = chapters[arrayPosition + 1];
+            audioPlayer.src = changeAudioPlayerSrc(chapters[arrayPosition + 1], introFileSrc);
             audioPlayer.play();
         });
 
@@ -1073,6 +1073,7 @@ https://toughengineer.github.io/demo/slider-styler*/
             trackListened.textContent = sToTime(currentTime);
             progressBar.value = currentTime;
             trackLeft.textContent = sToTime(audioPlayer.duration - currentTime);
+            console.log(chapterSourcesAndNamesLong[audioPlayer.src.split("=")[1]]);
             currentlyPlaying.textContent = chapterSourcesAndNamesLong[audioPlayer.src.split("=")[1]];
             timeLeftWholeBook.textContent = calculateTimeUntillEnd(audioPlayer.src.split("=")[1], audioPlayer.duration - currentTime);
         });
