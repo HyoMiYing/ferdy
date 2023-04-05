@@ -12,6 +12,7 @@ import org.springframework.validation.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import rokklancar.ferdydurkeaudiobookplayer.persistence.dao.UserRepository;
 import rokklancar.ferdydurkeaudiobookplayer.persistence.model.Bookmark;
 import rokklancar.ferdydurkeaudiobookplayer.service.BookmarkService;
@@ -138,7 +139,7 @@ public class WebsiteController {
     }
 
     @PostMapping("/prijavljeni/dodaj_zaznamek")
-    public String addBookmark(@ModelAttribute("bookmark") @Valid BookmarkDto bookmarkDto) {
+    public String addBookmark(@ModelAttribute("bookmark") @Valid BookmarkDto bookmarkDto, RedirectAttributes redirectAttributes) {
         try {
             final Bookmark bookmark = bookmarkService.addNewBookmark(bookmarkDto);
             System.out.println("Bookmark added");

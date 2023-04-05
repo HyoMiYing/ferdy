@@ -170,7 +170,48 @@
             cursor: pointer;
         }
 
-        #chapters-menu {
+        .submenu {
+            display: none;
+            position: absolute;
+            background-color: #FFF5D2;
+            margin: auto;
+            width: 417px;
+            height: 625px;
+            margin: auto;
+            z-index: 15;
+            overflow: auto;
+        }
+
+        .submenu a {
+            word-wrap: normal;
+        }
+
+        .submenu-ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            overflow: auto;
+        }
+
+        .submenu-ul li {
+            padding: 1.17rem 0.78rem;
+            border-bottom-width: 1px;
+            border-bottom: #4168686D 1px solid;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .submenu-ul a {
+            color: #416868;
+            text-decoration: none;
+        }
+
+        .submenu-ul span {
+            padding-left: 2rem;
+            margin: auto 0;
+        }
+
+        /* #chapters-menu {
             display: none;
             position: absolute;
             background-color: #FFF5D2;
@@ -210,9 +251,44 @@
         #chapters span {
             padding-left: 2rem;
             margin: auto 0;
+        } */
+
+        .submenu-header {
+            position: sticky;
+            width: 93%;
+            top: 0px;
+            background-color: #FFF5D2;
+            display: flex;
+            padding: 1.35rem 0.9rem;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: #41686880 1px solid;
         }
 
-        #chapters-menu-header {
+        .submenu-header div {
+            color: #B77900;
+            display: inline-block;
+        }
+
+        .submenu-header h4 {
+            font-size: 1.1rem;
+        }
+
+        .submenu-header * {
+            margin: 0;
+        }
+
+        .close-menu {
+            cursor: pointer;
+        }
+
+        .open-another-submenu {
+            cursor: pointer;
+            color: #B77900;
+            display: inline-block;
+        }
+
+        /* #chapters-menu-header {
             position: sticky;
             width: 93%;
             top: 0px;
@@ -241,6 +317,10 @@
             cursor: pointer;
         }
 
+        #open-bookmarks-menu {
+            cursor: pointer;
+        } */
+
         @media only screen and (max-width: 417px) {
 
 
@@ -258,7 +338,21 @@
                 border: none;
             }
 
-            #chapters-menu {
+            .submenu {
+                padding: 0;
+                top: 61px;
+                min-height: 625px;
+                width: 100%;
+                height: 100vh;
+                border: none;
+            }
+
+            .submenu-header {
+                position: fixed;
+                top: 0px;
+            }
+
+            /* #chapters-menu {
                 width: 100%;
                 height: 100vh;
                 border: none;
@@ -268,12 +362,12 @@
                 padding: 0;
                 top: 61px;
                 min-height: 625px;
-            }
+            } */
 
-            #chapters-menu-header {
+            /* #chapters-menu-header {
                 position: fixed;
                 top: 0px;
-            }
+            } */
 
         }
 
@@ -457,47 +551,59 @@ https://toughengineer.github.io/demo/slider-styler*/
             </form>
             <p>Prijavljen kot <b id="user-name" th:text="${authenticatedUserName}"></b></p>
         </nav>
-        <div id="chapters-menu">
-            <div id="chapters-menu-header">
-                <div id="close-chapters-menu">Zapri</div>
-                <h4>Poglavja</h4>
-                <span style="visibility: hidden;">Zapri</span>
+        <div class="submenu" id="bookmarks-menu">
+            <div class="submenu-header" id="bookmarks-menu-header">
+                <div class="close-menu" id="close-bookmarks-menu">Zapri</div>
+                <h4>Zaznamki</h4>
+                <span class="open-another-submenu" id="open-chapters-menu" >Poglavja</span>
             </div>
-            <ul id="chapters">
-                <li><a class="chapter uvod" id="intro" href="#fake-id">UVOD</a><span>00:00:00</span></li>
-                <li><a class="chapter prvo_poglavje" id="chapter1" href="#fake-id">1. Poglavje: UGRABITEV</a><span>00:00:00</span></li>
+            <ul class="submenu-ul" id="bookmarks">
+                <li class="bookmark-list-item chapter" th:data-bookmark-chapter="${bookmark.getChapter}"
+                    th:data-bookmark-timestamp="${bookmark.getTimestamp}" th:each="bookmark : ${bookmarks}"><a th:text="${bookmark.getNote}">-</a><span class="bookmark-timestamp"
+                        th:text="${bookmark.getTimestamp}"></span></li>
+            </ul>
+        </div>
+        <div class="submenu" id="chapters-menu">
+            <div class="submenu-header" id="chapters-menu-header">
+                <div class="close-menu" id="close-chapters-menu">Zapri</div>
+                <h4>Poglavja</h4>
+                <span class="open-another-submenu" id="open-bookmarks-menu" >Zaznamki</span>
+            </div>
+            <ul class="submenu-ul" id="chapters">
+                <li><a class="chapter uvod" id="intro" href="#fake-id">UVOD</a><span>21</span></li>
+                <li><a class="chapter prvo_poglavje" id="chapter1" href="#fake-id">1. Poglavje: UGRABITEV</a><span>48:37</span></li>
                 <li><a class="chapter drugo_poglavje" id="chapter2" href="#fake-id">2. Poglavje: V JETNIŠTVU IN
                         NADALJNEM
-                        MANJŠANJU</a><span>00:00:00</span></li>
+                        MANJŠANJU</a><span>1:06:36</span></li>
                 <li><a class="chapter tretje_poglavje" id="chapter3" href="#fake-id">3. Poglavje: V MIŠNICI IN NADALJNEM
-                        MEČKANJU</a><span>00:00:00</span></li>
+                        MEČKANJU</a><span>50:20</span></li>
                 <li><a class="chapter cetrto_poglavje" id="chapter4" href="#fake-id">4. Poglavje: PREDGOVOR K FILIDORJU
                         S
-                        PODLAGO V OTROKU</a><span>00:00:00</span></li>
+                        PODLAGO V OTROKU</a><span>50:17</span></li>
                 <li><a class="chapter peto_poglavje" id="chapter5" href="#fake-id">5. Poglavje: FILIDOR, S PODLAGO V
-                        OTROKU</a><span>00:00</span></li>
+                        OTROKU</a><span>38:38</span></li>
                 <li><a class="chapter sesto_poglavje" id="chapter6" href="#fake-id">6. Poglavje: ZAPELJEVANJE, SILJENJE
                         V
-                        MLADOST SE NADALJUJE</a><span>00:00:00</span></li>
-                <li><a class="chapter sedmo_poglavje" id="chapter7" href="#fake-id">7. Poglavje: LJUBEZEN</a><span>00:00:00</span></li>
-                <li><a class="chapter osmo_poglavje" id="chapter8" href="#fake-id">8. Poglavje: KOMPOT</a><span>00:00:00</span></li>
+                        MLADOST SE NADALJUJE</a><span>38:40</span></li>
+                <li><a class="chapter sedmo_poglavje" id="chapter7" href="#fake-id">7. Poglavje: LJUBEZEN</a><span>28:39</span></li>
+                <li><a class="chapter osmo_poglavje" id="chapter8" href="#fake-id">8. Poglavje: KOMPOT</a><span>37:42</span></li>
                 <li><a class="chapter deveto_poglavje" id="chapter9" href="#fake-id">9. Poglavje: ZALEZOVANJE, TIPANJE V
-                        SODOBNOST SE NADALJUJE</a><span>00:00:00</span></li>
+                        SODOBNOST SE NADALJUJE</a><span>50:42</span></li>
                 <li><a class="chapter deseto_poglavje" id="chapter10" href="#fake-id">10. Poglavje: ORGIJA STEGEN IN
                         ZNOVA V
-                        MIŠNICI</a><span>00:00:00</span></li>
+                        MIŠNICI</a><span>55:42</span></li>
                 <li><a class="chapter enajsto_poglavje" id="chapter11" href="#fake-id">11. Poglavje: PREDGOVOR K
                         FILIBERTU,
-                        PODLOŽENEMU Z OTROKOM</a><span>00:00:00</span></li>
+                        PODLOŽENEMU Z OTROKOM</a><span>9:56</span></li>
                 <li><a class="chapter dvanajsto_poglavje" id="chapter12" href="#fake-id">12. Poglavje: FILIBERT,
                         PODLOŽEN Z
-                        OTROKOM</a><span>00:00:00</span></li>
+                        OTROKOM</a><span>5:56</span></li>
                 <li><a class="chapter trinajsto_poglavje" id="chapter13" href="#fake-id">13. Poglavje: HLAPČIČ ALI NOVE
-                        NEVARNOSTI</a><span>00:00:00</span></li>
+                        NEVARNOSTI</a><span>1:20:35</span></li>
                 <li><a class="chapter stirinajsto_poglavje" id="chapter14" href="#fake-id">14. Poglavje: ORGIJA FRISOV
                         IN
                         ZNOVA
-                        V MIŠNICI</a><span>00:00:00</span></li>
+                        V MIŠNICI</a><span>1:56:50</span></li>
             </ul>
         </div>
         <div id="main-info">
@@ -577,7 +683,7 @@ https://toughengineer.github.io/demo/slider-styler*/
                             <input class="hidden-element" id="note-field" type="text" name="note">
                             <input class="hidden-element" id="email-field" type="email" name="userEmail"
                                 th:value="${authenticatedUserName}">
-                            <div class="icono-bookmark one column" id="add-bookmark">
+                            <div class="icono-bookmark one column" id="add-bookmark"><button style="all: unset;" type="submit"></button></div>
                         </form>
                     </div>
                 </div>
@@ -643,16 +749,43 @@ https://toughengineer.github.io/demo/slider-styler*/
         const chaptersMenu = document.getElementById("chapters-menu");
         const closeChaptersMenu = document.getElementById("close-chapters-menu");
 
-        const timeLeftWholeBook = document.getElementById("time-left-whole-book");
+        const openBookmarksMenu = document.getElementById("open-bookmarks-menu");
 
-        chaptersListButton.addEventListener("click", (e) => {
-            chaptersMenu.style.display = "block";
-        });
+        // Bookmarks menu elements
 
-        closeChaptersMenu.addEventListener("click", (e) => {
+        const bookmarksMenu = document.getElementById("bookmarks-menu");
+        const openChaptersMenu = document.getElementById("open-chapters-menu");
+        const closeBookmarksMenu = document.getElementById("close-bookmarks-menu");
+        const bookmarkTimestamps = document.getElementsByClassName("bookmark-timestamp");
+
+        //
+
+        openBookmarksMenu.addEventListener("click", (e) => {
+            bookmarksMenu.style.display = "block";
             chaptersMenu.style.display = "none";
         });
 
+        openChaptersMenu.addEventListener("click", (e) => {
+            bookmarksMenu.style.display = "none";
+            chaptersMenu.style.display = "block";
+        });
+
+        closeBookmarksMenu.addEventListener("click", (e) => {
+            bookmarksMenu.style.display = "none";
+        });
+
+        //
+
+        
+        chaptersListButton.addEventListener("click", (e) => {
+            chaptersMenu.style.display = "block";
+        });
+        
+        closeChaptersMenu.addEventListener("click", (e) => {
+            chaptersMenu.style.display = "none";
+        });
+        
+        const timeLeftWholeBook = document.getElementById("time-left-whole-book");
 
         const progressBar = document.getElementById("progress-slider");
 
@@ -816,7 +949,23 @@ https://toughengineer.github.io/demo/slider-styler*/
         const chapter13 = document.getElementById("chapter13");
         const chapter14 = document.getElementById("chapter14");
 
+        function getTimeFromStartForChapter(chapter) {
+            const indexOfChapter = chapters.indexOf(chapter);
+            let seconds = 0;
+            for (let i = 0; i < indexOfChapter; i++) {
+                seconds += chapterSourcesAndLength[chapters[i]];
+            }
+            return seconds;
+        }
+
         document.addEventListener("DOMContentLoaded", (e) => {
+            for (var i = 0; i < bookmarkTimestamps.length; i++) {
+                    const chapter = bookmarkTimestamps[i].parentElement.getAttribute("data-bookmark-chapter");
+                    const originalText = bookmarkTimestamps[i].textContent;
+                    const secondsOfPreviousChapters = getTimeFromStartForChapter(chapter);
+                    const absolutePositionOfBookmarkInAudiobook = parseInt(originalText) + secondsOfPreviousChapters;
+                    bookmarkTimestamps[i].textContent = sToTime(absolutePositionOfBookmarkInAudiobook);
+                }
             if (localStorage.getItem("playhead-position")) {
                 audioPlayer.currentTime = localStorage.getItem("playhead-position") - 5;
                 audioPlayer.src = localStorage.getItem("chapter-source");
@@ -829,10 +978,7 @@ https://toughengineer.github.io/demo/slider-styler*/
         // Add bookmark
         const addBookmarkForm = document.getElementById("add-bookmark-form");
 
-        addBookmark.addEventListener("click", () => { addBookmarkForm.submit() });
-
-        addBookmarkForm.addEventListener("submit", (e) => {
-            e.preventDefault();
+        addBookmark.addEventListener("click", () => { 
             audioPlayer.pause();
             const bookmarkNote = window.prompt("Opomba za zaznamek:");
             let chapterField = document.getElementById("chapter-field");
@@ -841,7 +987,7 @@ https://toughengineer.github.io/demo/slider-styler*/
             timestampField.value = audioPlayer.currentTime;
             let noteField = document.getElementById("note-field");
             noteField.value = bookmarkNote;
-            addBookmarkForm.submit();
+            addBookmarkForm.submit(); 
         });
 
         // Play bookmark OR delete a bookmark
@@ -950,7 +1096,7 @@ https://toughengineer.github.io/demo/slider-styler*/
         }
 
         function sToHourAndMin(t) {
-            return parseInt((t / (60 * 60)) % 24) + "h" +
+            return parseInt((t / (60 * 60)) % 24) + "h " +
                 parseInt((t / (60)) % 60) + "m";
         }
 
