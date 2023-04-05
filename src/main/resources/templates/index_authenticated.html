@@ -439,6 +439,11 @@ https://toughengineer.github.io/demo/slider-styler*/
         #progress-slider:focus::-ms-fill-upper {
             background: #ccc;
         }
+
+        .time-fixed-size {
+            width: 5em;
+            text-align: center;
+        }
     </style>
 </head>
 
@@ -507,7 +512,7 @@ https://toughengineer.github.io/demo/slider-styler*/
 
                 <div class="center-elements">
                     <div class="ten columns" style="color: #FFF5D2; display: block; text-align: center;"
-                        id="chapter-info">10. Poglavje: ORGIJA STEGEN IN ZNOVA V MIŠNICI</div>
+                        id="currently-playing">poglavje</div>
                 </div>
 
                 <br>
@@ -525,34 +530,34 @@ https://toughengineer.github.io/demo/slider-styler*/
                 </div>
 
                 <div id="seconds-info" class="center-elements">
-                    <div class="three columns">
-                        <div id="track-listened">to more</div>
+                    <div class="time-fixed-size">
+                        <div id="track-listened">poslušano</div>
                     </div>
-                    <div class="three columns">
-                        <div id="time-left-whole-book">4h 15min</div>
+                    <div class="time-fixed-size">
+                        <div id="time-left-whole-book">ves preostanek</div>
                     </div>
-                    <div class="three columns">
-                        <div id="track-left">bit kle</div>
+                    <div class="time-fixed-size">
+                        <div id="track-left">preostanek</div>
                     </div>
                 </div>
 
                 <br>
 
                 <div id="player-controls" class="center-elements">
-                    <div class="one column">
-                        <div class="icono-previous" id="previous-chapter"></div>
+                    <div id="previous-chapter">
+                        <div class="icono-previous"></div>
                     </div>
-                    <div class="one column">
+                    <div>
                         <div class="icono-rewind" id="back-10-sec"></div>
                     </div>
-                    <div class="one column" id="play-pause-container">
+                    <div id="play-pause-container">
                         <div class="icono-play" id="play-pause"></div>
                     </div>
-                    <div class="one column">
+                    <div>
                         <div class="icono-forward" id="forward-10-sec"></div>
                     </div>
-                    <div class="one column">
-                        <div class="icono-next" id="next-chapter"></div>
+                    <div id="next-chapter">
+                        <div class="icono-next"></div>
                     </div>
                 </div>
 
@@ -584,26 +589,9 @@ https://toughengineer.github.io/demo/slider-styler*/
     </div>
     </div>
     <div id="previous-main">
-        <p id="currently-playing">UVOD</p>
         <span id="track-listened"></span><audio id="audio-player" type="audio/mpeg" controls
             th:src="@{/prijavljeni/ferdydurke_stream?chapter=uvod.mp3}"></audio><span id="track-left"></span>
-        <form id="add-bookmark-form" th:action="@{/prijavljeni/dodaj_zaznamek}" method="post">
-            <input class="hidden-element" id="chapter-field" type="text" name="chapter">
-            <input class="hidden-element" id="timestamp-field" type="text" name="timestamp">
-            <input class="hidden-element" id="note-field" type="text" name="note">
-            <input class="hidden-element" id="email-field" type="email" name="userEmail"
-                th:value="${authenticatedUserName}">
-        </form>
         <br>
-        <div th:if="${bookmarks != null}">
-            <h5>Zaznamki</h5>
-            <ul id="bookmarks">
-                <li class="bookmark-list-item" th:data-bookmark-chapter="${bookmark.getChapter}"
-                    th:data-bookmark-timestamp="${bookmark.getTimestamp}" th:each="bookmark : ${bookmarks}"><span
-                        th:text="${bookmark.getChapter}"></span>-<span th:text="${bookmark.getTimestamp}"></span>-<span
-                        th:text="${bookmark.getNote}"></span></li>
-            </ul>
-        </div>
         <br>
         <div id="play-speed-toggle">
             <h4>Hitrost predvajanja</h4>
@@ -622,6 +610,10 @@ https://toughengineer.github.io/demo/slider-styler*/
     <script>
 
         // UI elements
+        const previousChapterButton = document.getElementById("previous-chapter");
+        const nextChapterButton = document.getElementById("next-chapter");
+
+
         const audioPlayer = document.getElementById("audio-player");
 
         const mainInfoDiv = document.getElementById("main-info");
@@ -638,7 +630,9 @@ https://toughengineer.github.io/demo/slider-styler*/
         const chaptersListButton = document.getElementById("chapter-list");
 
         const chaptersMenu = document.getElementById("chapters-menu");
-        const closeChaptersMenu = document.getElementById("close-chapters-menu")
+        const closeChaptersMenu = document.getElementById("close-chapters-menu");
+
+        const timeLeftWholeBook = document.getElementById("time-left-whole-book");
 
         chaptersListButton.addEventListener("click", (e) => {
             chaptersMenu.style.display = "block";
@@ -650,6 +644,37 @@ https://toughengineer.github.io/demo/slider-styler*/
 
 
         const progressBar = document.getElementById("progress-slider");
+
+        progressBar.addEventListener("change", (e) => {
+            const currentChapter = audioPlayer.src.split("=")[1];
+            const currentChapterLength = chapterSourcesAndLength[currentChapter];
+            audioPlayer.currentTime = progressBar.value;
+        });
+
+        progressBar.addEventListener("input", (e) => {
+            trackListened.textContent = sToTime(progressBar.value);
+            trackLeft.textContent = sToTime(audioPlayer.duration - progressBar.value);
+        });
+
+
+        const chapterSourcesAndLength = {
+            // in seconds
+            "uvod.mp3": 21,
+            "prvo_poglavje.mp3": 2917,
+            "drugo_poglavje.mp3": 3996,
+            "tretje_poglavje.mp3": 3020,
+            "cetrto_poglavje.mp3": 3017,
+            "peto_poglavje.mp3": 2318,
+            "sesto_poglavje.mp3": 2320,
+            "sedmo_poglavje.mp3": 1719,
+            "osmo_poglavje.mp3": 2262,
+            "deveto_poglavje.mp3": 3042,
+            "deseto_poglavje.mp3": 3342,
+            "enajsto_poglavje.mp3": 596,
+            "dvanajsto_poglavje.mp3": 356,
+            "trinajsto_poglavje.mp3": 4835,
+            "stirinajsto_poglavje.mp3": 7010,
+        }
 
         playPauseButtonContainer.addEventListener("click", (e) => {
             if (playPauseButton.classList.contains("icono-play")) {
@@ -663,6 +688,32 @@ https://toughengineer.github.io/demo/slider-styler*/
             }
         });
 
+        previousChapterButton.addEventListener("click", (e) => {
+            const currentChapterIndex = chapters.indexOf(audioPlayer.src.split("=")[1]);
+            if (currentChapterIndex == 0) {
+                return;
+            }
+            chaptersMenu.style.display = "none";
+            audioPlayer.src = changeAudioPlayerSrc(chapters[currentChapterIndex-1], introFileSrc);
+            markChapterAsSelected(chapters[currentChapterIndex-1]);
+            redefineRangeInputValue();
+            playAudio();
+            audioPlayer.play();
+        });
+
+        nextChapterButton.addEventListener("click", (e) => {
+            const currentChapterIndex = chapters.indexOf(audioPlayer.src.split("=")[1]);
+            if (currentChapterIndex == 14) {
+                return;
+            }
+            chaptersMenu.style.display = "none";
+            audioPlayer.src = changeAudioPlayerSrc(chapters[currentChapterIndex+1], introFileSrc);
+            markChapterAsSelected(chapters[currentChapterIndex+1]);
+            redefineRangeInputValue();
+            playAudio();
+            audioPlayer.play();
+        });
+
         function playAudio () {
             playPauseButton.classList.remove("icono-play");
             playPauseButton.classList.remove("icono-pause");
@@ -670,21 +721,21 @@ https://toughengineer.github.io/demo/slider-styler*/
         }
 
         const chapters = [
-            "https://samplelib.com/lib/preview/mp3/sample-15s.mp3",
-            "https://freetestdata.com/wp-content/uploads/2021/09/Free_Test_Data_5MB_MP3.mp3",
-            "https://freetestdata.com/wp-content/uploads/2021/09/Free_Test_Data_5MB_MP3.mp3",
-            "https://file-examples.com/storage/fef1706276640fa2f99a5a4/2017/11/file_example_MP3_2MG.mp3",
-            "https://file-examples.com/storage/fef1706276640fa2f99a5a4/2017/11/file_example_MP3_2MG.mp3",
-            "media/peto_poglavje.mp3",
-            "media/sesto_poglavje.mp3",
-            "media/sedmo_poglavje.mp3",
-            "media/osmo_poglavje.mp3",
-            "media/deveto_poglavje.mp3",
-            "media/deseto_poglavje.mp3",
-            "media/enajsto_poglavje.mp3",
-            "media/dvanajsto_poglavje.mp3",
-            "media/trinajsto_poglavje.mp3",
-            "media/stirinajsto_poglavje.mp3",
+            "uvod.mp3",
+            "prvo_poglavje.mp3",
+            "drugo_poglavje.mp3",
+            "tretje_poglavje.mp3",
+            "cetrto_poglavje.mp3",
+            "peto_poglavje.mp3",
+            "sesto_poglavje.mp3",
+            "sedmo_poglavje.mp3",
+            "osmo_poglavje.mp3",
+            "deveto_poglavje.mp3",
+            "deseto_poglavje.mp3",
+            "enajsto_poglavje.mp3",
+            "dvanajsto_poglavje.mp3",
+            "trinajsto_poglavje.mp3",
+            "stirinajsto_poglavje.mp3",
         ];
 
         const chapterSourcesAndNamesLong = {
@@ -758,6 +809,8 @@ https://toughengineer.github.io/demo/slider-styler*/
             if (localStorage.getItem("playhead-position")) {
                 audioPlayer.currentTime = localStorage.getItem("playhead-position") - 5;
                 audioPlayer.src = localStorage.getItem("chapter-source");
+            } else {
+                progressBar.setAttribute("max", chapterSourcesAndLength[audioPlayer.src.split("=")[1]]);
             }
         });
 
@@ -861,10 +914,21 @@ https://toughengineer.github.io/demo/slider-styler*/
             localStorage.setItem("playhead-position", currentTime);
             localStorage.setItem("chapter-source", audioPlayer.getAttribute("src"));
             trackListened.textContent = sToTime(currentTime);
-            progressBar.value = (currentTime / audioPlayer.duration) * 100;
+            progressBar.value = currentTime;
             trackLeft.textContent = sToTime(audioPlayer.duration - currentTime);
-            currentlyPlaying.textContent = chapterSourcesAndNamesLong[audioPlayer.getAttribute("src")];
+            currentlyPlaying.textContent = chapterSourcesAndNamesLong[audioPlayer.src.split("=")[1]];
+            timeLeftWholeBook.textContent = calculateTimeUntillEnd(audioPlayer.src.split("=")[1], audioPlayer.duration - currentTime);
         });
+
+        function calculateTimeUntillEnd(chapterSource, trackLeft) {
+            let secondsUntillEnd = trackLeft;
+            const indexOfCurrentChapter = chapters.indexOf(chapterSource);
+            for (let step = indexOfCurrentChapter+1; step <= chapters.length-1; step++) {
+                secondsUntillEnd += chapterSourcesAndLength[chapters[step]];
+            }
+            const minutesAndSecondsUntillEnd = sToHourAndMin(secondsUntillEnd);
+            return minutesAndSecondsUntillEnd;
+        }
 
         // Helper methods seconds to hour:min:sec
 
@@ -872,6 +936,11 @@ https://toughengineer.github.io/demo/slider-styler*/
             return padZero(parseInt((t / (60 * 60)) % 24)) + ":" +
                 padZero(parseInt((t / (60)) % 60)) + ":" +
                 padZero(parseInt((t) % 60));
+        }
+
+        function sToHourAndMin(t) {
+            return parseInt((t / (60 * 60)) % 24) + "h" +
+                parseInt((t / (60)) % 60) + "m";
         }
 
         function padZero(v) {
@@ -894,12 +963,21 @@ https://toughengineer.github.io/demo/slider-styler*/
             }
         }
 
+        //
+
+        function redefineRangeInputValue () {
+          progressBar.setAttribute("max", chapterSourcesAndLength[audioPlayer.src.split("=")[1]]);
+        }
+
+        // Chapters
+
         // Chapters
 
         intro.addEventListener("click", (e) => {
             chaptersMenu.style.display = "none";
             audioPlayer.src = changeAudioPlayerSrc("uvod.mp3", introFileSrc);
             markChapterAsSelected("uvod");
+            redefineRangeInputValue();
             playAudio();
             audioPlayer.play();
         });
@@ -908,6 +986,7 @@ https://toughengineer.github.io/demo/slider-styler*/
             chaptersMenu.style.display = "none";
             audioPlayer.src = changeAudioPlayerSrc("prvo_poglavje.mp3", introFileSrc);
             markChapterAsSelected("prvo_poglavje");
+            redefineRangeInputValue();
             playAudio();
             audioPlayer.play();
         });
@@ -916,6 +995,7 @@ https://toughengineer.github.io/demo/slider-styler*/
             chaptersMenu.style.display = "none";
             audioPlayer.src = changeAudioPlayerSrc("drugo_poglavje.mp3", introFileSrc);
             markChapterAsSelected("drugo_poglavje");
+            redefineRangeInputValue();
             playAudio();
             audioPlayer.play();
         });
@@ -924,6 +1004,7 @@ https://toughengineer.github.io/demo/slider-styler*/
             chaptersMenu.style.display = "none";
             audioPlayer.src = changeAudioPlayerSrc("tretje_poglavje.mp3", introFileSrc);
             markChapterAsSelected("tretje_poglavje");
+            redefineRangeInputValue();
             playAudio();
             audioPlayer.play();
         });
@@ -932,6 +1013,7 @@ https://toughengineer.github.io/demo/slider-styler*/
             chaptersMenu.style.display = "none";
             audioPlayer.src = changeAudioPlayerSrc("cetrto_poglavje.mp3", introFileSrc);
             markChapterAsSelected("cetrto_poglavje");
+            redefineRangeInputValue();
             playAudio();
             audioPlayer.play();
         });
@@ -940,6 +1022,7 @@ https://toughengineer.github.io/demo/slider-styler*/
             chaptersMenu.style.display = "none";
             audioPlayer.src = changeAudioPlayerSrc("peto_poglavje.mp3", introFileSrc);
             markChapterAsSelected("peto_poglavje");
+            redefineRangeInputValue();
             playAudio();
             audioPlayer.play();
         });
@@ -948,6 +1031,7 @@ https://toughengineer.github.io/demo/slider-styler*/
             chaptersMenu.style.display = "none";
             audioPlayer.src = changeAudioPlayerSrc("sesto_poglavje.mp3", introFileSrc);
             markChapterAsSelected("sesto_poglavje");
+            redefineRangeInputValue();
             playAudio();
             audioPlayer.play();
         });
@@ -956,6 +1040,7 @@ https://toughengineer.github.io/demo/slider-styler*/
             chaptersMenu.style.display = "none";
             audioPlayer.src = changeAudioPlayerSrc("sedmo_poglavje.mp3", introFileSrc);
             markChapterAsSelected("sedmo_poglavje");
+            redefineRangeInputValue();
             playAudio();
             audioPlayer.play();
         });
@@ -964,6 +1049,7 @@ https://toughengineer.github.io/demo/slider-styler*/
             chaptersMenu.style.display = "none";
             audioPlayer.src = changeAudioPlayerSrc("osmo_poglavje.mp3", introFileSrc);
             markChapterAsSelected("osmo_poglavje");
+            redefineRangeInputValue();
             playAudio();
             audioPlayer.play();
         });
@@ -972,6 +1058,7 @@ https://toughengineer.github.io/demo/slider-styler*/
             chaptersMenu.style.display = "none";
             audioPlayer.src = changeAudioPlayerSrc("deveto_poglavje.mp3", introFileSrc);
             markChapterAsSelected("deveto_poglavje");
+            redefineRangeInputValue();
             playAudio();
             audioPlayer.play();
         });
@@ -980,6 +1067,7 @@ https://toughengineer.github.io/demo/slider-styler*/
             chaptersMenu.style.display = "none";
             audioPlayer.src = changeAudioPlayerSrc("deseto_poglavje.mp3", introFileSrc);
             markChapterAsSelected("deseto_poglavje");
+            redefineRangeInputValue();
             playAudio();
             audioPlayer.play();
         });
@@ -988,6 +1076,7 @@ https://toughengineer.github.io/demo/slider-styler*/
             chaptersMenu.style.display = "none";
             audioPlayer.src = changeAudioPlayerSrc("enajsto_poglavje.mp3", introFileSrc);
             markChapterAsSelected("enajsto_poglavje");
+            redefineRangeInputValue();
             playAudio();
             audioPlayer.play();
         });
@@ -996,6 +1085,7 @@ https://toughengineer.github.io/demo/slider-styler*/
             chaptersMenu.style.display = "none";
             audioPlayer.src = changeAudioPlayerSrc("dvanajsto_poglavje.mp3", introFileSrc);
             markChapterAsSelected("dvanajsto_poglavje");
+            redefineRangeInputValue();
             playAudio();
             audioPlayer.play();
         });
@@ -1004,6 +1094,7 @@ https://toughengineer.github.io/demo/slider-styler*/
             chaptersMenu.style.display = "none";
             audioPlayer.src = changeAudioPlayerSrc("trinajsto_poglavje.mp3", introFileSrc);
             markChapterAsSelected("trinajsto_poglavje");
+            redefineRangeInputValue();
             playAudio();
             audioPlayer.play();
         });
@@ -1012,6 +1103,7 @@ https://toughengineer.github.io/demo/slider-styler*/
             chaptersMenu.style.display = "none";
             audioPlayer.src = changeAudioPlayerSrc("stirinajsto_poglavje.mp3", introFileSrc);
             markChapterAsSelected("stirinajsto_poglavje");
+            redefineRangeInputValue();
             playAudio();
             audioPlayer.play();
         });
