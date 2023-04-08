@@ -70,7 +70,7 @@ public class SecurityConfiguration {
         http
             .authorizeHttpRequests()
             .requestMatchers("/neprijavljeni/**").anonymous()
-            .requestMatchers("/", "/styles/main.css").permitAll()
+            .requestMatchers("/", "/styles/main.css", "/styles/form.css").permitAll()
             .anyRequest().authenticated()
                 .and()
             .formLogin()
