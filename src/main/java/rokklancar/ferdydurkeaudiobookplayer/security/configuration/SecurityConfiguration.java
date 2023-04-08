@@ -70,9 +70,9 @@ public class SecurityConfiguration {
         http
             .authorizeHttpRequests()
             .requestMatchers("/neprijavljeni/**").anonymous()
-            .requestMatchers("/").permitAll()
+            .requestMatchers("/", "/styles/main.css").permitAll()
             .anyRequest().authenticated()
-            .and()
+                .and()
             .formLogin()
                 .loginPage("/neprijavljeni/prijava").permitAll()
                 .defaultSuccessUrl("/prijavljeni", true);
