@@ -23,20 +23,6 @@
     const chaptersMenu = document.getElementById("chapters-menu");
     const closeChaptersMenu = document.getElementById("close-chapters-menu");
 
-    openBookmarksMenu.addEventListener("click", (e) => {
-        bookmarksMenu.style.display = "block";
-        chaptersMenu.style.display = "none";
-    });
-
-    openChaptersMenu.addEventListener("click", (e) => {
-        bookmarksMenu.style.display = "none";
-        chaptersMenu.style.display = "block";
-    });
-
-    closeBookmarksMenu.addEventListener("click", (e) => {
-        bookmarksMenu.style.display = "none";
-    });
-
     //
 
     
@@ -227,13 +213,6 @@
     }
 
     document.addEventListener("DOMContentLoaded", (e) => {
-        for (var i = 0; i < bookmarkTimestamps.length; i++) {
-                const chapter = bookmarkTimestamps[i].parentElement.getAttribute("data-bookmark-chapter");
-                const originalText = bookmarkTimestamps[i].textContent;
-                const secondsOfPreviousChapters = getTimeFromStartForChapter(chapter);
-                const absolutePositionOfBookmarkInAudiobook = parseInt(originalText) + secondsOfPreviousChapters;
-                bookmarkTimestamps[i].textContent = sToTime(absolutePositionOfBookmarkInAudiobook);
-            }
         if (localStorage.getItem("playhead-position")) {
             audioPlayer.currentTime = localStorage.getItem("playhead-position") - 5;
             audioPlayer.src = localStorage.getItem("chapter-source");
