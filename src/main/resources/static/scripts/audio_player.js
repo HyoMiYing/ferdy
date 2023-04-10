@@ -244,10 +244,7 @@
         progressBar.value = currentTime;
         progressBar.style.setProperty("--max", chapterSourcesAndLength[audioPlayer.src.split("=")[1]]);
         progressBar.style.setProperty("--value", currentTime);
-        console.log("audioPlayer.duration. it is: " + audioPlayer.duration);
-        console.log("currentTime. it is: " + currentTime);
         trackLeft.textContent = sToTime(audioPlayer.duration - currentTime);
-        console.log("setting track left number. it is: " + trackLeft.textContent);
         currentlyPlaying.textContent = chapterSourcesAndNamesLong[audioPlayer.src.split("=")[1]];
         timeLeftWholeBook.textContent = calculateTimeUntillEnd(audioPlayer.src.split("=")[1], audioPlayer.duration - currentTime);
     });
