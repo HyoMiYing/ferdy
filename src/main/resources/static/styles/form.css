@@ -505,6 +505,10 @@ input[type=range].styled-slider {
             text-align: center;
         }
 
+        #main-info .input-elements {
+            text-align: right;
+        }
+
         #main-info * {
             margin: 0;
         }

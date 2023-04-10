@@ -23,13 +23,15 @@
   <div th:if="${param.logout}">
     Odjavljen/a si</div>
   <form th:action="@{/neprijavljeni/prijava}" method="post">
-    <div class="input-element">
-      <label for="username">email</label>
-      <input type="email" name="username" placeholder="email"/>
-    </div>
-    <div class="input-element">
-      <label for="password">geslo</label>
-      <input type="password" name="password" placeholder="geslo"/>
+    <div class="input-elements">
+      <div class="input-element">
+        <label for="username">email</label>
+        <input type="email" name="username" placeholder="email"/>
+      </div>
+      <div class="input-element">
+        <label for="password">geslo</label>
+        <input type="password" name="password" placeholder="geslo"/>
+      </div>
     </div>
     <input class="submit-button" type="submit" value="prijavi se" />
   </form>

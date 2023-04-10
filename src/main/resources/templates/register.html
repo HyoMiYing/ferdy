@@ -18,35 +18,37 @@
   </nav>
   <div id="main-info">
   <h1>Registriraj se</h1>
-  <p style="text-align: center;" >Če se registriraš, se tvoj položaj v knjigi vedno shrani. Poleg tega lahko dodajaš zaznamke</p>
   <form th:action="@{/neprijavljeni/registracija}" th:object="${user}" method="post" enctype="utf8">
     <div class="error" th:if="${userExistsException != null}">
       <div  th:text="${userExistsException.getMessage}">
     </div>
     </div>
-    <div class="input-element">
-      <label>email</label>
-      <input type="email" th:field="*{email}" placeholder="email">
-      <div th:if="${fieldErrors != null}"> 
-        <div th:each="error : ${fieldErrors}" th:if="${error.field} == 'email'" th:text="${error.defaultMessage}" ></div>
+    <div class="input-elements">
+      <div class="input-element">
+        <label>email</label>
+        <input type="email" th:field="*{email}" placeholder="email">
+        <div th:if="${fieldErrors != null}"> 
+          <div th:each="error : ${fieldErrors}" th:if="${error.field} == 'email'" th:text="${error.defaultMessage}" ></div>
+        </div>
       </div>
-    </div>
-    <div class="input-element">
-      <label>geslo</label>
-      <input type="password" th:field="*{password}" placeholder="geslo">
-      <div th:if="${fieldErrors != null}">
+      <div class="input-element">
+        <label>geslo</label>
+        <input type="password" th:field="*{password}" placeholder="geslo">
+        <div th:if="${fieldErrors != null}">
+        </div>
       </div>
-    </div>
-    <div class="input-element">
-      <label>potrdi geslo</label>
-      <input type="password" th:field="*{matchingPassword}" placeholder="potrdi geslo">
-      <div th:if="${globalErrors != null}">
-        <div th:each="error : ${globalErrors}" th:text="${error.defaultMessage}"></div>
+      <div class="input-element">
+        <label>potrdi geslo</label>
+        <input type="password" th:field="*{matchingPassword}" placeholder="potrdi geslo">
+        <div th:if="${globalErrors != null}">
+          <div th:each="error : ${globalErrors}" th:text="${error.defaultMessage}"></div>
+        </div>
       </div>
     </div>
     <button class="submit-button" type="submit">registriraj se</button>
   </form>
 </div>
+<p style="text-align: center;" >Če se registriraš, se tvoj položaj v knjigi vedno shrani. Poleg tega lahko dodajaš zaznamke</p>
 </div>
 </body>
 </html>
