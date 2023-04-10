@@ -21,7 +21,19 @@
     const chaptersListButton = document.getElementById("chapter-list");
 
     const chaptersMenu = document.getElementById("chapters-menu");
-    const closeChaptersMenu = document.getElementById("close-chapters-menu");
+    const closeChaptersMenu = document.getElementById("close-chapters-menu");    // openBookmarksMenu.addEventListener("click", (e) => {
+        //     bookmarksMenu.style.display = "block";
+        //     chaptersMenu.style.display = "none";
+        // });
+    
+        // openChaptersMenu.addEventListener("click", (e) => {
+        //     bookmarksMenu.style.display = "none";
+        //     chaptersMenu.style.display = "block";
+        // });
+    
+        // closeBookmarksMenu.addEventListener("click", (e) => {
+        //     bookmarksMenu.style.display = "none";
+        // });
 
     //
 
@@ -213,12 +225,31 @@
     }
 
     document.addEventListener("DOMContentLoaded", (e) => {
+        const currentTime = audioPlayer.currentTime.toFixed(0);
+
         if (localStorage.getItem("playhead-position")) {
+            let chapterFilename = localStorage.getItem("chapter-source");
+            audioPlayer.src = changeAudioPlayerSrc(chapterFilename, introFileSrc);
+            markChapterAsSelected(chapterFilename.replace(".mp3", ""));
             audioPlayer.currentTime = localStorage.getItem("playhead-position") - 5;
-            audioPlayer.src = localStorage.getItem("chapter-source");
+            redefineRangeInputValue();
         } else {
-            progressBar.setAttribute("max", chapterSourcesAndLength[audioPlayer.src.split("=")[1]]);
+            let chapterFilename = "uvod.mp3";
+            audioPlayer.src = changeAudioPlayerSrc(chapterFilename, introFileSrc);
+            markChapterAsSelected(chapterFilename.replace(".mp3", ""));
+            audioPlayer.currentTime = 0.1;
+            redefineRangeInputValue();
         }
+        trackListened.textContent = sToTime(currentTime);
+        progressBar.value = currentTime;
+        progressBar.style.setProperty("--max", chapterSourcesAndLength[audioPlayer.src.split("=")[1]]);
+        progressBar.style.setProperty("--value", currentTime);
+        console.log("audioPlayer.duration. it is: " + audioPlayer.duration);
+        console.log("currentTime. it is: " + currentTime);
+        trackLeft.textContent = sToTime(audioPlayer.duration - currentTime);
+        console.log("setting track left number. it is: " + trackLeft.textContent);
+        currentlyPlaying.textContent = chapterSourcesAndNamesLong[audioPlayer.src.split("=")[1]];
+        timeLeftWholeBook.textContent = calculateTimeUntillEnd(audioPlayer.src.split("=")[1], audioPlayer.duration - currentTime);
     });
 
 
@@ -341,137 +372,71 @@
 
     // Chapters
 
-    intro.addEventListener("click", (e) => {
+    function switchToChapter(chapterFilename) {
         chaptersMenu.style.display = "none";
-        audioPlayer.src = changeAudioPlayerSrc("uvod.mp3", introFileSrc);
-        markChapterAsSelected("uvod");
+        audioPlayer.src = changeAudioPlayerSrc(chapterFilename, introFileSrc);
+        markChapterAsSelected(chapterFilename.replace(".mp3", ""));
         redefineRangeInputValue();
         playAudio();
         audioPlayer.play();
+    }
+
+    intro.addEventListener("click", (e) => {
+        switchToChapter("uvod.mp3");
     });
 
     chapter1.addEventListener("click", (e) => {
-        chaptersMenu.style.display = "none";
-        audioPlayer.src = changeAudioPlayerSrc("prvo_poglavje.mp3", introFileSrc);
-        markChapterAsSelected("prvo_poglavje");
-        redefineRangeInputValue();
-        playAudio();
-        audioPlayer.play();
+        switchToChapter("prvo_poglavje.mp3");
     });
 
     chapter2.addEventListener("click", (e) => {
-        chaptersMenu.style.display = "none";
-        audioPlayer.src = changeAudioPlayerSrc("drugo_poglavje.mp3", introFileSrc);
-        markChapterAsSelected("drugo_poglavje");
-        redefineRangeInputValue();
-        playAudio();
-        audioPlayer.play();
+        switchToChapter("drugo_poglavje.mp3");
     });
 
     chapter3.addEventListener("click", (e) => {
-        chaptersMenu.style.display = "none";
-        audioPlayer.src = changeAudioPlayerSrc("tretje_poglavje.mp3", introFileSrc);
-        markChapterAsSelected("tretje_poglavje");
-        redefineRangeInputValue();
-        playAudio();
-        audioPlayer.play();
+        switchToChapter("tretje_poglavje.mp3");
     });
 
     chapter4.addEventListener("click", (e) => {
-        chaptersMenu.style.display = "none";
-        audioPlayer.src = changeAudioPlayerSrc("cetrto_poglavje.mp3", introFileSrc);
-        markChapterAsSelected("cetrto_poglavje");
-        redefineRangeInputValue();
-        playAudio();
-        audioPlayer.play();
+        switchToChapter("cetrto_poglavje.mp3");
     });
 
     chapter5.addEventListener("click", (e) => {
-        chaptersMenu.style.display = "none";
-        audioPlayer.src = changeAudioPlayerSrc("peto_poglavje.mp3", introFileSrc);
-        markChapterAsSelected("peto_poglavje");
-        redefineRangeInputValue();
-        playAudio();
-        audioPlayer.play();
+        switchToChapter("peto_poglavje.mp3");
     });
 
     chapter6.addEventListener("click", (e) => {
-        chaptersMenu.style.display = "none";
-        audioPlayer.src = changeAudioPlayerSrc("sesto_poglavje.mp3", introFileSrc);
-        markChapterAsSelected("sesto_poglavje");
-        redefineRangeInputValue();
-        playAudio();
-        audioPlayer.play();
+        switchToChapter("sesto_poglavje.mp3");
     });
 
     chapter7.addEventListener("click", (e) => {
-        chaptersMenu.style.display = "none";
-        audioPlayer.src = changeAudioPlayerSrc("sedmo_poglavje.mp3", introFileSrc);
-        markChapterAsSelected("sedmo_poglavje");
-        redefineRangeInputValue();
-        playAudio();
-        audioPlayer.play();
+        switchToChapter("sedmo_poglavje.mp3");
     });
 
     chapter8.addEventListener("click", (e) => {
-        chaptersMenu.style.display = "none";
-        audioPlayer.src = changeAudioPlayerSrc("osmo_poglavje.mp3", introFileSrc);
-        markChapterAsSelected("osmo_poglavje");
-        redefineRangeInputValue();
-        playAudio();
-        audioPlayer.play();
+        switchToChapter("osmo_poglavje.mp3");
     });
 
     chapter9.addEventListener("click", (e) => {
-        chaptersMenu.style.display = "none";
-        audioPlayer.src = changeAudioPlayerSrc("deveto_poglavje.mp3", introFileSrc);
-        markChapterAsSelected("deveto_poglavje");
-        redefineRangeInputValue();
-        playAudio();
-        audioPlayer.play();
+        switchToChapter("deveto_poglavje.mp3");
     });
 
     chapter10.addEventListener("click", (e) => {
-        chaptersMenu.style.display = "none";
-        audioPlayer.src = changeAudioPlayerSrc("deseto_poglavje.mp3", introFileSrc);
-        markChapterAsSelected("deseto_poglavje");
-        redefineRangeInputValue();
-        playAudio();
-        audioPlayer.play();
+        switchToChapter("deseto_poglavje.mp3");
     });
 
     chapter11.addEventListener("click", (e) => {
-        chaptersMenu.style.display = "none";
-        audioPlayer.src = changeAudioPlayerSrc("enajsto_poglavje.mp3", introFileSrc);
-        markChapterAsSelected("enajsto_poglavje");
-        redefineRangeInputValue();
-        playAudio();
-        audioPlayer.play();
+        switchToChapter("enajsto_poglavje.mp3");
     });
 
     chapter12.addEventListener("click", (e) => {
-        chaptersMenu.style.display = "none";
-        audioPlayer.src = changeAudioPlayerSrc("dvanajsto_poglavje.mp3", introFileSrc);
-        markChapterAsSelected("dvanajsto_poglavje");
-        redefineRangeInputValue();
-        playAudio();
-        audioPlayer.play();
+        switchToChapter("dvanajsto_poglavje.mp3");
     });
 
     chapter13.addEventListener("click", (e) => {
-        chaptersMenu.style.display = "none";
-        audioPlayer.src = changeAudioPlayerSrc("trinajsto_poglavje.mp3", introFileSrc);
-        markChapterAsSelected("trinajsto_poglavje");
-        redefineRangeInputValue();
-        playAudio();
-        audioPlayer.play();
+        switchToChapter("trinajsto_poglavje.mp3");
     });
 
     chapter14.addEventListener("click", (e) => {
-        chaptersMenu.style.display = "none";
-        audioPlayer.src = changeAudioPlayerSrc("stirinajsto_poglavje.mp3", introFileSrc);
-        markChapterAsSelected("stirinajsto_poglavje");
-        redefineRangeInputValue();
-        playAudio();
-        audioPlayer.play();
+        switchToChapter("stirinajsto_poglavje.mp3");
     });
