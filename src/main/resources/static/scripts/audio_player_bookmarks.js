@@ -7,8 +7,6 @@ const openChaptersMenu = document.getElementById("open-chapters-menu");
 const closeBookmarksMenu = document.getElementById("close-bookmarks-menu");
 const bookmarkTimestamps = document.getElementsByClassName("bookmark-timestamp");
 
-//
-
 const addBookmark = document.getElementById("add-bookmark");
 const bookmarks = document.getElementById("bookmarks");
 
@@ -54,7 +52,6 @@ const bookmarks = document.getElementById("bookmarks");
     });
 
     // bookmark menu controls
-
     openBookmarksMenu.addEventListener("click", (e) => {
         bookmarksMenu.style.display = "block";
         chaptersMenu.style.display = "none";
@@ -69,8 +66,7 @@ const bookmarks = document.getElementById("bookmarks");
         bookmarksMenu.style.display = "none";
     });
 
-    // pimp out bookmark display in html
-
+    // recalculate bookmark display in html
     document.addEventListener("DOMContentLoaded", (e) => {
         for (var i = 0; i < bookmarkTimestamps.length; i++) {
                 const chapter = bookmarkTimestamps[i].parentElement.getAttribute("data-bookmark-chapter");
