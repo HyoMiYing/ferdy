@@ -21,21 +21,7 @@
     const chaptersListButton = document.getElementById("chapter-list");
 
     const chaptersMenu = document.getElementById("chapters-menu");
-    const closeChaptersMenu = document.getElementById("close-chapters-menu");    // openBookmarksMenu.addEventListener("click", (e) => {
-        //     bookmarksMenu.style.display = "block";
-        //     chaptersMenu.style.display = "none";
-        // });
-    
-        // openChaptersMenu.addEventListener("click", (e) => {
-        //     bookmarksMenu.style.display = "none";
-        //     chaptersMenu.style.display = "block";
-        // });
-    
-        // closeBookmarksMenu.addEventListener("click", (e) => {
-        //     bookmarksMenu.style.display = "none";
-        // });
-
-    //
+    const closeChaptersMenu = document.getElementById("close-chapters-menu");
 
     
     chaptersListButton.addEventListener("click", (e) => {
@@ -63,7 +49,6 @@
 
 
     const chapterSourcesAndLength = {
-        // in seconds
         "uvod.mp3": 21,
         "prvo_poglavje.mp3": 2917,
         "drugo_poglavje.mp3": 3996,
@@ -80,13 +65,6 @@
         "trinajsto_poglavje.mp3": 4835,
         "stirinajsto_poglavje.mp3": 7010,
     }
-
-    // const fakeLinks = document.getElementsByClassName("fake-link");
-
-    // for (let link of fakeLinks) {
-    //     link.preventDefault();
-    // }
-
 
 
     playPauseButtonContainer.addEventListener("click", (e) => {
@@ -169,35 +147,8 @@
         "stirinajsto_poglavje.mp3": "14. POGLAVJE: ORGIJA FRISOV IN ZNOVA V MIŠNICI",
     }
 
-    const chapterSourcesAndNames = {
-        "https://samplelib.com/lib/preview/mp3/sample-15s.mp3": "UVOD",
-        "https://freetestdata.com/wp-content/uploads/2021/09/Free_Test_Data_5MB_MP3.mp3": "1. POGLAVJE",
-        "https://freetestdata.com/wp-content/uploads/2021/09/Free_Test_Data_5MB_MP3.mp3": "2. POGLAVJE",
-        "https://file-examples.com/storage/fef1706276640fa2f99a5a4/2017/11/file_example_MP3_2MG.mp3": "3. POGLAVJE",
-        "https://file-examples.com/storage/fef1706276640fa2f99a5a4/2017/11/file_example_MP3_2MG.mp3": "4. POGLAVJE",
-        "media/peto_poglavje.mp3": "5. POGLAVJE",
-        "media/sesto_poglavje.mp3": "6. POGLAVJE",
-        "media/sedmo_poglavje.mp3": "7. POGLAVJE",
-        "media/osmo_poglavje.mp3": "8. POGLAVJE",
-        "media/deveto_poglavje.mp3": "9. POGLAVJE",
-        "media/deseto_poglavje.mp3": "10. POGLAVJE",
-        "media/enajsto_poglavje.mp3": "11. POGLAVJE",
-        "media/dvanajsto_poglavje.mp3": "12. POGLAVJE",
-        "media/trinajsto_poglavje.mp3": "13. POGLAVJE",
-        "media/stirinajsto_poglavje.mp3": "14. POGLAVJE",
-    }
-
-
     const back10Sec = document.getElementById("back-10-sec");
     const forward10Sec = document.getElementById("forward-10-sec");
-
-    const x05 = document.getElementById("x0.5");
-    const x075 = document.getElementById("x0.75");
-    const x1 = document.getElementById("x1.0");
-    const x125 = document.getElementById("x1.25");
-    const x15 = document.getElementById("x1.5");
-    const x175 = document.getElementById("x1.75");
-    const x2 = document.getElementById("x2.0");
 
     const intro = document.getElementById("intro");
     const chapter1 = document.getElementById("chapter1");
@@ -262,39 +213,7 @@
         audioPlayer.play();
     });
 
-
-    // Play speed
-
-    x05.addEventListener("click", (e) => {
-        audioPlayer.playbackRate = 0.5;
-    });
-
-    x075.addEventListener("click", (e) => {
-        audioPlayer.playbackRate = 0.75;
-    });
-
-    x1.addEventListener("click", (e) => {
-        audioPlayer.playbackRate = 1.0;
-    });
-
-    x125.addEventListener("click", (e) => {
-        audioPlayer.playbackRate = 1.25;
-    });
-
-    x15.addEventListener("click", (e) => {
-        audioPlayer.playbackRate = 1.5;
-    });
-
-    x175.addEventListener("click", (e) => {
-        audioPlayer.playbackRate = 1.75;
-    });
-
-    x2.addEventListener("click", (e) => {
-        audioPlayer.playbackRate = 2.0;
-    });
-
     // Rewind/fast forward
-
     back10Sec.addEventListener("click", (e) => {
         audioPlayer.currentTime -= 10;
     });
@@ -304,7 +223,6 @@
     });
 
     // Store playhead position && update time listened and time left text && update currently playing info
-
     audioPlayer.addEventListener("timeupdate", (e) => {
         const currentTime = audioPlayer.currentTime.toFixed(0);
         localStorage.setItem("playhead-position", currentTime);
@@ -329,7 +247,6 @@
     }
 
     // Helper methods seconds to hour:min:sec
-
     function sToTime(t) {
         return padZero(parseInt((t / (60 * 60)) % 24)) + ":" +
             padZero(parseInt((t / (60)) % 60)) + ":" +
@@ -362,13 +279,11 @@
     }
 
     //
-
     function redefineRangeInputValue () {
         progressBar.setAttribute("max", chapterSourcesAndLength[audioPlayer.src.split("=")[1]]);
     }
 
     // Chapters
-
     function switchToChapter(chapterFilename) {
         chaptersMenu.style.display = "none";
         audioPlayer.src = changeAudioPlayerSrc(chapterFilename, introFileSrc);
